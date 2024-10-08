@@ -10,10 +10,19 @@ import AdminServicesPage from './AdminServicesPage';
 
 function App() {
     const [isLoaded, setIsLoaded] = useState<boolean>(false)
+    const [services, setServices] = useState<{ name: string; time: number }[]>([])
     const navigate = useNavigate();
 
     useEffect(() => {
         setIsLoaded(true);
+        const tempServices = [
+            { name: 'Financial Services', time: 10 },
+            { name: 'Payment Services', time: 7 },
+            { name: 'International Services', time: 12 },
+            { name: 'Information', time: 5 },
+            { name: 'Delivery', time: 8 }
+          ];
+        setServices(tempServices)
     }, []);
 
     return (
@@ -32,7 +41,7 @@ function App() {
                        element={<AdminPage />}
                 />
                 <Route path="/admin/services"
-                       element={<AdminServicesPage />}
+                       element={<AdminServicesPage services={services}/>}
                 />
 
             </Routes>
