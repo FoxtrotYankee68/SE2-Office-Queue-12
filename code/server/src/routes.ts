@@ -1,6 +1,6 @@
 import express from "express"
 import ErrorHandler from "./helper"
-import ItemRoutes from "./routers/itemRoutes"
+import ItemRoutes from "./routers/counterRoutes"
 
 const morgan = require("morgan")
 const prefix = "/officequeue"
