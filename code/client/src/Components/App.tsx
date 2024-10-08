@@ -5,6 +5,8 @@ import { Container } from 'react-bootstrap';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import API from '../API/API';
 import Homepage from './Homepage';
+import AdminPage from './AdminPage';
+import AdminServicesPage from './AdminServicesPage';
 
 function App() {
     const [isLoaded, setIsLoaded] = useState<boolean>(false)
@@ -24,6 +26,13 @@ function App() {
 
                 <Route path="/home"
                        element={<Homepage />}
+                />
+
+                <Route path="/admin"
+                       element={<AdminPage />}
+                />
+                <Route path="/admin/services"
+                       element={<AdminServicesPage />}
                 />
 
             </Routes>
