@@ -1,19 +1,35 @@
 import {Button, Card, Container, Row, Navbar,Nav,Form,Dropdown} from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { useState} from 'react'
+import PropTypes from "prop-types";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./style.css"
-import API from "../API/API";
+import API from "../API/API"; 
 
-function AdminServicesPage() {
+interface Service {
+    name: string;
+    time: number;
+  }
+  
+  interface AdminServicesPageProps {
+    services: Service[]; // Array of Service objects
+  }
+
+function AdminServicesPage({ services }:AdminServicesPageProps) {
     const navigate = useNavigate()
     // Use useState to manage the selected tab
   const [activeTab, setActiveTab] = useState('#add');
+  const [editSelection, setEditSelection] = useState('');
+  const [deleteSelection, setDeleteSelection] = useState('');
   const [serviceName, setServiceName] = useState('');
   const [serviceTime, setServiceTime] = useState('');
 
   // Define the content that changes based on the selected tab
   const handleAdd = () => {
+    
+  };
+
+  const handleEdit = () => {
     
   };
 
@@ -43,6 +59,10 @@ function AdminServicesPage() {
                         // Handle the case where selectedKey might be null
                         if (selectedKey) {
                           setActiveTab(selectedKey);
+                          setServiceName('')
+                          setServiceTime('')
+                          setEditSelection('')
+                          setDeleteSelection('')
                         }
                       }}>
                       <Nav.Item>
@@ -78,7 +98,7 @@ function AdminServicesPage() {
                       required
                     />
                   </Form.Group>
-                  <Button variant="primary">Add</Button>
+                  <Button style={{ backgroundColor: '#FF7F50' }}>Add</Button>
                 </Form>
                   </Card.Body>
                  ) : activeTab==="#edit" ?(
@@ -89,14 +109,22 @@ function AdminServicesPage() {
                         Choose a service
                       </Dropdown.Toggle>
                     <Dropdown.Menu>
-                       <Dropdown.Item href="#/action-1">Financial Services</Dropdown.Item>
-                       <Dropdown.Item href="#/action-2">Payment Services</Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">International Services</Dropdown.Item>
-                      <Dropdown.Item href="#/action-3">Information</Dropdown.Item>
-                      <Dropdown.Item href="#/action-4">Delivery</Dropdown.Item>
+                    {services.map((service, index) => (
+                          <Dropdown.Item
+                            key={index}
+                            eventKey={service.name}
+                            onClick={() => {
+                                setEditSelection(service.name)
+                                setServiceName(service.name)
+                                setServiceTime(service.time.toString())
+                            }}
+                          >
+                            {service.name}
+                          </Dropdown.Item>
+                        ))}
                     </Dropdown.Menu>
                   </Dropdown>
-                    <Form onSubmit={handleAdd}>
+                    <Form onSubmit={handleEdit}>
                   <Form.Group className="mb-3" controlId="username">
                     <Form.Label>Name of service</Form.Label>
                     <Form.Control
@@ -115,7 +143,7 @@ function AdminServicesPage() {
                       required
                     />
                   </Form.Group>
-                  <Button variant="primary">Edit</Button>
+                  <Button style={{ backgroundColor: '#FF7F50' }}>Edit</Button>
                 </Form>
                     </Card.Body>
                  ) : (
@@ -126,15 +154,24 @@ function AdminServicesPage() {
                         Choose a service
                       </Dropdown.Toggle>
                     <Dropdown.Menu>
-                       <Dropdown.Item href="#/action-1">Financial Services</Dropdown.Item>
-                       <Dropdown.Item href="#/action-2">Payment Services</Dropdown.Item>
-                      <Dropdown.Item href="#/action-2">International Services</Dropdown.Item>
-                      <Dropdown.Item href="#/action-3">Information</Dropdown.Item>
-                      <Dropdown.Item href="#/action-4">Delivery</Dropdown.Item>
+                    {services.map((service, index) => (
+                          <Dropdown.Item
+                            key={index}
+                            eventKey={service.name}
+                            onClick={() => {
+                                setDeleteSelection(service.name)
+                                setServiceName(service.name)
+                                setServiceTime(service.time.toString())
+                            }}
+                          >
+                            {service.name}
+                          </Dropdown.Item>
+                        ))}
                     </Dropdown.Menu>
                   </Dropdown>
                   <br/>
-                    <Button variant="primary">Delete</Button>
+                  <p>{deleteSelection==='' ? '' : `Are you sure you want to delete ${deleteSelection}?`}</p>
+                    <Button style={{ backgroundColor: '#FF7F50' }}>Delete</Button>
                   </Card.Body>
                  )
                 }
@@ -147,5 +184,14 @@ function AdminServicesPage() {
         </>
     )
 }
+
+AdminServicesPage.propTypes = {
+    services: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        time: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+  };
 
 export default AdminServicesPage
