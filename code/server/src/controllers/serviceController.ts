@@ -48,4 +48,4 @@ class ServiceController {
     }
 }
 
-export default ServiceDAO
+export default ServiceController;
