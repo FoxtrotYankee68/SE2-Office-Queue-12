@@ -1,5 +1,6 @@
 import ItemDAO from "../dao/counterDAO";
 import {Counter} from "../components/counter";
+import { Service } from "../components/service";
 
 /**
  * Represents a controller for managing shopping carts.
@@ -31,6 +32,18 @@ class CounterController {
     async editCounter(id: number, name: string): Promise<void> {
         return this.dao.editCounter(id, name);
     }
+
+    async addCounterService(counterId: number, serviceId: number): Promise<void> {
+        return this.dao.addCounterService(counterId, serviceId);
+    }
+
+    async deleteCounterService(counterId: number, serviceId: number): Promise<void> {
+        return this.dao.deleteCounterService(counterId, serviceId);
+    }
+
+    async viewAllServicesByCounterToday(counterId: number): Promise<Service[]> {
+        return this.dao.viewAllServicesByCounterToday(counterId);
+    } 
 }
 
 export default CounterController

@@ -1,9 +1,22 @@
 import db from "../db/db";
 import {Counter} from "../components/counter";
+import { Service } from "../components/service";
 import { rejects } from "assert";
 import { resolve } from "path";
+import { get } from "http";
+
+const getFormattedDate = (): string => {
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // I mesi partono da 0, quindi aggiungi 1
+    const year = today.getFullYear();
+  
+    return `${day}-${month}-${year}`;
+  };
+  
 
 class CounterDAO {
+    
     getCounter(id: string): Promise<Counter> {
         return new Promise<Counter>((resolve, reject) => {
             const sql = "SELECT * FROM counter WHERE id = ?";
@@ -78,6 +91,68 @@ class CounterDAO {
                 }else{
                     return reject("Update not completed correctly.");
                 }
+            });
+        });
+    }
+
+    addCounterService(counterId: number, serviceId: number): Promise<void> {
+        return new Promise<void> ((resolve, reject) => {
+
+            const date = getFormattedDate();
+
+            const sql = `INSERT INTO counter_service(counterId, serviceId, date) VALUES(?, ?, ?)`;
+
+            db.run(sql, [counterId, serviceId, date], function(this: any, err: Error | null){
+                if(err){
+                    return reject(err);
+                }
+                if(this.lastID === 0){
+                    return reject("Insertion not completed correctly.");
+                }else{
+                    return resolve();
+                }
+
+            });
+        });
+    }
+
+    deleteCounterService(counterId: number, serviceId: number): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            const date = getFormattedDate();
+
+            const sql = `DELETE FROM counter_service 
+                        WHERE counterId = ? AND serviceId = ? AND date = ?`;
+            db.run(sql, [counterId, serviceId, date], function(this: any, err: Error | null){
+                if(err){
+                    return reject(err);
+                }
+                if(this.changes !== 0){
+                    return resolve();
+                }
+                return reject("Counter and/or service not found.");
+            });
+        });
+    }
+
+    /**
+     * Allows you to return all service types that manage a counter based on the counter id and date (today)
+     */
+    viewAllServicesByCounterToday(counterId: number): Promise<Service[]> {
+        return new Promise((resolve, reject) => {
+            const date = getFormattedDate();
+
+            const sql = `SELECT id, name, serviceTime
+                        FROM counter_service, service
+                        WHERE counter_service.serviceId = service.id
+                            AND counter_service.counterId = ? AND date = ?`;
+            db.all(sql, [counterId, date], (err, rows) => {
+                if(err){
+                    return reject(err);
+                }
+
+                const services = rows.map((r: any) => new Service(r.id, r.name, r.serviceTime));
+                
+                return resolve(services);
             });
         });
     }

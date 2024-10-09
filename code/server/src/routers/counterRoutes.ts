@@ -115,6 +115,28 @@ class CounterRoutes {
                     next(err)
                 })
         )
+
+        /**
+         * Route to add a service at the counter for today
+         * Requires the counterId and serviceId
+         * Return a 200 status code if the Insertion was successful
+         */
+        //TODO: depending by the requests of frontend
+
+
+        /**
+         * Route to delete a service at the counter for today
+         * Requires the counterId and serviceId
+         * Return a 200 status code if the Delete was successful
+         */
+        //TODO: depending by the requests of frontend
+
+        /**
+         * Route to view all services that a counter hadles
+         * Requires the counterId 
+         * Return a 200 status code and return the list of the services
+         */
+        //TODO: depending by the requests of frontend
     }
 }
 
