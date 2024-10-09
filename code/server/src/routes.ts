@@ -1,6 +1,7 @@
 import express from "express"
 import ErrorHandler from "./helper"
 import ItemRoutes from "./routers/itemRoutes"
+import ServiceRoutes from "./routers/serviceRoutes"
 
 const morgan = require("morgan")
 const prefix = "/officequeue"
@@ -27,11 +28,13 @@ function initRoutes(app: express.Application) {
      */
 
     const itemRoutes = new ItemRoutes()
+    const serviceRoutes = new ServiceRoutes();
 
     /**
      * The routes for the user, authentication, product, proposal, and cart resources are defined here.
-     */
+    */
     app.use(`${prefix}/items`, itemRoutes.getRouter())
+    app.use(`${prefix}/services`, serviceRoutes.getRouter())
 
     ErrorHandler.registerErrorHandler(app)
 }

@@ -7,7 +7,7 @@ class ServiceDAO {
      * @param name - The name of the service.
      * @param serviceTime - The time the service takes to complete.
      * @returns A promise that resolves if the operation is successful.
-     */
+    */
     async addService(name: string, serviceTime: number): Promise<void> {
         const sql = "INSERT INTO service (name, serviceTime) VALUES (?,?)";
         const params = [name, serviceTime];
@@ -31,7 +31,7 @@ class ServiceDAO {
      * Get a specific service in the database.
      * @param id - The id of the service.
      * @returns A promise that resolves with the service if it exists.
-     */    
+    */    
     getService(id: string): Promise<Service> {
         const sql = "SELECT * FROM service WHERE id = ?";
         const params = [id];
@@ -58,11 +58,38 @@ class ServiceDAO {
             });
         });
     }
+
+    /**
+     * Retrieves all services from the database.
+     * @returns A promise that resolves with an array of services.
+    */
+    getServices(): Promise<Service[]> {
+        const sql = "SELECT * FROM service";
+        return new Promise((resolve, reject) => {
+            db.all(sql, [], (err: Error | null, rows: any[]) => {
+                if (err) {
+                    reject(new Error(`Error retrieving services: ${err.message}`));
+                    return;
+                }
+                
+                const services: Service[] = rows.map((row: any) => {
+                    return {
+                        id: row.id,
+                        name: row.name,
+                        serviceTime: row.serviceTime
+                    };
+                });
+
+                resolve(services);
+            });
+        });
+    }
+
     /**
      * Deletes a specific service from the database.
      * @param id - The ID of the service to delete.
      * @returns A promise that resolves if the operation is successful.
-     */
+    */
     deleteService(id: string): Promise<void> {
         return new Promise((resolve, reject) => {
             const sql = "DELETE FROM service WHERE id = ?";
@@ -85,7 +112,7 @@ class ServiceDAO {
      * @param name - The new name of the service.
      * @param serviceTime - The new service time of the service.
      * @returns A promise that resolves if the operation is successful.
-     */
+    */
     editService(id: string, name: string, serviceTime: number): Promise<void> {
         return new Promise((resolve, reject) => {
             const sql = "UPDATE service SET name = ?, serviceTime = ? WHERE id = ?";
