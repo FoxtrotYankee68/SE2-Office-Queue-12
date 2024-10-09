@@ -128,6 +128,36 @@ class ServiceDAO {
             });
         });
     }
+
+        /**
+     * Estimate waiting time for a specific service in the database.
+     * @param id - The id of the service.
+     * @returns ??
+    */    
+        estimateServiceWaitingTime(id: string): Promise<number> {
+            const sql = "SELECT * FROM service WHERE id = ?";
+            const params = [id];
+    
+            return new Promise((resolve, reject) => {
+                db.get(sql, params, (err: Error | null, row: any) => {
+                    if (err) {
+                        reject(new Error(`Error retrieving service: ${err.message}`));
+                        return;
+                    }
+                    
+                    if (!row) {
+                        reject(new Error(`Service with ID ${id} not found`));
+                        return;
+                    }
+                    
+                    const waitingTime =0;
+
+                    //calculate waiting time
+                    
+                    resolve(waitingTime);
+                });
+            });
+        }
 }
 
 export default ServiceDAO;

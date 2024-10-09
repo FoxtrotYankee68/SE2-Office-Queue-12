@@ -54,6 +54,15 @@ class ServiceController {
     async editService(id: string, name: string, serviceTime: number): Promise<void> {
         return this.dao.editService(id, name, serviceTime);
     }
+
+     /**
+     * Estimate waiting time for a specific service in the database.
+     * @param id - The id of the service to retrieve.
+     * @returns waiting time number.
+    */
+     async estimateServiceWaitingTime(id: string): Promise<number> {
+        return this.dao.estimateServiceWaitingTime(id);
+    }
 }
 
 export default ServiceController;
