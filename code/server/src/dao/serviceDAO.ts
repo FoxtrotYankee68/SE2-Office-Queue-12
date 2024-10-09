@@ -32,7 +32,7 @@ class ServiceDAO {
      * @param id - The id of the service.
      * @returns A promise that resolves with the service if it exists.
     */    
-    getService(id: string): Promise<Service> {
+    getService(id: number): Promise<Service> {
         const sql = "SELECT * FROM service WHERE id = ?";
         const params = [id];
 
@@ -90,7 +90,7 @@ class ServiceDAO {
      * @param id - The ID of the service to delete.
      * @returns A promise that resolves if the operation is successful.
     */
-    deleteService(id: string): Promise<void> {
+    deleteService(id: number): Promise<void> {
         return new Promise((resolve, reject) => {
             const sql = "DELETE FROM service WHERE id = ?";
             const params = [id];
@@ -113,7 +113,7 @@ class ServiceDAO {
      * @param serviceTime - The new service time of the service.
      * @returns A promise that resolves if the operation is successful.
     */
-    editService(id: string, name: string, serviceTime: number): Promise<void> {
+    editService(id: number, name: string, serviceTime: number): Promise<void> {
         return new Promise((resolve, reject) => {
             const sql = "UPDATE service SET name = ?, serviceTime = ? WHERE id = ?";
             const params = [name, serviceTime, id];

@@ -17,7 +17,7 @@ const getFormattedDate = (): string => {
 
 class CounterDAO {
     
-    getCounter(id: string): Promise<Counter> {
+    getCounter(id: number): Promise<Counter> {
         return new Promise<Counter>((resolve, reject) => {
             const sql = "SELECT * FROM counter WHERE id = ?";
             db.get<any>(sql, [id], (err, row) => {
