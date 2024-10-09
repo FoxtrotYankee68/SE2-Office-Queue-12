@@ -122,6 +122,24 @@ class ServiceRoutes {
                 }
             }
         );
+
+        /**
+         * Route for estimate waiting time a specific service.  
+        */
+        this.router.get(
+            "waiting-time/:id",
+            param("id").isString(),
+            this.errorHandler.validateRequest,
+            (req: any, res: any, next: any) => {
+                try {
+                    this.controller.estimateServiceWaitingTime(req.params.id).then((number: number) => {
+                        res.status(200).json(number);
+                    });
+                } catch (err) {
+                    next(err);
+                }
+            }
+        );
     }
 }
 
