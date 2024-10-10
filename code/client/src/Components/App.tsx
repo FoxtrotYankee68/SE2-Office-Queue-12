@@ -9,46 +9,39 @@ import AdminPage from './AdminPage';
 import AdminServicesPage from './AdminServicesPage';
 
 function App() {
-    const [isLoaded, setIsLoaded] = useState<boolean>(false)
-    const [services, setServices] = useState<{ name: string; time: number }[]>([])
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [services, setServices] = useState<{ name: string; serviceTime: number }[]>([]);
+    const [error, setError] = useState<string>("");
     const navigate = useNavigate();
 
+    const getServices = async () => {
+        try {
+            const s = await API.getServices();
+            console.log(s);
+            setIsLoaded(true);
+            setServices(s);
+        } catch (e: any) {
+            setError(e.message);
+        }
+    };
+
     useEffect(() => {
-        setIsLoaded(true);
-        const tempServices = [
-            { name: 'Financial Services', time: 10 },
-            { name: 'Payment Services', time: 7 },
-            { name: 'International Services', time: 12 },
-            { name: 'Information', time: 5 },
-            { name: 'Delivery', time: 8 }
-          ];
-        setServices(tempServices)
+        getServices();
     }, []);
 
     return (
         <Container fluid style={{ padding: 0, height: "100%" }}>
             <Routes>
-
-                <Route path="/"
-                       element={<Navigate to="/home" />}
+                <Route path="/" element={<Navigate to="/home" />} />
+                <Route path="/home" element={<Homepage />} />
+                <Route path="/admin" element={<AdminPage />} />
+                <Route
+                    path="/admin/services"
+                    element={<AdminServicesPage services={services} updateServices={getServices} />}
                 />
-
-                <Route path="/home"
-                       element={<Homepage />}
-                />
-
-                <Route path="/admin"
-                       element={<AdminPage />}
-                />
-                <Route path="/admin/services"
-                       element={<AdminServicesPage services={services}/>}
-                />
-
             </Routes>
         </Container>
-    )
+    );
 }
-
-
 
 export default App

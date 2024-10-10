@@ -16,7 +16,7 @@ async function getService(id: string) {
 }
 
 async function getServices() {
-    const response = await fetch(baseURL + "services/", { credentials: "include" })
+    const response = await fetch(baseURL + "services/")
     if (response.ok) {
         return await response.json()
     } else {
@@ -53,15 +53,15 @@ async function addService(name: string, serviceTime: number) {
     }
 }
 
-async function editService(id: string, name: string, serviceTime: number) {
-    const response = await fetch(baseURL + "services/" + id, {
+async function editService(name:string, newName: string, serviceTime: number) {
+    const response = await fetch(baseURL + "services/" + name, {
         method: 'PATCH',
         credentials: "include",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            name: name,
+            newName: newName,
             serviceTime: serviceTime
         })
     })
@@ -77,8 +77,8 @@ async function editService(id: string, name: string, serviceTime: number) {
     }
 }
 
-async function deleteService(id: string) {
-    const response = await fetch(baseURL + "services/" + id, {
+async function deleteService(name: string) {
+    const response = await fetch(baseURL + "services/" + name, {
         method: 'DELETE',
         credentials: "include"
     })
