@@ -89,12 +89,12 @@ class ServiceRoutes {
          * Route for deleting a specific service.
         */
         this.router.delete(
-            "/:id",
-            param("id").isString(),
+            "/:name",
+            param("name").isString(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
                 try {
-                    this.controller.deleteService(req.params.id).then(() => {
+                    this.controller.deleteService(req.params.name).then(() => {
                         res.status(200).end();
                     });
                 } catch (err) {
@@ -107,14 +107,14 @@ class ServiceRoutes {
          * Route for editing a service.
         */
         this.router.patch(
-            "/:id",
-            param("id").isString(),
-            body("name").isString().isLength({ min: 3 }),
+            "/:name",
+            param("name").isString(),
+            body("newName").isString(),
             body("serviceTime").isNumeric(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
                 try {
-                    this.controller.editService(req.params.id, req.body.name, req.body.serviceTime).then(() => {
+                    this.controller.editService(req.params.name, req.body.newName, req.body.serviceTime).then(() => {
                         res.status(200).end();
                     });
                 } catch (err) {

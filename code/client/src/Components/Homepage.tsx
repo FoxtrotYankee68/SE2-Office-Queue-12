@@ -26,6 +26,7 @@ function Homepage() {
                 <Row style={{ textAlign: "center", margin: 0, padding: 0 }}>
                     <span className="adminTitle">Homepage</span>
                 </Row>
+                {/*}
                 <Row style={{ justifyContent: 'center', margin: 0, padding: 0, alignItems: "center", height: "100%" }}>
                     <Button onClick={() => API.getItem("0")}>
                         Get item
@@ -34,6 +35,7 @@ function Homepage() {
                         Add item
                     </Button>
                 </Row>
+                */}
             </Container>
         </>
     )
