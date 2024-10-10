@@ -87,13 +87,13 @@ class ServiceDAO {
 
     /**
      * Deletes a specific service from the database.
-     * @param id - The ID of the service to delete.
+     * @param name - The name of the service to delete.
      * @returns A promise that resolves if the operation is successful.
     */
-    deleteService(id: number): Promise<void> {
+    deleteService(name: string): Promise<void> {
         return new Promise((resolve, reject) => {
-            const sql = "DELETE FROM service WHERE id = ?";
-            const params = [id];
+            const sql = "DELETE FROM service WHERE name = ?";
+            const params = [name];
 
             db.run(sql, params, (err: Error | null) => {
                 if (err) {
@@ -108,15 +108,15 @@ class ServiceDAO {
     
     /**
      * Edits a specific service in the database.
-     * @param id - The id of the service to edit.
-     * @param name - The new name of the service.
+     * @param name - The id of the service to edit.
+     * @param newName - The new name of the service.
      * @param serviceTime - The new service time of the service.
      * @returns A promise that resolves if the operation is successful.
     */
-    editService(id: number, name: string, serviceTime: number): Promise<void> {
+    editService(name: string, newName: string, serviceTime: number): Promise<void> {
         return new Promise((resolve, reject) => {
-            const sql = "UPDATE service SET name = ?, serviceTime = ? WHERE id = ?";
-            const params = [name, serviceTime, id];
+            const sql = "UPDATE service SET name = ?, serviceTime = ? WHERE name = ?";
+            const params = [newName, serviceTime, name];
 
             db.run(sql, params, (err: Error | null) => {
                 if (err) {

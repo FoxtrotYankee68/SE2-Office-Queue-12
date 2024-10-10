@@ -1,10 +1,8 @@
 import { describe, afterEach, test, expect, beforeAll, afterAll, jest } from "@jest/globals"
 import serviceDAO from "../../src/dao/serviceDAO"
 import db from "../../src/db/db"
-import { Counter } from "../../src/components/counter";
 import { Service } from "../../src/components/service";
 import { Database } from "sqlite3";
-import { run } from "node:test";
 
 //jest.mock("crypto")
 jest.mock("../../src/db/db.ts");
@@ -46,7 +44,7 @@ describe('serviceDAO', () => {
                 return {} as Database;
             });
 
-            await expect(dao.addService(testName,testTime)).rejects.toThrow('Error inserting service: Database error');
+            await expect(dao.addService(testName,testTime)).rejects.toThrow(`Error inserting service: ${mockError.message}`);
     
             expect(db.run).toHaveBeenCalledWith(
                 "INSERT INTO service (name, serviceTime) VALUES (?,?)",
@@ -82,7 +80,7 @@ describe('serviceDAO', () => {
                 return {} as Database;
             });
 
-            await expect(dao.getService(testId)).rejects.toThrow('Service with ID 1 not found');
+            await expect(dao.getService(testId)).rejects.toThrow(`Service with ID ${testId} not found`);
     
             expect(db.get).toHaveBeenCalledWith(
                 "SELECT * FROM service WHERE id = ?",
@@ -98,7 +96,7 @@ describe('serviceDAO', () => {
                 return {} as Database;
             });
 
-            await expect(dao.getService(testId)).rejects.toThrow('Error retrieving service: Database error');
+            await expect(dao.getService(testId)).rejects.toThrow(`Error retrieving service: ${mockError.message}`);
     
             expect(db.get).toHaveBeenCalledWith(
                 "SELECT * FROM service WHERE id = ?",
@@ -151,7 +149,7 @@ describe('serviceDAO', () => {
                 return {} as Database;
             });
 
-            await expect(dao.getServices()).rejects.toThrow('Error retrieving services: Database error');
+            await expect(dao.getServices()).rejects.toThrow(`Error retrieving services: ${mockError.message}`);
     
             expect(db.all).toHaveBeenCalledWith(
                 "SELECT * FROM service",
@@ -170,11 +168,11 @@ describe('serviceDAO', () => {
                 return {} as Database;
             });
 
-            await expect(dao.deleteService(testId)).resolves.toBeUndefined();;
+            await expect(dao.deleteService(testName)).resolves.toBeUndefined();;
     
             expect(db.run).toHaveBeenCalledWith(
-                "DELETE FROM service WHERE id = ?",
-                [testId],
+                "DELETE FROM service WHERE name = ?",
+                [testName],
                 expect.any(Function)
             );
         });
@@ -185,11 +183,11 @@ describe('serviceDAO', () => {
                 return {} as Database;
             });
 
-            await expect(dao.deleteService(testId)).rejects.toThrow('Error deleting service: Database error');
+            await expect(dao.deleteService(testName)).rejects.toThrow(`Error deleting service: ${mockError.message}`);
     
             expect(db.run).toHaveBeenCalledWith(
-                "DELETE FROM service WHERE id = ?",
-                [testId],
+                "DELETE FROM service WHERE name = ?",
+                [testName],
                 expect.any(Function)
             );
         });
@@ -204,11 +202,11 @@ describe('serviceDAO', () => {
                 return {} as Database;
             });
 
-            await expect(dao.editService(testId,testName,testTime)).resolves.toBeUndefined();;
+            await expect(dao.editService(testName,"",testTime)).resolves.toBeUndefined();;
     
             expect(db.run).toHaveBeenCalledWith(
-                "UPDATE service SET name = ?, serviceTime = ? WHERE id = ?",
-                [testName,testTime,testId],
+                "UPDATE service SET name = ?, serviceTime = ? WHERE name = ?",
+                ["",testTime,testName],
                 expect.any(Function)
             ); 
         });
@@ -219,11 +217,11 @@ describe('serviceDAO', () => {
                 return {} as Database;
             });
     
-            await expect(dao.editService(testId,testName,testTime)).rejects.toThrow('Error editing service: Database error');
+            await expect(dao.editService(testName,"",testTime)).rejects.toThrow(`Error editing service: ${mockError.message}`);
     
             expect(db.run).toHaveBeenCalledWith(
-                "UPDATE service SET name = ?, serviceTime = ? WHERE id = ?",
-                [testName,testTime,testId],
+                "UPDATE service SET name = ?, serviceTime = ? WHERE name = ?",
+                ["",testTime,testName],
                 expect.any(Function)
             ); 
         });

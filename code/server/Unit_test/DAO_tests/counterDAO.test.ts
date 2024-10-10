@@ -1,11 +1,10 @@
-import { describe, afterEach, test, expect, beforeAll, afterAll, jest } from "@jest/globals"
+import { describe, afterEach, test, expect, jest } from "@jest/globals"
 import counterDAO from "../../src/dao/counterDAO"
 import db from "../../src/db/db"
 import { Counter } from "../../src/components/counter";
 import { Service } from "../../src/components/service";
 import { Database } from "sqlite3";
 
-//jest.mock("crypto")
 jest.mock("../../src/db/db.ts")
 
 const getFormattedDate = (): string => {
@@ -34,7 +33,7 @@ describe('countertDAO', () => {
 
     describe('getCounter', () => {
         test("It should return the counter if it exists", async () => {
-
+            
             jest.spyOn(db, 'get').mockImplementation((sql, params, callback) => {
                 callback(null, mockCounter);
                 return {} as Database;
@@ -267,7 +266,7 @@ describe('countertDAO', () => {
 
     });
 
-    describe('addCounterServicer', () => {
+    describe('addCounterService', () => {
         test('It should successfully add a service to the counter', async () => {
 
             jest.spyOn(db, 'run').mockImplementation(function (sql, params, callback) {
@@ -321,7 +320,7 @@ describe('countertDAO', () => {
 
     });
 
-    describe('deleteCounterServicer', () => {
+    describe('deleteCounterService', () => {
         test('It should successfully delete a service from the counter', async () => {
 
             jest.spyOn(db, 'run').mockImplementation(function (sql, params, callback) {

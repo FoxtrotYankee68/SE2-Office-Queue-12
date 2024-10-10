@@ -23,7 +23,7 @@ class ServiceController {
      * @param id - The id of the service to retrieve.
      * @returns A promise that resolves with the service if it exists.
     */
-    async getService(id: string): Promise<Service> {
+    async getService(id: number): Promise<Service> {
         return this.dao.getService(id);
     }
 
@@ -37,22 +37,22 @@ class ServiceController {
 
     /**
      * Deletes a specific service from the database.
-     * @param id - The id of the service to delete.
+     * @param name - The name of the service to delete.
      * @returns A promise that resolves if the operation is successful.
     */
-    async deleteService(id: string): Promise<void> {
-        return this.dao.deleteService(id);
+    async deleteService(name: string): Promise<void> {
+        return this.dao.deleteService(name);
     }
 
     /**
      * Edits a specific service in the database.
-     * @param id - The id of the service to edit.
-     * @param name - The new name of the service.
+     * @param name - The name of the service we want to edit.
+     * @param newName - The new name of the service.
      * @param serviceTime - The new service time of the service.
      * @returns A promise that resolves if the operation is successful.
     */
-    async editService(id: string, name: string, serviceTime: number): Promise<void> {
-        return this.dao.editService(id, name, serviceTime);
+    async editService(name: string, newName: string, serviceTime: number): Promise<void> {
+        return this.dao.editService(name, newName, serviceTime);
     }
 }
 
