@@ -1,4 +1,4 @@
-import ItemDAO from "../dao/counterDAO";
+import CounterDAO from "../dao/counterDAO";
 import {Counter} from "../components/counter";
 import { Service } from "../components/service";
 
@@ -7,10 +7,10 @@ import { Service } from "../components/service";
  * All methods of this class must interact with the corresponding DAO class to retrieve or store data.
  */
 class CounterController {
-    private dao: ItemDAO
+    private dao: CounterDAO
 
     constructor() {
-        this.dao = new ItemDAO;
+        this.dao = new CounterDAO;
     }
 
     async getCounter(id: string): Promise<Counter> {
