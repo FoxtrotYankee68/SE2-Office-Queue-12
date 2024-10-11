@@ -1,5 +1,6 @@
 import express from "express"
 import ErrorHandler from "./helper"
+import CounterRoutes from "./routers/counterRoutes"
 import ServiceRoutes from "./routers/serviceRoutes"
 
 const morgan = require("morgan")
@@ -26,11 +27,14 @@ function initRoutes(app: express.Application) {
      * All routes must have the authenticator object in order to work properly.
      */
 
+    const counterRoutes = new CounterRoutes();
     const serviceRoutes = new ServiceRoutes();
 
     /**
      * The routes for the user, authentication, product, proposal, and cart resources are defined here.
     */
+
+    app.use(`${prefix}/counters`, counterRoutes.getRouter())
     app.use(`${prefix}/services`, serviceRoutes.getRouter())
 
     ErrorHandler.registerErrorHandler(app)

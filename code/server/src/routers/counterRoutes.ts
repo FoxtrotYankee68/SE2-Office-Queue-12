@@ -3,6 +3,7 @@ import ErrorHandler from "../helper"
 import {body, oneOf, param, query} from "express-validator"
 import CounterController from "../controllers/counterController";
 import {Counter} from "../components/counter";
+import { Service } from "../components/service";
 
 /**
  * Represents a class that defines the routes for handling proposals.
@@ -121,22 +122,53 @@ class CounterRoutes {
          * Requires the counterId and serviceId
          * Return a 200 status code if the Insertion was successful
          */
-        //TODO: depending by the requests of frontend
-
+        this.router.post(
+            "/:counterid/services/:serviceid",
+            param("counterid").isInt(),
+            param("serviceid").isInt(),
+            this.errorHandler.validateRequest,
+            (req: any, res: any, next: any) => this.controller.addCounterService(req.params.counterid, req.params.serviceid)
+                .then(() => res.status(200).send())
+                .catch((err) => {
+                    console.log(err)
+                    next(err)
+                })
+        )
 
         /**
          * Route to delete a service at the counter for today
          * Requires the counterId and serviceId
          * Return a 200 status code if the Delete was successful
          */
-        //TODO: depending by the requests of frontend
+        this.router.delete(
+            "/:counterid/services/:serviceid",
+            param("counterid").isInt(),
+            param("serviceid").isInt(),
+            this.errorHandler.validateRequest,
+            (req: any, res: any, next: any) => this.controller.deleteCounterService(req.params.counterid, req.params.serviceid)
+                .then(() => res.status(200).send())
+                .catch((err) => {
+                    console.log(err)
+                    next(err)
+                })
+        )
 
         /**
-         * Route to view all services that a counter hadles
+         * Route to view all services that a counter hadles today
          * Requires the counterId 
          * Return a 200 status code and return the list of the services
          */
-        //TODO: depending by the requests of frontend
+        this.router.get(
+            "/:counterid/services",
+            param("counterid").isInt(),
+            this.errorHandler.validateRequest,
+            (req: any, res: any, next: any) => this.controller.viewAllServicesByCounterToday(req.params.counterid)
+                .then((services: Service[]) => res.status(200).json(services))
+                .catch((err) => {
+                    console.log(err)
+                    next(err)
+                })
+        )
     }
 }
 
