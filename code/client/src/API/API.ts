@@ -1,4 +1,4 @@
-import { Counter } from "../Models/Counter";
+import { Counter } from "../Models/counter";
 import { Service } from "../Models/service";
 
 const baseURL = "http://localhost:3001/officequeue/"
