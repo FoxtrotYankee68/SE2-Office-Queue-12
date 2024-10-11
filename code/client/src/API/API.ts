@@ -262,6 +262,22 @@ async function viewAllServicesByCounterToday(counterId: number) {
     
 }
 
+async function getWaitingTime(id: string) {
+    console.log(baseURL + "services/waitingtime/" + id)
+    const response = await fetch(baseURL + "services/waitingtime/" + id, { credentials: "include" })
+    if (response.ok) {
+       
+        return await response.json()
+    } else {
+        const errDetail = await response.json();
+        if (errDetail.error)
+            throw errDetail.error
+        if (errDetail.message)
+            throw errDetail.message
+        throw new Error("Error. Please reload the page")
+    }
+}
+
 const API = {
     getService,
     getServices,
@@ -275,7 +291,8 @@ const API = {
     deleteCounter, 
     addCounterService, 
     deleteCounterService, 
-    viewAllServicesByCounterToday
+    viewAllServicesByCounterToday,
+    getWaitingTime
 }
 
 export default API
