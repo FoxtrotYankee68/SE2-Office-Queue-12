@@ -8,14 +8,15 @@ import API from "../API/API";
 
 interface Service {
     name: string;
-    time: number;
+    serviceTime: number;
   }
   
   interface AdminServicesPageProps {
     services: Service[]; // Array of Service objects
+    updateServices: () => void; // Function to update the services
   }
 
-function AdminServicesPage({ services }:AdminServicesPageProps) {
+function AdminServicesPage({ services, updateServices }:AdminServicesPageProps) {
     const navigate = useNavigate()
     // Use useState to manage the selected tab
   const [activeTab, setActiveTab] = useState('#add');
@@ -25,17 +26,35 @@ function AdminServicesPage({ services }:AdminServicesPageProps) {
   const [serviceTime, setServiceTime] = useState('');
 
   // Define the content that changes based on the selected tab
-  const handleAdd = () => {
-    
+  const handleAdd = async (event: React.FormEvent) => {
+    event.preventDefault();
+    await API.addService(serviceName, Number(serviceTime));
+    setServiceName('');
+    setServiceTime('');
+    await updateServices();
+};
+
+  const handleEdit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log(editSelection);
+    console.log(serviceName);
+    console.log(serviceTime);
+    await API.editService(editSelection, serviceName, Number(serviceTime));
+    setServiceName('');
+    setServiceTime('');
+    setEditSelection('');
+    await updateServices();
   };
 
-  const handleEdit = () => {
-    
+  const handleDelete = async (event: React.FormEvent) => {
+    event.preventDefault();
+    await API.deleteService(deleteSelection);
+    setDeleteSelection('');
+    await updateServices();
   };
 
     return (
         <>
-        
             <Container fluid>
             <Navbar style={{ backgroundColor: '#FF7F50' }}>
              <Container background-colour="#FF7F50">
@@ -80,33 +99,33 @@ function AdminServicesPage({ services }:AdminServicesPageProps) {
                     <Card.Body>
                     <Card.Title>Add a Service</Card.Title>
                     <Form onSubmit={handleAdd}>
-                  <Form.Group className="mb-3" controlId="username">
-                    <Form.Label>Name of service</Form.Label>
-                    <Form.Control
-                      value={serviceName}
-                      placeholder="Example: Delivery"
-                      onChange={(ev) => setServiceName(ev.target.value)}
-                      required
-                    />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="password">
-                    <Form.Label>Service time</Form.Label>
-                    <Form.Control
-                      value={serviceTime}
-                      placeholder="Example: 10"
-                      onChange={(ev) => setServiceTime(ev.target.value)}
-                      required
-                    />
-                  </Form.Group>
-                  <Button style={{ backgroundColor: '#FF7F50' }}>Add</Button>
-                </Form>
+                      <Form.Group className="mb-3" controlId="username">
+                        <Form.Label>Name of service</Form.Label>
+                        <Form.Control
+                          value={serviceName}
+                          placeholder="Example: Delivery"
+                          onChange={(ev) => setServiceName(ev.target.value)}
+                          required
+                        />
+                      </Form.Group>
+                      <Form.Group className="mb-3" controlId="password">
+                        <Form.Label>Service time</Form.Label>
+                        <Form.Control
+                          value={serviceTime}
+                          placeholder="Example: 10"
+                          onChange={(ev) => setServiceTime(ev.target.value)}
+                          required
+                        />
+                      </Form.Group>
+                      <Button type="submit" style={{ backgroundColor: '#FF7F50' }}>Add</Button>
+                    </Form>
                   </Card.Body>
                  ) : activeTab==="#edit" ?(
                     <Card.Body>
                     <Card.Title>Edit a Service</Card.Title>
                     <Dropdown data-bs-theme="dark">
                       <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-                        Choose a service
+                      {editSelection ? editSelection : "Choose a service"}
                       </Dropdown.Toggle>
                     <Dropdown.Menu>
                     {services.map((service, index) => (
@@ -116,7 +135,7 @@ function AdminServicesPage({ services }:AdminServicesPageProps) {
                             onClick={() => {
                                 setEditSelection(service.name)
                                 setServiceName(service.name)
-                                setServiceTime(service.time.toString())
+                                setServiceTime(service.serviceTime.toString())
                             }}
                           >
                             {service.name}
@@ -143,7 +162,7 @@ function AdminServicesPage({ services }:AdminServicesPageProps) {
                       required
                     />
                   </Form.Group>
-                  <Button style={{ backgroundColor: '#FF7F50' }}>Edit</Button>
+                  <Button type="submit" style={{ backgroundColor: '#FF7F50' }}>Edit</Button>
                 </Form>
                     </Card.Body>
                  ) : (
@@ -151,7 +170,7 @@ function AdminServicesPage({ services }:AdminServicesPageProps) {
                     <Card.Title>Delete a Service</Card.Title>
                     <Dropdown data-bs-theme="dark">
                       <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-                        Choose a service
+                      {deleteSelection ? deleteSelection : "Choose a service"}
                       </Dropdown.Toggle>
                     <Dropdown.Menu>
                     {services.map((service, index) => (
@@ -161,7 +180,7 @@ function AdminServicesPage({ services }:AdminServicesPageProps) {
                             onClick={() => {
                                 setDeleteSelection(service.name)
                                 setServiceName(service.name)
-                                setServiceTime(service.time.toString())
+                                setServiceTime(service.serviceTime.toString())
                             }}
                           >
                             {service.name}
@@ -171,7 +190,7 @@ function AdminServicesPage({ services }:AdminServicesPageProps) {
                   </Dropdown>
                   <br/>
                   <p>{deleteSelection==='' ? '' : `Are you sure you want to delete ${deleteSelection}?`}</p>
-                    <Button style={{ backgroundColor: '#FF7F50' }}>Delete</Button>
+                    <Button onClick={handleDelete} style={{ backgroundColor: '#FF7F50' }}>Delete</Button>
                   </Card.Body>
                  )
                 }
@@ -186,12 +205,13 @@ function AdminServicesPage({ services }:AdminServicesPageProps) {
 }
 
 AdminServicesPage.propTypes = {
-    services: PropTypes.arrayOf(
+  services: PropTypes.arrayOf(
       PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        time: PropTypes.number.isRequired,
+          name: PropTypes.string.isRequired,
+          serviceTime: PropTypes.number.isRequired,
       })
-    ).isRequired,
-  };
+  ).isRequired,
+  updateServices: PropTypes.func.isRequired,
+};
 
 export default AdminServicesPage

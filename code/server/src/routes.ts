@@ -33,6 +33,7 @@ function initRoutes(app: express.Application) {
     /**
      * The routes for the user, authentication, product, proposal, and cart resources are defined here.
     */
+
     app.use(`${prefix}/counters`, counterRoutes.getRouter())
     app.use(`${prefix}/services`, serviceRoutes.getRouter())
 
