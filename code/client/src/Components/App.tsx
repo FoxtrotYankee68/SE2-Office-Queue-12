@@ -33,7 +33,7 @@ function App() {
         <Container fluid style={{ padding: 0, height: "100%" }}>
             <Routes>
                 <Route path="/" element={<Navigate to="/home" />} />
-                <Route path="/home" element={<Homepage />} />
+                <Route path="/home" element={<Homepage services={services} />} />
                 <Route path="/admin" element={<AdminPage />} />
                 <Route
                     path="/admin/services"
