@@ -22,6 +22,12 @@ function Homepage( {services }: HomepageProps ) {
 
     const [selectedService, setSelectedService] = useState('');
 
+    const [ticketNumber, setTicketNumber] = useState<number | null>(null);
+
+    const [ticketCounter, setTicketCounter] = useState<number>(0);
+
+
+
 
     const handleSelect = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -32,6 +38,21 @@ function Homepage( {services }: HomepageProps ) {
         }
         //todo here comes an API call
 
+        const newTicketNumber = ticketCounter + 1;
+        setTicketCounter(newTicketNumber);
+        setTicketNumber(newTicketNumber);
+        
+
+
+    }
+
+    const formatTicketNumber = (number: number) => {
+        return number.toString().padStart(5, '0');
+    };
+
+    const handleOkClick = () => {
+        setTicketNumber(null);
+        setSelectedService('');
     }
 
     return (
@@ -89,6 +110,26 @@ function Homepage( {services }: HomepageProps ) {
                                 Submit
                             </Button>
                         </Row>
+
+                        {ticketNumber !== null && (
+                            <Row className="justify-content-md-center mt-3">
+                                <Card className="p-3" style={{ width: '18rem', textAlign: 'center' }}>
+                                    <Card.Body>
+                                        <Card.Title>Your Ticket Number</Card.Title>
+                                        <Card.Text style={{ fontSize: '2rem', fontWeight: 'bold' }}>
+                                            {formatTicketNumber(ticketNumber)}
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                                <Button
+                                    style={{ backgroundColor: '#FF7F50' }}
+                                    onClick={handleOkClick}
+                                >
+                                    OK
+                                </Button>
+                            </Row>    
+                        )} 
+
                     </Container>
                 </div>
                 
