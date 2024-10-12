@@ -36,7 +36,7 @@ function AdminPage() {
             </Card>
           </Col>
           <Col md={8} lg={6}>
-            <Card className="shadow-sm" style={{backgroundColor: 'rgb(250, 250, 210, 0.8)', padding: '10px'}}>
+            <Card className="shadow-sm" style={{backgroundColor: 'rgb(250, 250, 210, 0.8)', padding: '10px'}} onClick={() => navigate("/admin/counters")}>
               <Card.Body style={{backgroundColor: 'rgb(250, 250, 210, 0)'}}>
               <Card.Img variant="top" src="countersImg.png" />    
               </Card.Body>

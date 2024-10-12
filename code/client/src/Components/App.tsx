@@ -7,6 +7,7 @@ import API from '../API/API';
 import Homepage from './Homepage';
 import AdminPage from './AdminPage';
 import AdminServicesPage from './AdminServicesPage';
+import AdminCountersPage from './AdminCountersPage';
 
 function App() {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -38,6 +39,10 @@ function App() {
                 <Route
                     path="/admin/services"
                     element={<AdminServicesPage services={services} updateServices={getServices} />}
+                />
+                <Route
+                    path="/admin/counters"
+                    element={<AdminCountersPage services={services} />}
                 />
             </Routes>
         </Container>
