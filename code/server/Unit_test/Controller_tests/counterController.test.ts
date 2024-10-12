@@ -6,7 +6,7 @@ import { Service } from "../../src/components/service";
 
 jest.mock("../../src/dao/counterDAO.ts");
 
-describe('countertController', () => {
+describe('counterController', () => {
 
     afterEach(() => {
         jest.clearAllMocks();
