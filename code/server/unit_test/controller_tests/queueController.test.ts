@@ -7,6 +7,11 @@ jest.mock("../../src/db/db.ts")
 
 describe(("Queue controller"), () => {
 
+    test("random", async () => {
+        
+    });
+
+
     //-------- getQueue ---------------//
     describe(("getQueue"), () => {
 
