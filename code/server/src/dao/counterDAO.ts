@@ -11,7 +11,7 @@ const getFormattedDate = (): string => {
     const month = String(today.getMonth() + 1).padStart(2, '0'); // I mesi partono da 0, quindi aggiungi 1
     const year = today.getFullYear();
   
-    return `${day}-${month}-${year}`;
+    return `${day}/${month}/${year}`;
   };
   
 
