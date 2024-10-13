@@ -137,6 +137,17 @@ class QueueController {
     
         return nextTicket;
     }
+
+    /**
+     * This method clears all items in the queue and prepares it for fresh input. 
+     * It does not return any value and is asynchronous, 
+     * which means it returns a Promise that resolves when the operation is complete.
+     * 
+     * @returns A Promise that resolves when the queue has been reset.
+    */
+    async resetQueue(): Promise<void> {
+        return this.dao.resetQueue();
+    }
     
 }
 

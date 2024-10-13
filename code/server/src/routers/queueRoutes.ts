@@ -1,8 +1,6 @@
 import express, { Router } from "express"
 import ErrorHandler from "../helper"
 import {body, oneOf, param, query} from "express-validator"
-import ItemController from "../controllers/itemController";
-import {Item} from "../components/item";
 import QueueController from "../controllers/queueController";
 import {Queue} from "../components/queue";
 
