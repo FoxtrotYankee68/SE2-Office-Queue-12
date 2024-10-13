@@ -9,8 +9,23 @@ import db from "../db/db";
 
 export function cleanup() {
     db.serialize(() => {
-        // Delete all data from the database.
-        // Add delete statements for the database's tables
-        // e.g. db.run("DELETE FROM items")
+        return new Promise<void>((resolve, reject) => {
+            db.run("DELETE FROM counter", (err: any, _: any) => {
+                if (err) return reject();
+                db.run("DELETE FROM service", (err: any, _: any) => {
+                    if (err) return reject();
+                    db.run("DELETE FROM counter_service", (err: any, _: any) => {
+                        if (err) return reject();
+                        db.run("DELETE FROM queue", (err: any, _: any) => {
+                            if (err) return reject();
+                            db.run("DELETE FROM sqlite_sequence", (err: any, _: any) => {
+                                if (err) return reject();
+                                resolve();
+                            });
+                        });
+                    });
+                });
+            });
+        });
     })
 }
