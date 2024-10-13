@@ -4,6 +4,7 @@ import { useState } from 'react'
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./style.css"
 import API from "../API/API";
+import {Ticket} from "../Models/ticket";
 
 interface Service {
     id: number;
@@ -13,25 +14,19 @@ interface Service {
 
 interface HomepageProps {
     services: Service[];
-
 }
 
 
 
-function Homepage( {services }: HomepageProps ) {
+function Homepage( {services}: HomepageProps ) {
     const navigate = useNavigate()
 
     const [selectedService, setSelectedService] = useState('');
     const [selectedServiceId, setSelectedServiceId] = useState<number>(0);
 
-    const [ticketNumber, setTicketNumber] = useState<number | null>(null);
-
-    const [ticketCounter, setTicketCounter] = useState<number>(0);
+    const [ticket, setTicket] = useState(new Ticket())
 
     const [waitingTime, setWaitingTime] = useState<number>(0);
-
-
-
 
     const handleSelect = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -40,14 +35,16 @@ function Homepage( {services }: HomepageProps ) {
             alert("Please select a service before submitting.");
             return;
         }
-        //todo here comes an API call
+
         console.log(selectedServiceId)
-        const wt = await API.getWaitingTime(selectedServiceId);
-        console.log(wt.waitingTime);
-        const newTicketNumber = ticketCounter + 1;
-        setTicketCounter(newTicketNumber);
-        setTicketNumber(newTicketNumber);
-        setWaitingTime(wt.waitingTime);
+
+        const newTicket = await API.getNewTicket(selectedServiceId)
+        console.log(newTicket);
+        setTicket(newTicket);
+
+        const waitTime = await API.getWaitingTime(selectedServiceId);
+        console.log(waitTime);
+        setWaitingTime(waitTime.waitingTime);
 
     }
 
@@ -56,7 +53,7 @@ function Homepage( {services }: HomepageProps ) {
     };
 
     const handleOkClick = () => {
-        setTicketNumber(null);
+        setTicket(new Ticket());
         setSelectedService('');
     }
 
@@ -136,14 +133,17 @@ function Homepage( {services }: HomepageProps ) {
           </Col>
           <Col md={8} lg={6}>
             <Card className="shadow-sm" style={{backgroundColor: 'rgb(250, 250, 210, 0.8)', padding: '10px', height: '300px'}}>
-        
-              {ticketNumber !== null && ( 
+              {ticket.id > 0 && (
                 <Card.Body style={{backgroundColor: 'rgb(250, 250, 210, 0)'}}>
-                <Card.Title>Your Ticket Number</Card.Title>
-                <Card.Text style={{ fontSize: '2rem', fontWeight: 'bold' }}>
-                    {formatTicketNumber(ticketNumber)}
+                <Card.Title>Your Ticket</Card.Title>
+                <Card.Text>
+                    Service: {selectedService}
                 </Card.Text>
-                <p>Estimated waiting time: {waitingTime ? waitingTime : ''}</p>
+                <Card.Text>
+                    Position in queue: {ticket.queuePosition + 1}
+                </Card.Text>
+                <Card.Text>
+                    Estimated waiting time: {waitingTime ? waitingTime : ''}</Card.Text>
                 <Button style={{ backgroundColor: '#FF7F50' }} onClick={handleOkClick}>OK</Button>
                 </Card.Body>
                     )}

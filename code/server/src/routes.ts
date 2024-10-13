@@ -2,6 +2,8 @@ import express from "express"
 import ErrorHandler from "./helper"
 import CounterRoutes from "./routers/counterRoutes"
 import ServiceRoutes from "./routers/serviceRoutes"
+import TicketRoutes from "./routers/ticketRoutes";
+import QueueRoutes from "./routers/queueRoutes";
 
 const morgan = require("morgan")
 const prefix = "/officequeue"
@@ -29,13 +31,17 @@ function initRoutes(app: express.Application) {
 
     const counterRoutes = new CounterRoutes();
     const serviceRoutes = new ServiceRoutes();
+    const queueRoutes = new QueueRoutes();
+    const ticketRoutes = new TicketRoutes();
 
     /**
-     * The routes for the user, authentication, product, proposal, and cart resources are defined here.
+     * The routes for the counter, service and ticket resources are defined here.
     */
 
     app.use(`${prefix}/counters`, counterRoutes.getRouter())
     app.use(`${prefix}/services`, serviceRoutes.getRouter())
+    app.use(`${prefix}/queues`, queueRoutes.getRouter())
+    app.use(`${prefix}/tickets`, ticketRoutes.getRouter())
 
     ErrorHandler.registerErrorHandler(app)
 }

@@ -1,8 +1,6 @@
 import express, { Router } from "express"
 import ErrorHandler from "../helper"
 import {body, oneOf, param, query} from "express-validator"
-import ItemController from "../controllers/itemController";
-import {Item} from "../components/item";
 import QueueController from "../controllers/queueController";
 import {Queue} from "../components/queue";
 
@@ -34,11 +32,11 @@ class QueueRoutes {
 
     /**
      * Initializes the routes for the product router.
-     * 
+     *
      * @remarks
      * This method sets up the HTTP routes for handling product-related operations such as registering products, registering arrivals, selling products, retrieving products, and deleting products.
      * It can (and should!) apply authentication, authorization, and validation middlewares to protect the routes.
-     * 
+     *
      */
     initRoutes() {
 
@@ -48,17 +46,65 @@ class QueueRoutes {
          */
         this.router.get(
             "/:serviceId/:date",
-            param("serviceId").isString().notEmpty(),
-            param("date").isString().notEmpty(),
+            param("serviceId").notEmpty().isNumeric(),
+            param("date").notEmpty().isString(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
-                try {
-                    this.controller.getQueue(req.params.serviceId, new Date(req.params.date)).then(
-                        (queue: Queue) => res.status(200).json(queue)
-                    )
-                } catch (err) {
-                    next(err);
-                }
+                this.controller.getQueue(req.params.serviceId, new Date(req.params.date)).then(
+                    (queue: Queue) => res.status(200).json(queue)
+                ).catch((err: Error) => {
+                    next(err)
+                })
+            }
+        )
+
+        /**
+         * Retrieves all the queues with a given serviceId.
+         * @returns A list of retrieved queues.
+         */
+        this.router.get(
+            "/:serviceId",
+            param("serviceId").notEmpty().isNumeric(),
+            this.errorHandler.validateRequest,
+            (req: any, res: any, next: any) => {
+                this.controller.getQueuesByService(req.params.serviceId).then(
+                    (queues: Queue[]) => res.status(200).json(queues)
+                ).catch(err => {
+                    return next(err);
+                })
+            }
+        )
+
+        /**
+         * Retrieves all the queues with a given date.
+         * @returns A list of retrieved queues.
+         */
+        this.router.get(
+            "/:date",
+            param("date").notEmpty().isString(),
+            this.errorHandler.validateRequest,
+            (req: any, res: any, next: any) => {
+                this.controller.getQueuesByDate(new Date(req.params.date)).then(
+                    (queues: Queue[]) => res.status(200).json(queues)
+                ).catch(err => {
+                    return next(err);
+                })
+            }
+        )
+
+        /**
+         * Retrieves all the queues in the database.
+         * @returns A list of retrieved queues.
+         */
+        this.router.get(
+            "/",
+            this.errorHandler.validateRequest,
+            (_: any, res: any, next: any) => {
+                this.controller.getAllQueues().then(
+                    (queues: Queue[]) => res.status(200).json(queues)
+                ).catch(err => {
+                    return next(err);
+                })
             }
         )
 
@@ -67,37 +113,33 @@ class QueueRoutes {
          */
         this.router.post(
             "/",
-            body("serviceId").isString().notEmpty(),
-            body("date").isString().notEmpty(),
+            body("serviceId").notEmpty().isNumeric(),
+            body("date").notEmpty().isString(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
-                try {
-                    this.controller.addQueue(req.body.serviceId, new Date(req.body.date)).then(
-                        () => res.status(200)
-                    )
-                } catch (err) {
-                    next(err);
-                }
+                this.controller.addQueue(req.body.serviceId, new Date(req.body.date)).then(
+                    () => res.status(200)
+                ).catch(err => {
+                    return next(err);
+                })
             }
         )
 
         /**
-         * Adds a customer to a queue (given the serviceId and date).
-         * @returns The modified Queue item, to show its information to the requesting customer.
+         * Edits a queue's information.
          */
         this.router.patch(
-            "/:serviceId/:date",
-            param("serviceId").isString().notEmpty(),
-            param("date").isString().notEmpty(),
+            ":serviceId/:date",
+            param("serviceId").notEmpty().isNumeric(),
+            param("date").notEmpty().isString(),
+            body("length").notEmpty().isNumeric(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
-                try {
-                    this.controller.addCustomerToQueue(req.params.serviceId, new Date(req.params.date)).then(
-                        (queue: Queue) => res.status(200).json(queue)
-                    )
-                } catch (err) {
-                    next(err);
-                }
+                this.controller.editQueue(req.params.serviceId, new Date(req.params.date), req.body.length).then(
+                    () => res.status(200)
+                ).catch(err => {
+                    return next(err);
+                })
             }
         )
 
@@ -106,37 +148,30 @@ class QueueRoutes {
          */
         this.router.delete(
             "/:serviceId/:date",
-            param("serviceId").isString().notEmpty(),
-            param("date").isString().notEmpty(),
+            param("serviceId").notEmpty().isNumeric(),
+            param("date").notEmpty().isString(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
-                try {
-                    this.controller.deleteQueue(req.params.serviceId, new Date(req.params.date)).then(
-                        () => res.status(200)
-                    )
-                } catch (err) {
-                    next(err);
-                }
+                this.controller.deleteQueue(req.params.serviceId, new Date(req.params.date)).then(
+                    () => res.status(200)
+                ).catch(err => {
+                    return next(err);
+                })
             }
         )
 
         /**
-         * The only route actually needed.
-         * Adds a customer to the current day's queue (given the serviceId).
-         * @returns The modified Queue item, to show its information to the requesting customer.
+         * Removes all queues from the database.
          */
-        this.router.patch(
-            "/:serviceId",
-            param("serviceId").isString().notEmpty(),
+        this.router.delete(
+            "/",
             this.errorHandler.validateRequest,
-            (req: any, res: any, next: any) => {
-                try {
-                    this.controller.addCustomerToQueue(req.params.serviceId, new Date(Date.now())).then(
-                        (queue: Queue) => res.status(200).json(queue)
-                    )
-                } catch (err) {
-                    next(err);
-                }
+            (_: any, res: any, next: any) => {
+                this.controller.deleteAllQueues().then(
+                    () => res.status(200)
+                ).catch(err => {
+                    return next(err);
+                })
             }
         )
     }

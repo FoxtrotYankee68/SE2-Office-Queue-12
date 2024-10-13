@@ -10,9 +10,9 @@ const getFormattedDate = (): string => {
     const day = String(today.getDate()).padStart(2, '0');
     const month = String(today.getMonth() + 1).padStart(2, '0'); // I mesi partono da 0, quindi aggiungi 1
     const year = today.getFullYear();
-  
+
     return `${day}-${month}-${year}`;
-  };
+};
   
 
 class CounterDAO {
@@ -97,7 +97,6 @@ class CounterDAO {
 
     addCounterService(counterId: number, serviceId: number): Promise<void> {
         return new Promise<void> ((resolve, reject) => {
-
             const date = getFormattedDate();
 
             const sql = `INSERT INTO counter_service(counterId, serviceId, date) VALUES(?, ?, ?)`;

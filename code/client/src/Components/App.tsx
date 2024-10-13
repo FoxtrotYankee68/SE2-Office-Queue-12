@@ -19,27 +19,33 @@ function App() {
 
     const getCounters = async () => {
         try {
-            const c = await API.getAllCounters();
-            console.log(c);
-            setCounters(c);
-        } catch (e: any) {
-            setError(e.message);
+            const counters = await API.getAllCounters();
+            console.log(counters);
+            setCounters(counters);
+        } catch (err: any) {
+            setError(err.message);
         }
     };
 
     const getServices = async () => {
         try {
-            const s = await API.getServices();
-            console.log(s);
-            setServices(s);
-        } catch (e: any) {
-            setError(e.message);
+            const services = await API.getServices();
+            console.log(services);
+            setServices(services);
+
+            for (const service of services) {
+                API.getQueue(service.id, new Date()).catch(err => {
+                    API.addQueue(service.id, new Date());
+                })
+            }
+        } catch (err: any) {
+            setError(err.message);
         }
     };
 
     useEffect(() => {
-        getServices();
-        getCounters();
+        getServices().then();
+        getCounters().then();
     }, []);
 
     return (
