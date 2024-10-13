@@ -133,7 +133,7 @@ class QueueDAO {
      * @returns A Promise that resolves to void if the operation is successful.
      * @throws An error if the reset operation fails or if no rows were affected.
      */
-    resetQueue(): Promise<void>{
+    resetQueues(): Promise<void>{
         const date = getFormattedDate();
         return new Promise<void>((resolve, reject) => {
             const sql = `UPDATE queue SET length = 0, date = ?`;
