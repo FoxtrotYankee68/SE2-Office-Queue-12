@@ -262,9 +262,9 @@ async function viewAllServicesByCounterToday(counterId: number) {
     
 }
 
-async function getWaitingTime(id: string) {
+async function getWaitingTime(id: number) {
     console.log(baseURL + "services/waitingtime/" + id)
-    const response = await fetch(baseURL + "services/waitingtime/" + id, { credentials: "include" })
+    const response = await fetch(baseURL + "services/waitingtime/" + id/*, { credentials: "include" }*/)
     if (response.ok) {
        
         return await response.json()

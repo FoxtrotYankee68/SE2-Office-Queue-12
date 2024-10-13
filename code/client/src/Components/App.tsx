@@ -8,18 +8,29 @@ import Homepage from './Homepage';
 import AdminPage from './AdminPage';
 import AdminServicesPage from './AdminServicesPage';
 import AdminCountersPage from './AdminCountersPage';
+import EmployeePage from './EmployeePage';
 
 function App() {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
-    const [services, setServices] = useState<{ name: string; serviceTime: number }[]>([]);
+    const [services, setServices] = useState<{ id:number; name: string; serviceTime: number }[]>([]);
+    const [counters, setCounters] = useState<{ id:number; name: string; }[]>([]);
     const [error, setError] = useState<string>("");
     const navigate = useNavigate();
+
+    const getCounters = async () => {
+        try {
+            const c = await API.getAllCounters();
+            console.log(c);
+            setCounters(c);
+        } catch (e: any) {
+            setError(e.message);
+        }
+    };
 
     const getServices = async () => {
         try {
             const s = await API.getServices();
             console.log(s);
-            setIsLoaded(true);
             setServices(s);
         } catch (e: any) {
             setError(e.message);
@@ -28,6 +39,7 @@ function App() {
 
     useEffect(() => {
         getServices();
+        getCounters();
     }, []);
 
     return (
@@ -36,6 +48,7 @@ function App() {
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path="/home" element={<Homepage services={services} />} />
                 <Route path="/admin" element={<AdminPage />} />
+                <Route path="/employee" element={<EmployeePage counters={counters}/>} />
                 <Route
                     path="/admin/services"
                     element={<AdminServicesPage services={services} updateServices={getServices} />}

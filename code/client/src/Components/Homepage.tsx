@@ -1,4 +1,4 @@
-import {Button, Card, Container, Row, Navbar, Form, Dropdown} from "react-bootstrap"
+import {Button, Card, Container, Row, Navbar, Form, Dropdown,Col} from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { useState } from 'react'
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -6,8 +6,9 @@ import "./style.css"
 import API from "../API/API";
 
 interface Service {
+    id: number;
     name: string;
-    //serviceTime: number;
+    serviceTime: number;
 }
 
 interface HomepageProps {
@@ -21,10 +22,13 @@ function Homepage( {services }: HomepageProps ) {
     const navigate = useNavigate()
 
     const [selectedService, setSelectedService] = useState('');
+    const [selectedServiceId, setSelectedServiceId] = useState<number>(0);
 
     const [ticketNumber, setTicketNumber] = useState<number | null>(null);
 
     const [ticketCounter, setTicketCounter] = useState<number>(0);
+
+    const [waitingTime, setWaitingTime] = useState<number>(0);
 
 
 
@@ -37,12 +41,13 @@ function Homepage( {services }: HomepageProps ) {
             return;
         }
         //todo here comes an API call
-
+        console.log(selectedServiceId)
+        const wt = await API.getWaitingTime(selectedServiceId);
+        console.log(wt.waitingTime);
         const newTicketNumber = ticketCounter + 1;
         setTicketCounter(newTicketNumber);
         setTicketNumber(newTicketNumber);
-        
-
+        setWaitingTime(wt.waitingTime);
 
     }
 
@@ -65,18 +70,41 @@ function Homepage( {services }: HomepageProps ) {
                 <i className="bi bi-building"></i>{' '}
                   Office Queue
                 </Navbar.Brand>
-                <Button variant="outline-light" className="ms-auto" onClick={() => navigate("/admin")}>
-                   Switch to Admin
-                </Button>
+                <Dropdown data-bs-theme="dark" className="ms-auto">
+                    <Dropdown.Toggle id="dropdown-basic" variant="secondary">Switch to</Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item
+                        key="0"
+                        eventKey="admin"
+                        onClick={() => navigate("/admin")}>
+                            Admin                
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                        key="1"
+                        eventKey="employee"
+                        onClick={() => navigate("/employee")}>
+                            Employee              
+                        </Dropdown.Item>
+                
+                        </Dropdown.Menu>
+                    </Dropdown>
              </Container>
             </Navbar>
-                <Row style={{ textAlign: "center", margin: 0, padding: 0 }}>
-                    <span className="adminTitle">Homepage</span>
-                </Row>
-                <div className="d-flex justify-content-center align-items-center vh-100">
-                    <Container>
-                        <Row className="justify-content-md-center">
-                            <Dropdown data-bs-theme="dark">
+                
+                
+                
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      <Container>
+        <Row className="justify-content-md-center">
+          <Col md={8} lg={6}>
+           
+            <Card className="shadow-sm" style={{backgroundColor: 'rgb(250, 250, 210, 0.8)', padding: '10px', height: '300px'}}>
+              <Card.Body>
+              <Card.Title style={{ fontSize: '2rem', fontWeight: 'bold' }}>Welcome to the post office!</Card.Title>
+              <Card.Text >
+                   Get your ticket by choosing the service u want and clicking on the "Get Ticket" button
+                </Card.Text>
+              <Dropdown data-bs-theme="dark">
                                 <Dropdown.Toggle id="dropdown-basic" variant="secondary">
                                     {selectedService ? selectedService : "Choose a Service" }
                                 </Dropdown.Toggle>
@@ -87,6 +115,7 @@ function Homepage( {services }: HomepageProps ) {
                                           eventKey={service.name}
                                           onClick={() => {
                                             setSelectedService(service.name)
+                                            setSelectedServiceId(service.id)
                                           }}
                                         >
                                             {service.name}
@@ -94,55 +123,35 @@ function Homepage( {services }: HomepageProps ) {
                                     ))}
                                 </Dropdown.Menu>
                             </Dropdown>
-                            {/*<Form onSubmit={handleSelect}>
-                                <Form.Group className="mb-3" controlId="username">
-                                    <Form.Label>Test</Form.Label>
-
-                                </Form.Group>
-                            </Form>*/}
-                        </Row>
-                        <Row className="justify-content-md-center">
+                            <br/>
                             <Button
                               type="submit"
                               style={{ backgroundColor: '#FF7F50' }}
                               onClick={handleSelect}
                             >
-                                Submit
+                                Get Ticket
                             </Button>
-                        </Row>
-
-                        {ticketNumber !== null && (
-                            <Row className="justify-content-md-center mt-3">
-                                <Card className="p-3" style={{ width: '18rem', textAlign: 'center' }}>
-                                    <Card.Body>
-                                        <Card.Title>Your Ticket Number</Card.Title>
-                                        <Card.Text style={{ fontSize: '2rem', fontWeight: 'bold' }}>
-                                            {formatTicketNumber(ticketNumber)}
-                                        </Card.Text>
-                                    </Card.Body>
-                                </Card>
-                                <Button
-                                    style={{ backgroundColor: '#FF7F50' }}
-                                    onClick={handleOkClick}
-                                >
-                                    OK
-                                </Button>
-                            </Row>    
-                        )} 
-
-                    </Container>
-                </div>
-                
-                {/*}
-                <Row style={{ justifyContent: 'center', margin: 0, padding: 0, alignItems: "center", height: "100%" }}>
-                    <Button onClick={() => API.getItem("0")}>
-                        Get item
-                    </Button>
-                    <Button onClick={() => API.addItem("0")}>
-                        Add item
-                    </Button>
-                </Row>
-                */}
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col md={8} lg={6}>
+            <Card className="shadow-sm" style={{backgroundColor: 'rgb(250, 250, 210, 0.8)', padding: '10px', height: '300px'}}>
+        
+              {ticketNumber !== null && ( 
+                <Card.Body style={{backgroundColor: 'rgb(250, 250, 210, 0)'}}>
+                <Card.Title>Your Ticket Number</Card.Title>
+                <Card.Text style={{ fontSize: '2rem', fontWeight: 'bold' }}>
+                    {formatTicketNumber(ticketNumber)}
+                </Card.Text>
+                <p>Estimated waiting time: {waitingTime ? waitingTime : ''}</p>
+                <Button style={{ backgroundColor: '#FF7F50' }} onClick={handleOkClick}>OK</Button>
+                </Card.Body>
+                    )}
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </div>
             </Container>
         </>
     )

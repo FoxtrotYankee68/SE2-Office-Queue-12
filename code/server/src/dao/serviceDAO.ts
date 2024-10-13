@@ -134,7 +134,7 @@ class ServiceDAO {
      * @param id - The id of the service.
      * @returns ??
     */    
-        estimateServiceWaitingTime(id: string): Promise<number> {
+        estimateServiceWaitingTime(id: number): Promise<number> {
             const sql = "SELECT serviceTime FROM service WHERE id = ?";
             const params = [id];
     
@@ -199,7 +199,7 @@ class ServiceDAO {
                     const sumReciprocals = counts.reduce((acc, val) => acc + (1 / val), 0);
                     // Step 2: Calculate the final value of Tr
                     const Tr = serviceTime * (0.5 + length / sumReciprocals);
-
+                    console.log(Tr);
                     resolve(Tr);  // This is waiting time
             });
             
