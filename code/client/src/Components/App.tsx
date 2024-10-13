@@ -9,11 +9,14 @@ import AdminPage from './AdminPage';
 import AdminServicesPage from './AdminServicesPage';
 import AdminCountersPage from './AdminCountersPage';
 import EmployeePage from './EmployeePage';
+import { Counter } from '../Models/counter';
+import { Service } from '../Models/service';
 
 function App() {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
-    const [services, setServices] = useState<{ id:number; name: string; serviceTime: number }[]>([]);
-    const [counters, setCounters] = useState<{ id:number; name: string; }[]>([]);
+    const [services, setServices] = useState<Service[]>([]);
+    const [counters, setCounters] = useState<Counter[]>([]);
+    const [nextCustomerList, setnextCustomerList] = useState<{ ticketCode:number; counterName: string; }[]>([]);
     const [error, setError] = useState<string>("");
     const navigate = useNavigate();
 
@@ -46,7 +49,7 @@ function App() {
         <Container fluid style={{ padding: 0, height: "100%" }}>
             <Routes>
                 <Route path="/" element={<Navigate to="/home" />} />
-                <Route path="/home" element={<Homepage services={services} />} />
+                <Route path="/home" element={<Homepage services={services} nextCustomerList={nextCustomerList}/>} />
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/employee" element={<EmployeePage counters={counters}/>} />
                 <Route

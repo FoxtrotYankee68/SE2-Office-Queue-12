@@ -1,9 +1,9 @@
 class Service{
-    id: string;
+    id: number;
     name: string;
     serviceTime: number;
 
-    constructor(id: string, name: string = "", serviceTime: number = 0) {
+    constructor(id: number, name: string = "", serviceTime: number = 0) {
         /* The id of the service */
         this.id = id;
 

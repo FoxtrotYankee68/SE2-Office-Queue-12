@@ -1,5 +1,6 @@
 import { Counter } from "../Models/counter";
 import { Service } from "../Models/service";
+import { Ticket } from "../Models/ticket";
 
 const baseURL = "http://localhost:3001/officequeue/"
 
@@ -277,6 +278,12 @@ async function getWaitingTime(id: number) {
         throw new Error("Error. Please reload the page")
     }
 }
+
+/** ------------------- Ticket APIs ------------------------ */
+
+
+
+
 
 const API = {
     getService,

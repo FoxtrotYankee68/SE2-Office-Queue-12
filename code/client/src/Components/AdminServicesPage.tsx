@@ -5,12 +5,7 @@ import PropTypes from "prop-types";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./style.css"
 import API from "../API/API"; 
-
-interface Service {
-    id: number;  
-    name: string;
-    serviceTime: number;
-  }
+import { Service } from "../Models/service";
   
   interface AdminServicesPageProps {
     services: Service[]; // Array of Service objects

@@ -1,24 +1,25 @@
-import {Button, Card, Container, Row, Navbar, Form, Dropdown,Col} from "react-bootstrap"
+import {Button, Card, Container, Row, Navbar, Form, Dropdown,Col,Table} from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { useState } from 'react'
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./style.css"
 import API from "../API/API";
+import { Service } from "../Models/service";
 
-interface Service {
-    id: number;
-    name: string;
-    serviceTime: number;
+interface ticketCounter {
+    ticketCode: number; 
+    counterName: string;
 }
 
 interface HomepageProps {
     services: Service[];
+    nextCustomerList: ticketCounter[];
 
 }
 
 
 
-function Homepage( {services }: HomepageProps ) {
+function Homepage( {services, nextCustomerList }: HomepageProps ) {
     const navigate = useNavigate()
 
     const [selectedService, setSelectedService] = useState('');
@@ -98,13 +99,24 @@ function Homepage( {services }: HomepageProps ) {
         <Row className="justify-content-md-center">
           <Col md={8} lg={6}>
            
-            <Card className="shadow-sm" style={{backgroundColor: 'rgb(250, 250, 210, 0.8)', padding: '10px', height: '300px'}}>
+            <Card className="shadow-sm" style={{backgroundColor: 'rgb(250, 250, 210, 0.8)', padding: '10px', height: '400px'}}>
               <Card.Body>
               <Card.Title style={{ fontSize: '2rem', fontWeight: 'bold' }}>Welcome to the post office!</Card.Title>
               <Card.Text >
                    Get your ticket by choosing the service u want and clicking on the "Get Ticket" button
                 </Card.Text>
-              <Dropdown data-bs-theme="dark">
+                {ticketNumber !== null ? ( 
+                    <div>
+                    <p>Your Ticket Number</p>
+                    <p style={{ fontSize: '2rem', fontWeight: 'bold' }}>
+                        {formatTicketNumber(ticketNumber)}
+                    </p>
+                    <p>Estimated waiting time: {waitingTime ? waitingTime : ''}</p>
+                    <Button style={{ backgroundColor: '#FF7F50' }} onClick={handleOkClick}>Get another Ticket</Button>
+                    </div>
+                ) : (
+                    <div>
+                        <Dropdown data-bs-theme="dark">
                                 <Dropdown.Toggle id="dropdown-basic" variant="secondary">
                                     {selectedService ? selectedService : "Choose a Service" }
                                 </Dropdown.Toggle>
@@ -131,22 +143,33 @@ function Homepage( {services }: HomepageProps ) {
                             >
                                 Get Ticket
                             </Button>
+                    </div>
+
+                )}
+                    
               </Card.Body>
             </Card>
           </Col>
           <Col md={8} lg={6}>
-            <Card className="shadow-sm" style={{backgroundColor: 'rgb(250, 250, 210, 0.8)', padding: '10px', height: '300px'}}>
-        
-              {ticketNumber !== null && ( 
-                <Card.Body style={{backgroundColor: 'rgb(250, 250, 210, 0)'}}>
-                <Card.Title>Your Ticket Number</Card.Title>
-                <Card.Text style={{ fontSize: '2rem', fontWeight: 'bold' }}>
-                    {formatTicketNumber(ticketNumber)}
-                </Card.Text>
-                <p>Estimated waiting time: {waitingTime ? waitingTime : ''}</p>
-                <Button style={{ backgroundColor: '#FF7F50' }} onClick={handleOkClick}>OK</Button>
-                </Card.Body>
-                    )}
+            <Card className="shadow-sm" style={{backgroundColor: 'rgb(250, 250, 210, 0.8)', padding: '10px', height: '400px'}}>
+            <Card.Body>
+            <Table responsive style={{backgroundColor: '#FF7F50'}}>
+              <thead style={{backgroundColor: '#FF7F50'}}>
+                <tr>
+                  <th style={{backgroundColor: '#FF7F50'}}>Ticket Number</th>
+                  <th style={{backgroundColor: '#FF7F50'}}>Counter</th>
+                </tr>
+              </thead>
+              <tbody style={{backgroundColor: '#FF7F50'}}>
+                {nextCustomerList.map((nc, index) => (
+                    <tr>
+                      <td style={{backgroundColor: '#FF7F50'}}>{nc.ticketCode}</td>
+                      <td style={{backgroundColor: '#FF7F50'}}>{nc.counterName}</td>
+                    </tr>
+                ))}       
+              </tbody>
+            </Table>
+            </Card.Body>
             </Card>
           </Col>
         </Row>

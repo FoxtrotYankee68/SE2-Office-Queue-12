@@ -3,12 +3,8 @@ import { useNavigate } from "react-router-dom"
 import { useState} from 'react'
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./style.css"
+import { Counter } from "../Models/counter";
 import API from "../API/API";
-
-interface Counter {
-  id: number;
-  name: string;
-}
 
 interface EmployeePageProps {
   counters: Counter[];
