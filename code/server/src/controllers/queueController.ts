@@ -145,8 +145,8 @@ class QueueController {
      * 
      * @returns A Promise that resolves when the queue has been reset.
     */
-    async resetQueue(): Promise<void> {
-        return this.dao.resetQueue();
+    async resetQueues(): Promise<void> {
+        return this.dao.resetQueues();
     }
     
 }
