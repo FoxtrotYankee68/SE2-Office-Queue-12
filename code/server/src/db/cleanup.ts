@@ -9,8 +9,8 @@ import db from "../db/db";
 
 export function cleanup() {
     db.serialize(() => {
-        // Delete all data from the database.
-        // Add delete statements for the database's tables
-        // e.g. db.run("DELETE FROM items")
+        db.run("DELETE FROM counter_service");
+        db.run("DELETE FROM queue");
+        db.run("DELETE FROM ticket");
     })
 }
