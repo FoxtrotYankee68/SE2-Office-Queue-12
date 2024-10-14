@@ -1,6 +1,7 @@
 import { describe, beforeEach, afterEach, test, expect, jest } from "@jest/globals";
 import request from 'supertest';
 import counterController from "../../src/controllers/counterController";
+import CounterDAO from "../../src/dao/counterDAO";
 import { Counter } from "../../src/components/counter";
 import { Service } from "../../src/components/service";
 import { app } from "../../index";
@@ -16,6 +17,7 @@ describe('CounterRoutes', () => {
     });
 
     const controller = counterController.prototype;
+    const dao = CounterDAO.prototype;
     const mockCounter = new Counter(1, "Counter1");
     const mockCounters = [mockCounter, new Counter(2, "Counter2")];
     const mockError = new Error('Internal Server Error');
@@ -52,7 +54,7 @@ describe('CounterRoutes', () => {
         });
 
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "addCounter").mockRejectedValueOnce(mockError);
+            jest.spyOn(dao, 'addCounter').mockRejectedValueOnce(new Error('Internal Server Error'));
 
             const response = await request(app)
                 .post(baseURL + `/`)
@@ -81,7 +83,7 @@ describe('CounterRoutes', () => {
         });
 
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "getCounter").mockRejectedValueOnce(mockError);
+            jest.spyOn(dao, 'getCounter').mockRejectedValueOnce(new Error('Internal Server Error'));
 
             const response = await request(app).get(baseURL + `/${testId}`);
 
@@ -101,7 +103,7 @@ describe('CounterRoutes', () => {
         });
 
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "getAllCounters").mockRejectedValueOnce(mockError);
+            jest.spyOn(dao, 'getAllCounters').mockRejectedValueOnce(new Error('Internal Server Error'));
 
             const response = await request(app).get(baseURL);
 
@@ -131,7 +133,7 @@ describe('CounterRoutes', () => {
         });
 
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "editCounter").mockRejectedValueOnce(mockError);
+            jest.spyOn(dao, 'editCounter').mockRejectedValueOnce(new Error('Internal Server Error'));
 
             const response = await request(app)
                 .post(baseURL + `/${testId}`)
@@ -159,7 +161,7 @@ describe('CounterRoutes', () => {
         });
 
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "deleteCounter").mockRejectedValueOnce(mockError);
+            jest.spyOn(dao, 'deleteCounter').mockRejectedValueOnce(new Error('Internal Server Error'));
 
             const response = await request(app).delete(baseURL + `/${testId}`);
 
@@ -170,7 +172,7 @@ describe('CounterRoutes', () => {
 
     describe('POST /:counterid/services/:serviceid', () => {
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "addCounterService").mockRejectedValueOnce(mockError);
+            jest.spyOn(dao, 'addCounterService').mockRejectedValueOnce(new Error('Internal Server Error'));
 
             const response = await request(app)
                 .post(baseURL + `/${testId}/services/${testId}`);
@@ -214,7 +216,7 @@ describe('CounterRoutes', () => {
         });
     
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "deleteCounterService").mockRejectedValueOnce(mockError); 
+            jest.spyOn(dao, 'deleteCounterService').mockRejectedValueOnce(new Error('Internal Server Error'));
     
             const response = await request(app)
                 .delete(baseURL + `/${testId}/services/${testId}`); 
@@ -238,7 +240,7 @@ describe('CounterRoutes', () => {
 
     describe('GET /:counterid/services', () => {
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "viewAllServicesByCounterToday").mockRejectedValueOnce(mockError);
+            jest.spyOn(dao, 'viewAllServicesByCounterToday').mockRejectedValueOnce(new Error('Internal Server Error'));
 
             const response = await request(app).get(baseURL + `/${testId}/services`)
 

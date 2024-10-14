@@ -6,6 +6,8 @@ import { Service } from "../../src/components/service";
 import db from "../../src/db/db";
 import { Database } from "sqlite3";
 import serviceController from "../../src/controllers/serviceController";
+import { cleanup } from "../../src/db/cleanup";
+import { setup} from "../../src/db/setup";
 
 let controller: counterController;
 let ServiceController: serviceController;
@@ -21,51 +23,7 @@ describe('counterController/counterDAO Integration tests', () => {
     const testService = new Service (testId,"Service1",2);
 
     beforeAll(async () => {
-        // Initialize the database connection
-
-        // Ensure the test database is connected and tables exist
-        await new Promise<void>((resolve, reject) => {
-            db.run(`CREATE TABLE IF NOT EXISTS counter
-                    (
-                       "id" INTEGER NOT NULL UNIQUE,
-	                   "name"	TEXT NOT NULL UNIQUE,
-	                   PRIMARY KEY("id" AUTOINCREMENT)
-                    )`, (err) => {
-                if (err) reject(err);
-                resolve();
-            });
-        });
-
-        await new Promise<void>((resolve, reject) => {
-            db.run(`CREATE TABLE IF NOT EXISTS service
-                    (
-                        "id" INTEGER NOT NULL UNIQUE,
-                        "name" TEXT NOT NULL UNIQUE,
-                        "serviceTime" INTEGER NOT NULL,
-                        PRIMARY KEY("id" AUTOINCREMENT)
-                    )`, (err) => {
-                if (err) reject(err);
-                resolve();
-            });
-        });
-
-   
-        await new Promise<void>((resolve, reject) => {
-            db.run(`CREATE TABLE IF NOT EXISTS counter_service
-                    (
-                       	"counterId"	INTEGER NOT NULL,
-	                    "serviceId"	INTEGER NOT NULL,
-	                    "date" VARCHAR(20) NOT NULL,
-	                    FOREIGN KEY("counterId") REFERENCES "counter"("id") ON DELETE CASCADE,
-	                    FOREIGN KEY("serviceId") REFERENCES "service"("id") ON DELETE CASCADE,
-	                    PRIMARY KEY(counterId, serviceId, date)
-                    )`, (err) => {
-                if (err) reject(err);
-                resolve();
-            });
-        });
-
-
+        await setup();
         // Initialize DAO and controller
         controller = new counterController();
         dao = new counterDAO();
@@ -83,37 +41,9 @@ describe('counterController/counterDAO Integration tests', () => {
         });
     });
 
-    afterEach(async () => {
-        // Clean up relevant tables before each test
-        await new Promise<void>((resolve, reject) => {
-            db.run('DELETE FROM counter', (err) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            });
-        });
-
-        await new Promise<void>((resolve, reject) => {
-            db.run('DELETE FROM service', (err) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            });
-        });
-
-        await new Promise<void>((resolve, reject) => {
-            db.run('DELETE FROM counter_service', (err) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            });
-        });
+    beforeEach(async () => {
+        await cleanup();
+        jest.clearAllMocks(); // Clear mocks after each test
     });
 
     describe('getCounter', () => {

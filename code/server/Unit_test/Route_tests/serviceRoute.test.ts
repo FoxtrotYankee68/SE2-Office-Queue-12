@@ -1,6 +1,7 @@
 import { describe, beforeEach, afterEach, test, expect, jest } from "@jest/globals";
 import request from 'supertest';
 import serviceController from "../../src/controllers/serviceController";
+import ServiceDAO from "../../src/dao/serviceDAO";
 import { Service } from "../../src/components/service";
 import { app } from "../../index";
 
@@ -14,6 +15,7 @@ describe('ServiceRoutes', () => {
         jest.clearAllMocks();
     });
 
+    const dao = ServiceDAO.prototype;
     const controller = serviceController.prototype;
     const testName = "service X";
     const testId = 1;
@@ -30,7 +32,7 @@ describe('ServiceRoutes', () => {
         });
 
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "addService").mockRejectedValueOnce(new Error('Internal Server Error'));
+            jest.spyOn(dao, 'addService').mockRejectedValueOnce(new Error('Internal Server Error'));
 
             const response = await request(app)
                 .post(baseURL + "/")
@@ -112,7 +114,7 @@ describe('ServiceRoutes', () => {
         });
 
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "getService").mockRejectedValueOnce(new Error('Internal Server Error'));
+            jest.spyOn(dao, 'getService').mockRejectedValueOnce(new Error('Internal Server Error'));
 
             const response = await request(app)
                 .get(baseURL + `/${testId}`);
@@ -136,7 +138,7 @@ describe('ServiceRoutes', () => {
         });
 
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "getServices").mockRejectedValueOnce(new Error('Internal Server Error'));
+            jest.spyOn(dao, 'getServices').mockRejectedValueOnce(new Error('Internal Server Error'));
 
             const response = await request(app).get(baseURL);
 
@@ -150,7 +152,7 @@ describe('ServiceRoutes', () => {
             jest.clearAllMocks();
         });
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "deleteService").mockRejectedValueOnce(new Error('Internal Server Error'));
+            jest.spyOn(dao, 'deleteService').mockRejectedValueOnce(new Error('Internal Server Error'));
 
             const response = await request(app)
                 .delete(`${baseURL}/${testName}`);
@@ -216,7 +218,7 @@ describe('ServiceRoutes', () => {
 
 
         test('It should return 503 if there is an error', async () => {
-            jest.spyOn(controller, "editService").mockRejectedValueOnce(new Error('Internal Server Error'));
+            jest.spyOn(dao, 'editService').mockRejectedValueOnce(new Error('Internal Server Error'));
 
             const response = await request(app)
                 .patch(baseURL + `/${testName}`)

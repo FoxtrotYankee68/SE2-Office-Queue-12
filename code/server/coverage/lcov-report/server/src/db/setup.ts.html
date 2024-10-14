@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for server/src/controllers/counterController.ts</title>
+    <title>Code coverage report for server/src/db/setup.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">server/src/controllers</a> counterController.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">server/src/db</a> setup.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.27% </span>
+                <span class="strong">76.47% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/11</span>
+                <span class='fraction'>13/17</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">0% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">11.11% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/9</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.27% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/11</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -111,10 +111,34 @@
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
 <a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -125,89 +149,74 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import ItemDAO from "../dao/counterDAO";
-import {Counter} from "../components/counter";
-import { Service } from "../components/service";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
 &nbsp;
-/**
- * Represents a controller for managing shopping carts.
- * All methods of this class must interact with the corresponding DAO class to retrieve or store data.
- */
-class CounterController {
-    private dao: ItemDAO
+import db from "../db/db";
 &nbsp;
-    constructor() {
-        this.dao = new ItemDAO;
-    }
+export async function setup() { // Create tables in the database
+    return new Promise&lt;void&gt;((resolve, reject) =&gt; {
+        db.serialize(() =&gt; {
+            db.run(`CREATE TABLE IF NOT EXISTS counter
+                    (
+                       "id" INTEGER NOT NULL UNIQUE,
+                       "name" TEXT NOT NULL UNIQUE,
+                       PRIMARY KEY("id" AUTOINCREMENT)
+                    )`, (err) =&gt; {
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (err) <span class="cstat-no" title="statement not covered" >return reject(new Error("Failed to create counter table: " + err.message));</span>
+                
+                db.run(`CREATE TABLE IF NOT EXISTS service
+                        (
+                            "id" INTEGER NOT NULL UNIQUE,
+                            "name" TEXT NOT NULL UNIQUE,
+                            "serviceTime" INTEGER NOT NULL,
+                            PRIMARY KEY("id" AUTOINCREMENT)
+                        )`, (err) =&gt; {
+                    <span class="missing-if-branch" title="if path not taken" >I</span>if (err) <span class="cstat-no" title="statement not covered" >return reject(new Error("Failed to create service table: " + err.message));</span>
 &nbsp;
-    async <span class="fstat-no" title="function not covered" >getCounter(</span>id: number): Promise&lt;Counter&gt; {
-<span class="cstat-no" title="statement not covered" >        return this.dao.getCounter(id);</span>
-    }
+                    db.run(`CREATE TABLE IF NOT EXISTS counter_service
+                            (
+                                "counterId" INTEGER NOT NULL,
+                                "serviceId" INTEGER NOT NULL,
+                                "date" VARCHAR(20) NOT NULL,
+                                FOREIGN KEY("counterId") REFERENCES "counter"("id") ON DELETE CASCADE,
+                                FOREIGN KEY("serviceId") REFERENCES "service"("id") ON DELETE CASCADE,
+                                PRIMARY KEY(counterId, serviceId, date)
+                            )`, (err) =&gt; {
+                        <span class="missing-if-branch" title="if path not taken" >I</span>if (err) <span class="cstat-no" title="statement not covered" >return reject(new Error("Failed to create counter_service table: " + err.message));</span>
 &nbsp;
-    async <span class="fstat-no" title="function not covered" >getAllCounters(</span>): Promise&lt;Counter[]&gt; {
-<span class="cstat-no" title="statement not covered" >        return this.dao.getAllCounters();</span>
-    }
-&nbsp;
-    async <span class="fstat-no" title="function not covered" >addCounter(</span>name: string): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >        return this.dao.addCounter(name);</span>
-    }
-&nbsp;
-    async <span class="fstat-no" title="function not covered" >deleteCounter(</span>id: number): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >        return this.dao.deleteCounter(id);</span>
-    }
-&nbsp;
-    async <span class="fstat-no" title="function not covered" >editCounter(</span>id: number, name: string): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >        return this.dao.editCounter(id, name);</span>
-    }
-&nbsp;
-    async <span class="fstat-no" title="function not covered" >addCounterService(</span>counterId: number, serviceId: number): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >        return this.dao.addCounterService(counterId, serviceId);</span>
-    }
-&nbsp;
-    async <span class="fstat-no" title="function not covered" >deleteCounterService(</span>counterId: number, serviceId: number): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >        return this.dao.deleteCounterService(counterId, serviceId);</span>
-    }
-&nbsp;
-    async <span class="fstat-no" title="function not covered" >viewAllServicesByCounterToday(</span>counterId: number): Promise&lt;Service[]&gt; {
-<span class="cstat-no" title="statement not covered" >        return this.dao.viewAllServicesByCounterToday(counterId);</span>
-    } 
-}
-&nbsp;
-export default CounterController</pre></td></tr></table></pre>
+                        db.run(`CREATE TABLE IF NOT EXISTS queue
+                                (
+                                    "serviceId" INTEGER NOT NULL,
+                                    "date" VARCHAR(20) NOT NULL,
+                                    "length" INTEGER NOT NULL,
+                                    FOREIGN KEY("serviceId") REFERENCES "service"("id") ON DELETE CASCADE,
+                                    PRIMARY KEY(serviceId, date)
+                                )`, (err) =&gt; {
+                            <span class="missing-if-branch" title="if path not taken" >I</span>if (err) <span class="cstat-no" title="statement not covered" >return reject(new Error("Failed to create queue table: " + err.message));</span>
+                            resolve(); // All tables created successfully
+                        });
+                    });
+                });
+            });
+        });
+    });
+}</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
