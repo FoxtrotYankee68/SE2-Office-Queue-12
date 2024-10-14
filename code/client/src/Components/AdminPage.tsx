@@ -1,4 +1,4 @@
-import {Button, Card, Container, Row, Navbar, Col} from "react-bootstrap"
+import {Button, Card, Container, Row, Navbar, Col,Dropdown} from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import { useState} from 'react'
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -19,9 +19,24 @@ function AdminPage() {
                 <i className="bi bi-building"></i>{' '}
                   Office Queue
                 </Navbar.Brand>
-                <Button variant="outline-light" className="ms-auto" onClick={() => navigate("/home")}>
-                   Switch to Costumer
-                </Button>
+                <Dropdown data-bs-theme="dark" className="ms-auto">
+                    <Dropdown.Toggle id="dropdown-basic" variant="secondary">Switch to</Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item
+                        key="0"
+                        eventKey="admin"
+                        onClick={() => navigate("/home")}>
+                            Customer               
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                        key="1"
+                        eventKey="employee"
+                        onClick={() => navigate("/employee")}>
+                            Employee              
+                        </Dropdown.Item>
+                
+                        </Dropdown.Menu>
+                    </Dropdown>
              </Container>
             </Navbar>
             <div className="d-flex justify-content-center align-items-center vh-100">
@@ -45,8 +60,8 @@ function AdminPage() {
         </Row>
       </Container>
     </div>
-            </Container>
-        </>
+    </Container>
+    </>
     )
 }
 

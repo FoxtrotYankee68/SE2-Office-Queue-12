@@ -60,7 +60,7 @@ class ServiceController {
      * @param id - The id of the service to retrieve.
      * @returns waiting time number.
     */
-     async estimateServiceWaitingTime(id: string): Promise<number> {
+     async estimateServiceWaitingTime(id: number): Promise<number> {
         return this.dao.estimateServiceWaitingTime(id);
     }
 }

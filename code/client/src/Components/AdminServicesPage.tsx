@@ -5,11 +5,7 @@ import PropTypes from "prop-types";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./style.css"
 import API from "../API/API"; 
-
-interface Service {
-    name: string;
-    serviceTime: number;
-  }
+import { Service } from "../Models/service";
   
   interface AdminServicesPageProps {
     services: Service[]; // Array of Service objects
@@ -62,9 +58,24 @@ function AdminServicesPage({ services, updateServices }:AdminServicesPageProps) 
                 <i className="bi bi-building"></i>{' '}
                   Office Queue
                 </Navbar.Brand>
-                <Button variant="outline-light" className="ms-auto" onClick={() => navigate("/home")}>
-                   Switch to Costumer
-                </Button>
+                <Dropdown data-bs-theme="dark" className="ms-auto">
+                    <Dropdown.Toggle id="dropdown-basic" variant="secondary">Switch to</Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item
+                        key="0"
+                        eventKey="admin"
+                        onClick={() => navigate("/home")}>
+                            Customer               
+                        </Dropdown.Item>
+                        <Dropdown.Item
+                        key="1"
+                        eventKey="employee"
+                        onClick={() => navigate("/employee")}>
+                            Employee              
+                        </Dropdown.Item>
+                
+                        </Dropdown.Menu>
+                    </Dropdown>
              </Container>
             </Navbar>
             <div className="d-flex justify-content-center align-items-center vh-100">
@@ -207,8 +218,9 @@ function AdminServicesPage({ services, updateServices }:AdminServicesPageProps) 
 AdminServicesPage.propTypes = {
   services: PropTypes.arrayOf(
       PropTypes.shape({
+          id: PropTypes.number.isRequired,
           name: PropTypes.string.isRequired,
-          serviceTime: PropTypes.number.isRequired,
+          serviceTime: PropTypes.number.isRequired,     
       })
   ).isRequired,
   updateServices: PropTypes.func.isRequired,
