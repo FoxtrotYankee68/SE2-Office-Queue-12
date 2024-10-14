@@ -123,7 +123,7 @@ class ServiceRoutes {
             }
         );
 
-               /**
+        /**
          * Route for estimate waiting time a specific service.  
         */
         this.router.get(
