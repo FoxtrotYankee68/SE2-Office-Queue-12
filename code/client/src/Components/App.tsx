@@ -20,7 +20,6 @@ function App() {
     const getCounters = async () => {
         try {
             const counters = await API.getAllCounters();
-            console.log(counters);
             setCounters(counters);
         } catch (err: any) {
             setError(err.message);
@@ -30,14 +29,7 @@ function App() {
     const getServices = async () => {
         try {
             const services = await API.getServices();
-            console.log(services);
             setServices(services);
-
-            for (const service of services) {
-                API.getQueue(service.id, new Date()).catch(err => {
-                    API.addQueue(service.id, new Date());
-                })
-            }
         } catch (err: any) {
             setError(err.message);
         }

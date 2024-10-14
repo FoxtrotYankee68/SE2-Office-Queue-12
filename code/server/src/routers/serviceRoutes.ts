@@ -136,6 +136,7 @@ class ServiceRoutes {
                     const waitingTime = await this.controller.estimateServiceWaitingTime(req.params.id);
                     res.status(200).json({ waitingTime }); // Return as a JSON object
                 } catch (err) {
+                    console.log(err)
                     next(err); // Pass the error to the global error handler
                 }
             }

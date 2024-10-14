@@ -173,10 +173,7 @@ class TicketRoutes {
             (req: any, res: any, next: any) => {
                 try {
                     this.controller.getNewTicket(req.body.serviceId).then(
-                        (ticket: Ticket) => {
-                            console.log(ticket)
-                            res.status(200).json(ticket)
-                        }
+                        (ticket: Ticket) => res.status(200).json(ticket)
                     )
                 } catch (err) {
                     next(err);

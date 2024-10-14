@@ -145,7 +145,6 @@ class TicketDAO {
             db.get(sql, [serviceId, Utilities.getFormattedDate(date), queue_length], (err, row: Ticket) => {
                 if (err) return reject(err);
 
-                console.log(row)
                 return resolve(row);
             })
         })

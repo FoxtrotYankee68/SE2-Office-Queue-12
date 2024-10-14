@@ -1,6 +1,6 @@
-import {Button, Card, Container, Row, Navbar, Form, Dropdown,Col} from "react-bootstrap"
+import {Button, Card, Container, Row, Navbar, Dropdown, Col} from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
-import { useState } from 'react'
+import React, { useState } from 'react'
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./style.css"
 import API from "../API/API";
@@ -21,10 +21,10 @@ interface HomepageProps {
 function Homepage( {services}: HomepageProps ) {
     const navigate = useNavigate()
 
-    const [selectedService, setSelectedService] = useState('');
+    const [selectedService, setSelectedService] = useState<string>('');
     const [selectedServiceId, setSelectedServiceId] = useState<number>(0);
 
-    const [ticket, setTicket] = useState(new Ticket())
+    const [ticket, setTicket] = useState<Ticket>(new Ticket())
 
     const [waitingTime, setWaitingTime] = useState<number>(0);
 
@@ -38,23 +38,26 @@ function Homepage( {services}: HomepageProps ) {
 
         console.log(selectedServiceId)
 
-        const newTicket = await API.getNewTicket(selectedServiceId)
-        console.log(newTicket);
-        setTicket(newTicket);
+        setWaitingTime(0)
+        setTicket(new Ticket())
 
-        const waitTime = await API.getWaitingTime(selectedServiceId);
-        console.log(waitTime);
-        setWaitingTime(waitTime.waitingTime);
+        // This will fail if no counters have been set up for the specified service today.
+        // Until the admin API is implemented, this means the db needs to be updated manually
+        API.getWaitingTime(selectedServiceId)
+            .then(waitTime => setWaitingTime(waitTime.waitingTime))
+            .catch(err => console.log(err));
 
+        // This will fail if the queue for the specified service has not been set up for today.
+        // Until the admin API is implemented (to choose which services will be available today), the db needs to be updated manually.
+        API.getNewTicket(selectedServiceId)
+            .then((ticket: Ticket) => setTicket(ticket))
+            .catch(err => console.log(err));
     }
-
-    const formatTicketNumber = (number: number) => {
-        return number.toString().padStart(5, '0');
-    };
 
     const handleOkClick = () => {
         setTicket(new Ticket());
         setSelectedService('');
+        setWaitingTime(-1);
     }
 
     return (
@@ -135,7 +138,7 @@ function Homepage( {services}: HomepageProps ) {
             <Card className="shadow-sm" style={{backgroundColor: 'rgb(250, 250, 210, 0.8)', padding: '10px', height: '300px'}}>
               {ticket.id > 0 && (
                 <Card.Body style={{backgroundColor: 'rgb(250, 250, 210, 0)'}}>
-                <Card.Title>Your Ticket</Card.Title>
+                <Card.Title style={{ fontSize: '2rem', fontWeight: 'bold' }}>Your Ticket</Card.Title>
                 <Card.Text>
                     Service: {selectedService}
                 </Card.Text>
@@ -143,7 +146,8 @@ function Homepage( {services}: HomepageProps ) {
                     Position in queue: {ticket.queuePosition + 1}
                 </Card.Text>
                 <Card.Text>
-                    Estimated waiting time: {waitingTime ? waitingTime : ''}</Card.Text>
+                    Estimated waiting time: {waitingTime > 0 ? `${waitingTime.toFixed()} minutes` : '?'}
+                </Card.Text>
                 <Button style={{ backgroundColor: '#FF7F50' }} onClick={handleOkClick}>OK</Button>
                 </Card.Body>
                     )}
