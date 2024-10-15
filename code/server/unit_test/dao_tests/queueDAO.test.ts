@@ -3,6 +3,7 @@ import db from "../../src/db/db"
 import { Database, RunResult } from "sqlite3"
 import QueueDAO from "../../src/dao/queueDAO"
 import exp from "constants"
+import { Queue } from "../../src/components/queue"
 
 
 jest.mock("../../src/db/db.ts")
@@ -208,5 +209,69 @@ describe("Queue DAO", () => {
         
         });
     });
+    
+    describe("getQueuesForCounter", () => {
+        test("It should return an array of Queue objects", async () => {
+            const queueDAO = new QueueDAO();
+    
+            const mockRows = [
+                { serviceId: 1, date: new Date(), length: 5 },
+                { serviceId: 2, date: new Date(), length: 3 }
+            ];
+    
+            jest.spyOn(db, "all").mockImplementation((sql: string, params: any[], callback) => {
+                callback(null, mockRows);
+                return {} as Database;
+            });
+    
+            const result = await queueDAO.getQueuesForCounter(1);
+    
+            expect(result).toEqual([
+                new Queue(1, mockRows[0].date, mockRows[0].length),
+                new Queue(2, mockRows[1].date, mockRows[1].length)
+            ]);
+        });
+    
+        test("It should reject with error in db.all", async () => {
+            const queueDAO = new QueueDAO();
+            const error = new Error("Database error");
+    
+            jest.spyOn(db, "all").mockImplementation((sql: string, params: any[], callback) => {
+                callback(error, null);
+                return {} as Database;
+            });
+    
+            await expect(queueDAO.getQueuesForCounter(1)).rejects.toThrow(error);
+        });
+    });
 
+    describe("removeTicketFromQueue", () => {
+        test("It should reject with error when db.run fails", async () => {
+            const queueDAO = new QueueDAO();
+            const error = new Error("Database error");
+    
+            jest.spyOn(db, "run").mockImplementation((sql: string, params: any[], callback) => {
+                callback(error);
+                return {} as Database;
+            });
+    
+            await expect(queueDAO.removeTicketFromQueue(3)).rejects.toThrow(error);
+        });
+    });
+    
+    describe("resetQueues", () => {
+        test("It should reject with error when db.run fails", async () => {
+            const queueDAO = new QueueDAO();
+            const error = new Error("Database error");
+    
+            // Mock del metodo db.run per simulare un errore
+            jest.spyOn(db, "run").mockImplementation((sql: string, params: any[], callback) => {
+                callback(error); // Simula errore nel database
+                return {} as Database;
+            });
+    
+            await expect(queueDAO.resetQueues()).rejects.toThrow(error);
+        });
+    });
+    
 });

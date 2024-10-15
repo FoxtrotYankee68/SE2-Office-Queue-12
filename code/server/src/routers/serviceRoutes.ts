@@ -55,7 +55,7 @@ class ServiceRoutes {
         */
         this.router.get(
             "/:id",
-            param("id").isString(),
+            param("id").isNumeric(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
                 try {

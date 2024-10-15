@@ -32,7 +32,7 @@ class ServiceDAO {
      * @param id - The id of the service.
      * @returns A promise that resolves with the service if it exists.
     */    
-    getService(id: string): Promise<Service> {
+    getService(id: number): Promise<Service> {
         const sql = "SELECT * FROM service WHERE id = ?";
         const params = [id];
 

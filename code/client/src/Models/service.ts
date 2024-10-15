@@ -1,9 +1,17 @@
 class Service{
+<<<<<<< HEAD
     id: number;
     name: string;
     serviceTime: number;
 
     constructor(id: number, name: string = "", serviceTime: number = 0) {
+=======
+    id: string;
+    name: string;
+    serviceTime: number;
+
+    constructor(id: string, name: string = "", serviceTime: number = 0) {
+>>>>>>> branchStefan
         /* The id of the service */
         this.id = id;
 

@@ -25,7 +25,11 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
+<<<<<<< HEAD
+                <span class='fraction'>19/19</span>
+=======
                 <span class='fraction'>15/15</span>
+>>>>>>> branchStefan
             </div>
         
             
@@ -46,7 +50,11 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
+<<<<<<< HEAD
+                <span class='fraction'>19/19</span>
+=======
                 <span class='fraction'>15/15</span>
+>>>>>>> branchStefan
             </div>
         
             
@@ -86,6 +94,7 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
+<<<<<<< HEAD
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
@@ -105,7 +114,15 @@
 <a name='L40'></a><a href='#L40'>40</a>
 <a name='L41'></a><a href='#L41'>41</a>
 <a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+=======
+<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+>>>>>>> branchStefan
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -114,9 +131,24 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<<<<<<< HEAD
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+=======
+>>>>>>> branchStefan
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<<<<<<< HEAD
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -131,16 +163,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+=======
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+>>>>>>> branchStefan
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,10 +180,15 @@
 import ErrorHandler from "./helper"
 import CounterRoutes from "./routers/counterRoutes"
 import ServiceRoutes from "./routers/serviceRoutes"
+<<<<<<< HEAD
+import QueueRoutes from "./routers/queueRoutes"
+=======
+>>>>>>> branchStefan
 &nbsp;
 const morgan = require("morgan")
 const prefix = "/officequeue"
 &nbsp;
+<<<<<<< HEAD
 /**
  * Initializes the routes for the application.
  * 
@@ -178,11 +212,25 @@ function initRoutes(app: express.Application) {
 &nbsp;
     const counterRoutes = new CounterRoutes();
     const serviceRoutes = new ServiceRoutes();
+    const queueRoutes = new QueueRoutes();
 &nbsp;
     /**
-     * The routes for the user, authentication, product, proposal, and cart resources are defined here.
+     * The routes for the tickets, queues, counters are services are defined here.
     */
 &nbsp;
+    app.use(`${prefix}/tickets`, counterRoutes.getRouter())
+    app.use(`${prefix}/queues`, counterRoutes.getRouter())
+=======
+function initRoutes(app: express.Application) {
+    app.use(morgan("dev")) 
+    app.use(express.json({ limit: "25mb" }))
+    app.use(express.urlencoded({ limit: '25mb', extended: true }))
+&nbsp;
+&nbsp;
+    const counterRoutes = new CounterRoutes();
+    const serviceRoutes = new ServiceRoutes();
+&nbsp;
+>>>>>>> branchStefan
     app.use(`${prefix}/counters`, counterRoutes.getRouter())
     app.use(`${prefix}/services`, serviceRoutes.getRouter())
 &nbsp;
@@ -196,7 +244,11 @@ export default initRoutes</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-10-13T13:40:17.634Z
+<<<<<<< HEAD
+                at 2024-10-15T09:13:56.185Z
+=======
+                at 2024-10-14T17:53:15.506Z
+>>>>>>> branchStefan
             </div>
         <script src="../../prettify.js"></script>
         <script>
