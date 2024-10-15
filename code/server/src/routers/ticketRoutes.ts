@@ -182,34 +182,16 @@ class TicketRoutes {
         )
 
         /**
-         * Updates the counter assigned to a ticket.
-         */
-        this.router.patch(
-            "/updateCounter/:id",
-            param("id").notEmpty().isNumeric(),
-            body("counterId").notEmpty().isNumeric(),
-            this.errorHandler.validateRequest,
-            (req: any, res: any, next: any) => {
-                try {
-                    this.controller.updateTicketCounter(req.params.id, req.body.counterId).then(
-                        () => res.status(200)
-                    )
-                } catch (err) {
-                    next(err);
-                }
-            }
-        )
-
-        /**
          * Marks a ticket as served.
          */
         this.router.patch(
             "serve/:id",
             param("id").notEmpty().isNumeric(),
+            body("counterId").notEmpty().isNumeric(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
                 try {
-                    this.controller.markTicketServed(req.params.id).then(
+                    this.controller.markTicketIssued(req.params.id, req.body.counterId).then(
                         () => res.status(200)
                     )
                 } catch (err) {

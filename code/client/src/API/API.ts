@@ -6,8 +6,22 @@ import {Queue} from "../Models/queue";
 const baseURL = "http://localhost:3001/officequeue/"
 
 /** ------------------- Service APIs ------------------------ */
-async function getService(id: string) {
+async function getService(id: number) {
     const response = await fetch(baseURL + "services/" + id, { credentials: "include" })
+    if (response.ok) {
+        return await response.json()
+    } else {
+        const errDetail = await response.json();
+        if (errDetail.error)
+            throw errDetail.error
+        if (errDetail.message)
+            throw errDetail.message
+        throw new Error("Error. Please reload the page")
+    }
+}
+
+async function findServiceByName(name: string) {
+    const response = await fetch(baseURL + "services/name/" + name, { credentials: "include" })
     if (response.ok) {
         return await response.json()
     } else {
@@ -284,46 +298,6 @@ async function getQueue(serviceId: number, date: Date) {
     }
 }
 
-async function getQueuesByService(serviceId: number) {
-    const response = await fetch(`${baseURL}queues/${serviceId}`, {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    if (response.ok) {
-        const queuesJson = await response.json();
-        return queuesJson.map((q: any) => new Queue(q.serviceId, q.date, q.length));
-    } else {
-        const errDetail = await response.json();
-        if (errDetail.error)
-            throw errDetail.error
-        if (errDetail.message)
-            throw errDetail.message
-        throw new Error("Error. Please reload the page")
-    }
-}
-
-async function getQueuesByDate(date: Date) {
-    const response = await fetch(`${baseURL}queues/${date}`, {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-    if (response.ok) {
-        const queuesJson = await response.json();
-        return queuesJson.map((q: any) => new Queue(q.serviceId, q.date, q.length));
-    } else {
-        const errDetail = await response.json();
-        if (errDetail.error)
-            throw errDetail.error
-        if (errDetail.message)
-            throw errDetail.message
-        throw new Error("Error. Please reload the page")
-    }
-}
-
 async function getAllQueues() {
     const response = await fetch(`${baseURL}queues`, {
         method: "GET",
@@ -365,17 +339,18 @@ async function addQueue(serviceId: number, date: Date) {
     }
 }
 
-async function editQueue(serviceId: number, date: Date, length: number) {
+async function addCustomerToQueue(serviceId: number, date: Date): Promise<Queue> {
     let response = await fetch(`${baseURL}queues/${serviceId}/${date}`, {
         method: 'PATCH',
         headers: {
             "Content-Type": "application/json"
-        },
-        body: JSON.stringify({length})
+        }
     })
 
     if (response.ok) {
-        return;
+        let queueJson = await response.json();
+        return new Queue(queueJson.serviceId, queueJson.date, queueJson.length);
+
     } else {
         const errDetail = await response.json();
         if (errDetail.error)
@@ -414,6 +389,45 @@ async function deleteAllQueues() {
         },
     })
 
+    if (response.ok) {
+        return;
+    } else {
+        const errDetail = await response.json();
+        if (errDetail.error)
+            throw errDetail.error
+        if (errDetail.message)
+            throw errDetail.message
+        throw new Error("Error. Please reload the page")
+    }
+}
+
+async function callNextTicket(counterId: number): Promise<Ticket> {
+    const response = await fetch(`${baseURL}queues/${counterId}`, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    if (response.ok) {
+        const ticketJson = await response.json();
+        return new Ticket(ticketJson.id, ticketJson.serviceId, ticketJson.counterId, ticketJson.queuePosition, ticketJson.issueDate, ticketJson.served);
+    } else {
+        const errDetail = await response.json();
+        if (errDetail.error)
+            throw errDetail.error
+        if (errDetail.message)
+            throw errDetail.message
+        throw new Error("Error. Please reload the page")
+    }
+}
+
+async function resetQueues() {
+    const response = await fetch(`${baseURL}queues/reset`, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
     if (response.ok) {
         return;
     } else {
@@ -572,33 +586,13 @@ async function getNewTicket(serviceId: number) {
     }
 }
 
-async function updateTicketCounter(id: number, counterId: number) {
+async function markTicketIssued(id: number, counterId: number) {
     const response = await fetch(`${baseURL}tickets/updateCounter/${id}`, {
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({counterId})
-    })
-
-    if (response.ok) {
-        return;
-    } else {
-        const errDetail = await response.json();
-        if (errDetail.error)
-            throw errDetail.error
-        if (errDetail.message)
-            throw errDetail.message
-        throw new Error("Error. Please reload the page")
-    }
-}
-
-async function serveTicket(id: number) {
-    const response = await fetch(`${baseURL}tickets/serve/${id}`, {
-        method: "PATCH",
-        headers: {
-            'Content-Type': 'application/json',
-        }
     })
 
     if (response.ok) {
@@ -634,6 +628,7 @@ async function getWaitingTime(id: number) {
 
 const API = {
     getService,
+    findServiceByName,
     getServices,
     addService,
     editService,
@@ -647,13 +642,13 @@ const API = {
     deleteCounterService, 
     viewAllServicesByCounterToday,
     getQueue,
-    getQueuesByService,
-    getQueuesByDate,
     getAllQueues,
     addQueue,
-    editQueue,
+    addCustomerToQueue,
     deleteQueue,
     deleteAllQueues,
+    callNextTicket,
+    resetQueues,
     getTicket,
     getAllTickets,
     addTicket,
@@ -661,8 +656,7 @@ const API = {
     deleteTicket,
     deleteTickets,
     getNewTicket,
-    updateTicketCounter,
-    serveTicket,
+    markTicketIssued,
     getWaitingTime
 }
 

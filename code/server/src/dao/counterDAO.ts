@@ -4,20 +4,11 @@ import { Service } from "../components/service";
 import { rejects } from "assert";
 import { resolve } from "path";
 import { get } from "http";
-
-const getFormattedDate = (): string => {
-    const today = new Date();
-    const day = String(today.getDate()).padStart(2, '0');
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // I mesi partono da 0, quindi aggiungi 1
-    const year = today.getFullYear();
-
-    return `${day}-${month}-${year}`;
-};
-  
+import Utilities from "../utilities";
 
 class CounterDAO {
     
-    getCounter(id: string): Promise<Counter> {
+    getCounter(id: number): Promise<Counter> {
         return new Promise<Counter>((resolve, reject) => {
             const sql = "SELECT * FROM counter WHERE id = ?";
             db.get<any>(sql, [id], (err, row) => {
@@ -97,7 +88,7 @@ class CounterDAO {
 
     addCounterService(counterId: number, serviceId: number): Promise<void> {
         return new Promise<void> ((resolve, reject) => {
-            const date = getFormattedDate();
+            const date = Utilities.getFormattedDate();
 
             const sql = `INSERT INTO counter_service(counterId, serviceId, date) VALUES(?, ?, ?)`;
 
@@ -117,7 +108,7 @@ class CounterDAO {
 
     deleteCounterService(counterId: number, serviceId: number): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            const date = getFormattedDate();
+            const date = Utilities.getFormattedDate();
 
             const sql = `DELETE FROM counter_service 
                         WHERE counterId = ? AND serviceId = ? AND date = ?`;
@@ -138,7 +129,7 @@ class CounterDAO {
      */
     viewAllServicesByCounterToday(counterId: number): Promise<Service[]> {
         return new Promise((resolve, reject) => {
-            const date = getFormattedDate();
+            const date = Utilities.getFormattedDate();
 
             const sql = `SELECT id, name, serviceTime
                         FROM counter_service, service

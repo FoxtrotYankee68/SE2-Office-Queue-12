@@ -1,4 +1,6 @@
-// Represents a queue.
+/**
+ * Represents a queue for a service
+ */
 class Queue {
     serviceId: number;
     date: Date;

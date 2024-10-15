@@ -13,7 +13,7 @@ class TicketController {
     }
 
     async getTickets(): Promise<Ticket[]> {
-        return this.dao.getTickets();
+        return this.dao.getAllTickets();
     }
 
     async addTicket(serviceId: number, date: Date = null): Promise<void> {
@@ -36,30 +36,8 @@ class TicketController {
         return this.dao.getNewTicket(serviceId);
     }
 
-    async updateTicketCounter(id: number, counterId: number): Promise<void> {
-        const ticket = await this.getTicket(id);
-
-        return this.dao.editTicket(
-            ticket.id,
-            ticket.serviceId,
-            counterId,
-            ticket.queuePosition,
-            ticket.issueDate,
-            ticket.served
-        )
-    }
-
-    async markTicketServed(id: number): Promise<void> {
-        const ticket = await this.getTicket(id);
-
-        return this.dao.editTicket(
-            ticket.id,
-            ticket.serviceId,
-            ticket.counterId,
-            ticket.queuePosition,
-            ticket.issueDate,
-            true
-        )
+    async markTicketIssued(id: number, counterId: number): Promise<void> {
+        return this.dao.markTicketIssued(id, counterId);
     }
 }
 

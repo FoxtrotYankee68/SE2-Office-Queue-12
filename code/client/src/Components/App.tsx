@@ -11,22 +11,23 @@ import AdminCountersPage from './AdminCountersPage';
 import EmployeePage from './EmployeePage';
 import { Counter } from '../Models/counter';
 import { Service } from '../Models/service';
+import {Ticket} from "../Models/ticket";
 
 function App() {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [services, setServices] = useState<Service[]>([]);
     const [counters, setCounters] = useState<Counter[]>([]);
-    const [nextCustomerList, setnextCustomerList] = useState<{ ticketCode:number; counterName: string; }[]>([]);
+    const [nextCustomerList, setNextCustomerList] = useState<Ticket[]>([]);
     const [error, setError] = useState<string>("");
     const navigate = useNavigate();
 
-    const addNextCustomerToCallList = (ticketCode:number,counterName: string) => {
-        setnextCustomerList(prevList =>
-            prevList.filter(customer => customer.counterName !== counterName)
+    const addNextCustomerToCallList = (ticket: Ticket) => {
+        setNextCustomerList(prevList =>
+            prevList.filter(customer => customer.counterId !== ticket.counterId)
         );
-        setnextCustomerList(prevList => [
+        setNextCustomerList(prevList => [
             ...prevList,  // Spread the previous list items
-            { ticketCode, counterName }  // Add the new customer to the list
+            ticket
         ]);
       };
 

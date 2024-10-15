@@ -1,5 +1,5 @@
 /**
- * Represents a queue for a service
+ * Represents a ticket
  */
 class Ticket {
     id: number;

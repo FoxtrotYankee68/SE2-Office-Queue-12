@@ -4,11 +4,9 @@ import { useState} from 'react'
 import PropTypes from "prop-types";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./style.css"
-import API from "../API/API"; 
-
-interface Service {
-    name: string;
-}
+import API from "../API/API";
+import {Counter} from "../Models/counter";
+import {Service} from "../Models/service";
 
 interface AdminCountersPageProbs {
     services: Service[];
@@ -18,12 +16,12 @@ interface AdminCountersPageProbs {
 function AdminCountersPage( {services }: AdminCountersPageProbs) {
     const navigate = useNavigate();
 
-    const [counters, setCounters] = useState(Array(10).fill('Select an option'));
+    const [counters, setCounters] = useState(Array(10).fill(new Counter()));
 
     const handleSelect = (selectedValue: string | null, index: number) => {
         if(selectedValue === null) return;
         const updatedCounters = [...counters];
-        updatedCounters[index] = selectedValue;
+        updatedCounters[index] = new Counter(index + 1, selectedValue);
         setCounters(updatedCounters);
     };
 
@@ -33,11 +31,17 @@ function AdminCountersPage( {services }: AdminCountersPageProbs) {
             return;
         }
 
-        try {
-            // todo: API export
-            
-        } catch (error) {
-            alert("An error occurred while saving the counters.");
+        try{
+            for (const counter of counters) {
+                await API.findServiceByName(counter.name)
+                    .then(async (service: Service) => {
+                        await API.addCounterService(counter.id, service.id);
+                    })
+            }
+
+            await API.resetQueues()
+        } catch (err) {
+            console.log(err);
         }
     };
 
@@ -79,7 +83,7 @@ function AdminCountersPage( {services }: AdminCountersPageProbs) {
                                     <Card.Title>Counter {index + 1}</Card.Title>
                                     <Dropdown onSelect={(selectedValue) => handleSelect(selectedValue, index)}>
                                         <Dropdown.Toggle variant="primary" id={`dropdown-${index}`}>
-                                            {counter}
+                                            {counter.name}
                                         </Dropdown.Toggle>
 
                                         <Dropdown.Menu>

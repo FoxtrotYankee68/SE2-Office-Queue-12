@@ -1,6 +1,6 @@
 import {Button, Card, Container, Row, Navbar,Nav,Form,Dropdown} from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
-import { useState} from 'react'
+import React, { useState} from 'react'
 import PropTypes from "prop-types";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./style.css"
@@ -27,7 +27,8 @@ function AdminServicesPage({ services, updateServices }:AdminServicesPageProps) 
     await API.addService(serviceName, Number(serviceTime));
     setServiceName('');
     setServiceTime('');
-    await updateServices();
+
+    updateServices();
 };
 
   const handleEdit = async (event: React.FormEvent) => {

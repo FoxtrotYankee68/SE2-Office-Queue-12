@@ -27,6 +27,10 @@ class ServiceController {
         return this.dao.getService(id);
     }
 
+    async findServiceWithName(name: string): Promise<Service> {
+        return this.dao.getServiceByName(name);
+    }
+
     /**
      * Retrieves all services from the database.
      * @returns A promise that resolves with an array of services.
@@ -53,7 +57,6 @@ class ServiceController {
     */
     async editService(name: string, newName: string, serviceTime: number): Promise<void> {
         return this.dao.editService(name, newName, serviceTime);
-<<<<<<< HEAD
     }
 
     /**
@@ -63,8 +66,6 @@ class ServiceController {
     */
      async estimateServiceWaitingTime(id: number): Promise<number> {
         return this.dao.estimateServiceWaitingTime(id);
-=======
->>>>>>> branchStefan
     }
 }
 
