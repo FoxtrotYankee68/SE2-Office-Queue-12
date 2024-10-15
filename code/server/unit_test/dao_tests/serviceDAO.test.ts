@@ -37,7 +37,7 @@ describe("Service DAO", () => {
             return {} as Database;
         });
     
-        const result = await serviceDAO.estimateServiceWaitingTime("2");
+        const result = await serviceDAO.estimateServiceWaitingTime(2);
     
         expect(result).toBeCloseTo(90.71, 2);
     });
@@ -50,7 +50,7 @@ describe("Service DAO", () => {
             return {} as Database;
         });
     
-        await expect(serviceDAO.estimateServiceWaitingTime("3")).rejects.toThrow("Service with this ID not found");
+        await expect(serviceDAO.estimateServiceWaitingTime(2)).rejects.toThrow("Service with this ID not found");
     });    
 
     test("It should reject because there isn't a queue with the specified id", async () => {
@@ -66,7 +66,7 @@ describe("Service DAO", () => {
             return {} as Database;
         });
 
-        await expect(serviceDAO.estimateServiceWaitingTime("2")).rejects.toThrow("No additional data found for serviceTime 10");
+        await expect(serviceDAO.estimateServiceWaitingTime(2)).rejects.toThrow("No additional data found for serviceTime 10");
     });
 
     test("It should reject because there isn't a counter with the specified id", async () => {
@@ -88,7 +88,7 @@ describe("Service DAO", () => {
             return {} as Database;
         });
 
-        await expect(serviceDAO.estimateServiceWaitingTime("2")).rejects.toThrow("No counters found for serviceId 2 on date 2023-01-01");
+        await expect(serviceDAO.estimateServiceWaitingTime(2)).rejects.toThrow("No counters found for serviceId 2 on date 2023-01-01");
     });
 
     test("It should reject with an error during db.get", async () => {
@@ -98,7 +98,7 @@ describe("Service DAO", () => {
             return {} as Database;
         });
 
-        await expect(serviceDAO.estimateServiceWaitingTime("2")).rejects.toThrow("Error retrieving service: Database error");
+        await expect(serviceDAO.estimateServiceWaitingTime(2)).rejects.toThrow("Error retrieving service: Database error");
     });
 
     test("It should reject with an error during db.all", async () => {
@@ -120,7 +120,7 @@ describe("Service DAO", () => {
             return {} as Database;
         });
 
-        await expect(serviceDAO.estimateServiceWaitingTime("2")).rejects.toThrow("Error retrieving counter data: Database error");
+        await expect(serviceDAO.estimateServiceWaitingTime(2)).rejects.toThrow("Error retrieving counter data: Database error");
     });
     
 })

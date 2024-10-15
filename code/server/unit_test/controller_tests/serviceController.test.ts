@@ -27,9 +27,9 @@ describe(("Service controller"), () => {
 
             jest.spyOn(ServiceDAO.prototype, "estimateServiceWaitingTime").mockResolvedValue(service.serviceTime);
 
-            const result = await serviceController.estimateServiceWaitingTime(service.id);
+            const result = await serviceController.estimateServiceWaitingTime(1);
             expect(ServiceDAO.prototype.estimateServiceWaitingTime).toHaveBeenCalledTimes(1);
-            expect(ServiceDAO.prototype.estimateServiceWaitingTime).toHaveBeenCalledWith(service.id);
+            expect(ServiceDAO.prototype.estimateServiceWaitingTime).toHaveBeenCalledWith(1);
             expect(result).toEqual(5);
         });
 
@@ -40,9 +40,9 @@ describe(("Service controller"), () => {
 
             jest.spyOn(ServiceDAO.prototype, "estimateServiceWaitingTime").mockRejectedValue("Error during estimate service time");
 
-            await expect(serviceController.estimateServiceWaitingTime(service.id)).rejects.toEqual("Error during estimate service time");
+            await expect(serviceController.estimateServiceWaitingTime(1)).rejects.toEqual("Error during estimate service time");
             expect(ServiceDAO.prototype.estimateServiceWaitingTime).toHaveBeenCalledTimes(1);
-            expect(ServiceDAO.prototype.estimateServiceWaitingTime).toHaveBeenCalledWith(service.id);
+            expect(ServiceDAO.prototype.estimateServiceWaitingTime).toHaveBeenCalledWith(1);
         });
     });
 })
