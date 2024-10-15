@@ -47,7 +47,7 @@ class CounterRoutes {
          * Returns a 200 status code if the registration was successful.
          */
         this.router.post("/",
-            body("name").isString(),
+            body("name").isString().notEmpty(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => this.controller.addCounter(req.body.name)
                 .then(() => res.status(200).end())
@@ -93,7 +93,7 @@ class CounterRoutes {
          */
         this.router.post("/:id",
             param("id").isInt(),
-            body("name").isString(),
+            body("name").isString().notEmpty(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => this.controller.editCounter(req.param.id, req.body.name)
                 .then(() => res.status(200).end())
@@ -107,7 +107,7 @@ class CounterRoutes {
          */
         this.router.delete(
             "/:id",
-            param("id").isInt(),
+            param("id").isInt().notEmpty(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => this.controller.deleteCounter(req.params.id)
                 .then(() => res.status(200).send())

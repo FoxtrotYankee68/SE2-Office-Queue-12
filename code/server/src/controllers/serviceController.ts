@@ -23,7 +23,7 @@ class ServiceController {
      * @param id - The id of the service to retrieve.
      * @returns A promise that resolves with the service if it exists.
     */
-    async getService(id: string): Promise<Service> {
+    async getService(id: number): Promise<Service> {
         return this.dao.getService(id);
     }
 
@@ -53,6 +53,7 @@ class ServiceController {
     */
     async editService(name: string, newName: string, serviceTime: number): Promise<void> {
         return this.dao.editService(name, newName, serviceTime);
+<<<<<<< HEAD
     }
 
     /**
@@ -62,6 +63,8 @@ class ServiceController {
     */
      async estimateServiceWaitingTime(id: number): Promise<number> {
         return this.dao.estimateServiceWaitingTime(id);
+=======
+>>>>>>> branchStefan
     }
 }
 

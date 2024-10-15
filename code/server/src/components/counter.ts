@@ -2,10 +2,10 @@
  * Represents a counter of the office
  */
 class Counter {
-    id: string;
+    id: number;
     name: String;
 
-    constructor(id: string, name: string) {
+    constructor(id: number, name: string) {
         this.id = id;
         this.name = name;
     }
