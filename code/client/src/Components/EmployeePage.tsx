@@ -4,14 +4,16 @@ import { useState} from 'react'
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./style.css"
 import { Counter } from "../Models/counter";
+import { Ticket } from "../Models/ticket";
 import API from "../API/API";
 
 interface EmployeePageProps {
   counters: Counter[];
+  addNextCustomerToCallList: (ticketCode:number,counterName: string) => void;
 
 }
 
-function EmployeePage({ counters }: EmployeePageProps) {
+function EmployeePage({ counters, addNextCustomerToCallList }: EmployeePageProps) {
     const navigate = useNavigate()
     const [selectedCounter, setSelectedCounter] = useState('');
     const [selectedCounterId, setSelectedCounterId] = useState<number>(0);
@@ -33,16 +35,18 @@ function EmployeePage({ counters }: EmployeePageProps) {
 
     const handleNextCustomer = async (event: React.FormEvent) => {
       event.preventDefault();
-      //todo here comes an API call for Next Customer
-      //const nc = await API.getNextCurtomer();
-      //setNextCustomer(nc)
+      //these lines should be uncomented when getTicket is fixed
+      //const nc = await API.callNextTicket(selectedCounterId);
+      //setNextCustomer(nc.id)
+      //addNextCustomerToCallList(nc.id,selectedCounter)
       setIsClicked(true);
 
-      //the next few lines of code are only temporary untill the next customer 
-      // frontend and backend are not integrated
+      //the next few lines of code are only temporary because getTicket is still not working
       const newTicketNumber = ticketCounter + 1;
       setTicketCounter(newTicketNumber);
       setNextCustomer(newTicketNumber);
+      addNextCustomerToCallList(newTicketNumber,selectedCounter)
+
     }
 
     const handleUnregister = async (event: React.FormEvent) => {
@@ -51,7 +55,6 @@ function EmployeePage({ counters }: EmployeePageProps) {
       setSelectedCounterId(0);
       setIsClicked(false);
       setIsRegistered(false);
-      //todo here comes an API call for Next Customer
     }
     const formatTicketNumber = (number: number) => {
       return number.toString().padStart(5, '0');

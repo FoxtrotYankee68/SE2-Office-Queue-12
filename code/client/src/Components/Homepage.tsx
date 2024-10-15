@@ -27,7 +27,11 @@ function Homepage( {services, nextCustomerList }: HomepageProps ) {
 
     const [ticketNumber, setTicketNumber] = useState<number | null>(null);
 
-    const [ticketCounter, setTicketCounter] = useState<number>(0);
+    const [ticketCounter, setTicketCounter] = useState<number>(() => {
+      // Retrieve the stored value from localStorage if it exists, otherwise default to 0
+      const savedCounter = localStorage.getItem('ticketCounter');
+      return savedCounter ? Number(savedCounter) : 0;
+    });
 
     const [waitingTime, setWaitingTime] = useState<number>(0);
 
@@ -47,8 +51,10 @@ function Homepage( {services, nextCustomerList }: HomepageProps ) {
         console.log(wt.waitingTime);
         const newTicketNumber = ticketCounter + 1;
         setTicketCounter(newTicketNumber);
+        localStorage.setItem('ticketCounter', String(newTicketNumber));
         setTicketNumber(newTicketNumber);
         setWaitingTime(wt.waitingTime);
+        console.log(ticketCounter);
 
     }
 
@@ -163,7 +169,7 @@ function Homepage( {services, nextCustomerList }: HomepageProps ) {
               <tbody style={{backgroundColor: '#FF7F50'}}>
                 {nextCustomerList.map((nc, index) => (
                     <tr>
-                      <td style={{backgroundColor: '#FF7F50'}}>{nc.ticketCode}</td>
+                      <td style={{backgroundColor: '#FF7F50'}}>{formatTicketNumber(nc.ticketCode)}</td>
                       <td style={{backgroundColor: '#FF7F50'}}>{nc.counterName}</td>
                     </tr>
                 ))}       

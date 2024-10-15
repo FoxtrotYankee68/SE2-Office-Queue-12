@@ -20,6 +20,16 @@ function App() {
     const [error, setError] = useState<string>("");
     const navigate = useNavigate();
 
+    const addNextCustomerToCallList = (ticketCode:number,counterName: string) => {
+        setnextCustomerList(prevList =>
+            prevList.filter(customer => customer.counterName !== counterName)
+        );
+        setnextCustomerList(prevList => [
+            ...prevList,  // Spread the previous list items
+            { ticketCode, counterName }  // Add the new customer to the list
+        ]);
+      };
+
     const getCounters = async () => {
         try {
             const c = await API.getAllCounters();
@@ -51,14 +61,14 @@ function App() {
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path="/home" element={<Homepage services={services} nextCustomerList={nextCustomerList}/>} />
                 <Route path="/admin" element={<AdminPage />} />
-                <Route path="/employee" element={<EmployeePage counters={counters}/>} />
+                <Route path="/employee" element={<EmployeePage counters={counters} addNextCustomerToCallList={addNextCustomerToCallList}/>} />
                 <Route
                     path="/admin/services"
                     element={<AdminServicesPage services={services} updateServices={getServices} />}
                 />
                 <Route
                     path="/admin/counters"
-                    element={<AdminCountersPage services={services} />}
+                    element={<AdminCountersPage services={services}/>}
                 />
             </Routes>
         </Container>
