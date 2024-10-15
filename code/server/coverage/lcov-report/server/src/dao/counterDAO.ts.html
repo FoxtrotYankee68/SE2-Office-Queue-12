@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.49% </span>
+                <span class="strong">22.07% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/77</span>
+                <span class='fraction'>17/77</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">11.11% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>2/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">22.22% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/27</span>
+                <span class='fraction'>6/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.66% </span>
+                <span class="strong">22.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/75</span>
+                <span class='fraction'>17/75</span>
             </div>
         
             
@@ -244,30 +244,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -281,6 +268,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -398,31 +398,23 @@ const getFormattedDate = <span class="fstat-no" title="function not covered" >()
     const month = <span class="cstat-no" title="statement not covered" >String(today.getMonth() + 1).padStart(2, '0');</span> // I mesi partono da 0, quindi aggiungi 1
     const year = <span class="cstat-no" title="statement not covered" >today.getFullYear();</span>
   
-<<<<<<< HEAD
 <span class="cstat-no" title="statement not covered" >    return `${day}/${month}/${year}`;</span>
-=======
-<span class="cstat-no" title="statement not covered" >    return `${day}-${month}-${year}`;</span>
->>>>>>> branchStefan
   };
   
 &nbsp;
 class CounterDAO {
     
-<<<<<<< HEAD
-<span class="fstat-no" title="function not covered" >    getCounter(</span>id: string): Promise&lt;Counter&gt; {
-=======
-<span class="fstat-no" title="function not covered" >    getCounter(</span>id: number): Promise&lt;Counter&gt; {
->>>>>>> branchStefan
-<span class="cstat-no" title="statement not covered" >        return new Promise&lt;Counter&gt;(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
-            const sql = <span class="cstat-no" title="statement not covered" >"SELECT * FROM counter WHERE id = ?";</span>
-<span class="cstat-no" title="statement not covered" >            db.get&lt;any&gt;(sql, [id], <span class="fstat-no" title="function not covered" >(e</span>rr, row) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                <span class="missing-if-branch" title="if path not taken" >I</span>if(err){</span>
+    getCounter(id: number): Promise&lt;Counter&gt; {
+        return new Promise&lt;Counter&gt;((resolve, reject) =&gt; {
+            const sql = "SELECT * FROM counter WHERE id = ?";
+            db.get&lt;any&gt;(sql, [id], (err, row) =&gt; {
+                <span class="missing-if-branch" title="if path not taken" >I</span>if(err){
 <span class="cstat-no" title="statement not covered" >                    return reject(err);</span>
                 }
-<span class="cstat-no" title="statement not covered" >                if(row === undefined){</span>
+                <span class="missing-if-branch" title="if path not taken" >I</span>if(row === undefined){
 <span class="cstat-no" title="statement not covered" >                    return reject("Counter not found.");</span>
                 }else{
-<span class="cstat-no" title="statement not covered" >                    return resolve(new Counter(row.id, row.name));</span>
+                    return resolve(new Counter(row.id, row.name));
                 }
             });
         });
@@ -441,15 +433,15 @@ class CounterDAO {
         });
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    deleteCounter(</span>id: number): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >        return new Promise&lt;void&gt;(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
-            const sql = <span class="cstat-no" title="statement not covered" >"DELETE FROM counter WHERE id = ?";</span>
-<span class="cstat-no" title="statement not covered" >            db.run(sql, [id], <span class="fstat-no" title="function not covered" >function(this: any, e</span>rr: Error | null){</span>
-<span class="cstat-no" title="statement not covered" >                <span class="missing-if-branch" title="if path not taken" >I</span>if(err){</span>
+    deleteCounter(id: number): Promise&lt;void&gt; {
+        return new Promise&lt;void&gt;((resolve, reject) =&gt; {
+            const sql = "DELETE FROM counter WHERE id = ?";
+            db.run(sql, [id], function(this: any, err: Error | null){
+                <span class="missing-if-branch" title="if path not taken" >I</span>if(err){
 <span class="cstat-no" title="statement not covered" >                    return reject(err);</span>
                 }
-<span class="cstat-no" title="statement not covered" >                <span class="missing-if-branch" title="if path not taken" >I</span>if(this.changes !== 0){</span>
-<span class="cstat-no" title="statement not covered" >                    return resolve();</span>
+                if(this.changes !== 0){
+                    return resolve();
                 }
 <span class="cstat-no" title="statement not covered" >                return reject("Counter not found.");</span>
             });
@@ -561,11 +553,7 @@ export default CounterDAO;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-                at 2024-10-15T09:13:56.185Z
-=======
-                at 2024-10-14T17:53:15.506Z
->>>>>>> branchStefan
+                at 2024-10-15T19:00:27.781Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

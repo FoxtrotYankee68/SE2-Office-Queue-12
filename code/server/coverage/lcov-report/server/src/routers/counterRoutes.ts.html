@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">45.83% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/48</span>
+                <span class='fraction'>22/48</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.11% </span>
+                <span class="strong">25.92% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/27</span>
+                <span class='fraction'>7/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">37.5% </span>
+                <span class="strong">45.83% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>18/48</span>
+                <span class='fraction'>22/48</span>
             </div>
         
             
@@ -267,11 +267,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<<<<<<< HEAD
 <span class="cline-any cline-yes">3x</span>
-=======
-<span class="cline-any cline-yes">1x</span>
->>>>>>> branchStefan
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -306,8 +302,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -352,8 +348,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -464,11 +460,7 @@ class CounterRoutes {
          * Returns a 200 status code if the registration was successful.
          */
         this.router.post("/",
-<<<<<<< HEAD
-            body("name").isString(),
-=======
             body("name").isString().notEmpty(),
->>>>>>> branchStefan
             this.errorHandler.validateRequest,
 <span class="fstat-no" title="function not covered" >            (r</span>eq: any, res: any, next: any) =&gt; <span class="cstat-no" title="statement not covered" >this.controller.addCounter(req.body.name)</span>
                 .then(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >res.status(200).end())</span>
@@ -484,8 +476,8 @@ class CounterRoutes {
             "/:id",
             param("id").isInt(),
             this.errorHandler.validateRequest,
-<span class="fstat-no" title="function not covered" >            (r</span>eq: any, res: any, next: any) =&gt; <span class="cstat-no" title="statement not covered" >this.controller.getCounter(req.params.id)</span>
-                .then(<span class="fstat-no" title="function not covered" >(c</span>ounter: Counter) =&gt; <span class="cstat-no" title="statement not covered" >res.status(200).json(counter))</span>
+            (req: any, res: any, next: any) =&gt; this.controller.getCounter(req.params.id)
+                .then((counter: Counter) =&gt; res.status(200).json(counter))
                 .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
 <span class="cstat-no" title="statement not covered" >                    console.log(err)</span>
 <span class="cstat-no" title="statement not covered" >                    next(err)</span>
@@ -514,11 +506,7 @@ class CounterRoutes {
          */
         this.router.post("/:id",
             param("id").isInt(),
-<<<<<<< HEAD
-            body("name").isString(),
-=======
             body("name").isString().notEmpty(),
->>>>>>> branchStefan
             this.errorHandler.validateRequest,
 <span class="fstat-no" title="function not covered" >            (r</span>eq: any, res: any, next: any) =&gt; <span class="cstat-no" title="statement not covered" >this.controller.editCounter(req.param.id, req.body.name)</span>
                 .then(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >res.status(200).end())</span>
@@ -532,14 +520,10 @@ class CounterRoutes {
          */
         this.router.delete(
             "/:id",
-<<<<<<< HEAD
-            param("id").isInt(),
-=======
             param("id").isInt().notEmpty(),
->>>>>>> branchStefan
             this.errorHandler.validateRequest,
-<span class="fstat-no" title="function not covered" >            (r</span>eq: any, res: any, next: any) =&gt; <span class="cstat-no" title="statement not covered" >this.controller.deleteCounter(req.params.id)</span>
-                .then(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >res.status(200).send())</span>
+            (req: any, res: any, next: any) =&gt; this.controller.deleteCounter(req.params.id)
+                .then(() =&gt; res.status(200).send())
                 .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
 <span class="cstat-no" title="statement not covered" >                    console.log(err)</span>
 <span class="cstat-no" title="statement not covered" >                    next(err)</span>
@@ -608,11 +592,7 @@ export default CounterRoutes</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-                at 2024-10-15T09:13:56.185Z
-=======
-                at 2024-10-14T17:53:15.506Z
->>>>>>> branchStefan
+                at 2024-10-15T19:00:27.781Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

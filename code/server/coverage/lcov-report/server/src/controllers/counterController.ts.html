@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.27% </span>
+                <span class="strong">45.45% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/11</span>
+                <span class='fraction'>5/11</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">11.11% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/9</span>
+                <span class='fraction'>3/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.27% </span>
+                <span class="strong">45.45% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/11</span>
+                <span class='fraction'>5/11</span>
             </div>
         
             
@@ -127,6 +127,22 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -143,27 +159,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<<<<<<< HEAD
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import CounterDAO from "../dao/counterDAO";
-=======
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import ItemDAO from "../dao/counterDAO";
->>>>>>> branchStefan
 import {Counter} from "../components/counter";
 import { Service } from "../components/service";
 &nbsp;
@@ -172,24 +168,14 @@ import { Service } from "../components/service";
  * All methods of this class must interact with the corresponding DAO class to retrieve or store data.
  */
 class CounterController {
-<<<<<<< HEAD
     private dao: CounterDAO
 &nbsp;
     constructor() {
         this.dao = new CounterDAO;
     }
 &nbsp;
-    async <span class="fstat-no" title="function not covered" >getCounter(</span>id: string): Promise&lt;Counter&gt; {
-=======
-    private dao: ItemDAO
-&nbsp;
-    constructor() {
-        this.dao = new ItemDAO;
-    }
-&nbsp;
-    async <span class="fstat-no" title="function not covered" >getCounter(</span>id: number): Promise&lt;Counter&gt; {
->>>>>>> branchStefan
-<span class="cstat-no" title="statement not covered" >        return this.dao.getCounter(id);</span>
+    async getCounter(id: number): Promise&lt;Counter&gt; {
+        return this.dao.getCounter(id);
     }
 &nbsp;
     async <span class="fstat-no" title="function not covered" >getAllCounters(</span>): Promise&lt;Counter[]&gt; {
@@ -200,8 +186,8 @@ class CounterController {
 <span class="cstat-no" title="statement not covered" >        return this.dao.addCounter(name);</span>
     }
 &nbsp;
-    async <span class="fstat-no" title="function not covered" >deleteCounter(</span>id: number): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >        return this.dao.deleteCounter(id);</span>
+    async deleteCounter(id: number): Promise&lt;void&gt; {
+        return this.dao.deleteCounter(id);
     }
 &nbsp;
     async <span class="fstat-no" title="function not covered" >editCounter(</span>id: number, name: string): Promise&lt;void&gt; {
@@ -228,11 +214,7 @@ export default CounterController</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-                at 2024-10-15T09:13:56.185Z
-=======
-                at 2024-10-14T17:53:15.506Z
->>>>>>> branchStefan
+                at 2024-10-15T19:00:27.781Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

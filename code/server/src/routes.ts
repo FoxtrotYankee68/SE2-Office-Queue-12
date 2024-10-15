@@ -17,15 +17,12 @@ function initRoutes(app: express.Application) {
     const serviceRoutes = new ServiceRoutes();
     const queueRoutes = new QueueRoutes();
 
-<<<<<<< HEAD
     /**
      * The routes for the tickets, queues, counters are services are defined here.
     */
 
     app.use(`${prefix}/tickets`, counterRoutes.getRouter())
     app.use(`${prefix}/queues`, counterRoutes.getRouter())
-=======
->>>>>>> branchStefan
     app.use(`${prefix}/counters`, counterRoutes.getRouter())
     app.use(`${prefix}/services`, serviceRoutes.getRouter())
 

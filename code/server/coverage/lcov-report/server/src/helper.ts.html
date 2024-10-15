@@ -23,28 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-<<<<<<< HEAD
-                <span class="strong">63.63% </span>
-                <span class="quiet">Statements</span>
-                <span class='fraction'>7/11</span>
-=======
                 <span class="strong">90.9% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>10/11</span>
->>>>>>> branchStefan
             </div>
         
             
             <div class='fl pad1y space-right2'>
-<<<<<<< HEAD
-                <span class="strong">85.71% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>6/7</span>
-=======
                 <span class="strong">14.28% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>1/7</span>
->>>>>>> branchStefan
             </div>
         
             
@@ -56,15 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-<<<<<<< HEAD
-                <span class="strong">63.63% </span>
-                <span class="quiet">Lines</span>
-                <span class='fraction'>7/11</span>
-=======
                 <span class="strong">90.9% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>10/11</span>
->>>>>>> branchStefan
             </div>
         
             
@@ -79,11 +61,7 @@
             </div>
         </template>
     </div>
-<<<<<<< HEAD
-    <div class='status-line medium'></div>
-=======
     <div class='status-line high'></div>
->>>>>>> branchStefan
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -142,27 +120,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<<<<<<< HEAD
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">12x</span>
+<span class="cline-any cline-yes">27x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">12x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-=======
-<span class="cline-any cline-yes">25x</span>
-<span class="cline-any cline-yes">25x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
->>>>>>> branchStefan
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -171,11 +137,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<<<<<<< HEAD
-<span class="cline-any cline-yes">1x</span>
-=======
 <span class="cline-any cline-no">&nbsp;</span>
->>>>>>> branchStefan
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -200,21 +162,12 @@ class ErrorHandler {
      */
     validateRequest(req: any, res: any, next: any) {
         const errors = validationResult(req)
-<<<<<<< HEAD
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (!errors.isEmpty()) {
-            let error = <span class="cstat-no" title="statement not covered" >"The parameters are not formatted properly\n\n"</span>
-<span class="cstat-no" title="statement not covered" >            errors.array().forEach(<span class="fstat-no" title="function not covered" >(e</span>: any) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >                error += "- Parameter: **" + e.param + "** - Reason: *" + e.msg + "* - Location: *" + e.location + "*\n\n"</span>
-            })
-<span class="cstat-no" title="statement not covered" >            return res.status(422).json({ error: error })</span>
-=======
         if (!errors.isEmpty()) {
             let error = "The parameters are not formatted properly\n\n"
             errors.array().forEach((e: any) =&gt; {
                 error += "- Parameter: **" + e.param + "** - Reason: *" + e.msg + "* - Location: *" + e.location + "*\n\n"
             })
             return res.status(422).json({ error: error })
->>>>>>> branchStefan
         }
         return next()
     }
@@ -224,13 +177,8 @@ class ErrorHandler {
      * @param router - The router object
      */
     static registerErrorHandler(router: express.Application) {
-<<<<<<< HEAD
-        router.use((err: any, _req: any, res: any, _next: any) =&gt; {
-            return res.status(err.customCode || 503).json({
-=======
         router.use(<span class="fstat-no" title="function not covered" >(e</span>rr: any, _req: any, res: any, _next: any) =&gt; {
 <span class="cstat-no" title="statement not covered" >            return res.status(err.customCode || 503).json({</span>
->>>>>>> branchStefan
                 error: err.customMessage || "Internal Server Error",
                 status: err.customCode || 503
             });
@@ -245,11 +193,7 @@ export default ErrorHandler</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-<<<<<<< HEAD
-                at 2024-10-15T09:13:56.185Z
-=======
-                at 2024-10-14T17:53:15.506Z
->>>>>>> branchStefan
+                at 2024-10-15T19:00:27.781Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

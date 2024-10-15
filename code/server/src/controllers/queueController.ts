@@ -101,7 +101,7 @@ class QueueController {
     
         for (const q of queues_temp) {
             for (const s of allServices) {
-                if (s.id == q.serviceId.toString()) {
+                if (s.id == q.serviceId) {
                     if (estimated_time === undefined || s.serviceTime < estimated_time) {
                         longestQueue = q;
                         estimated_time = s.serviceTime; // Use "<" for the lowest service time
