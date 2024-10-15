@@ -9,13 +9,26 @@ import AdminPage from './AdminPage';
 import AdminServicesPage from './AdminServicesPage';
 import AdminCountersPage from './AdminCountersPage';
 import EmployeePage from './EmployeePage';
+import { Counter } from '../Models/counter';
+import { Service } from '../Models/service';
 
 function App() {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
-    const [services, setServices] = useState<{ id:number; name: string; serviceTime: number }[]>([]);
-    const [counters, setCounters] = useState<{ id:number; name: string; }[]>([]);
+    const [services, setServices] = useState<Service[]>([]);
+    const [counters, setCounters] = useState<Counter[]>([]);
+    const [nextCustomerList, setnextCustomerList] = useState<{ ticketCode:number; counterName: string; }[]>([]);
     const [error, setError] = useState<string>("");
     const navigate = useNavigate();
+
+    const addNextCustomerToCallList = (ticketCode:number,counterName: string) => {
+        setnextCustomerList(prevList =>
+            prevList.filter(customer => customer.counterName !== counterName)
+        );
+        setnextCustomerList(prevList => [
+            ...prevList,  // Spread the previous list items
+            { ticketCode, counterName }  // Add the new customer to the list
+        ]);
+      };
 
     const getCounters = async () => {
         try {
@@ -44,16 +57,16 @@ function App() {
         <Container fluid style={{ padding: 0, height: "100%" }}>
             <Routes>
                 <Route path="/" element={<Navigate to="/home" />} />
-                <Route path="/home" element={<Homepage services={services} />} />
+                <Route path="/home" element={<Homepage services={services} nextCustomerList={nextCustomerList}/>} />
                 <Route path="/admin" element={<AdminPage />} />
-                <Route path="/employee" element={<EmployeePage counters={counters}/>} />
+                <Route path="/employee" element={<EmployeePage counters={counters} addNextCustomerToCallList={addNextCustomerToCallList}/>} />
                 <Route
                     path="/admin/services"
                     element={<AdminServicesPage services={services} updateServices={getServices} />}
                 />
                 <Route
                     path="/admin/counters"
-                    element={<AdminCountersPage services={services} />}
+                    element={<AdminCountersPage services={services}/>}
                 />
             </Routes>
         </Container>

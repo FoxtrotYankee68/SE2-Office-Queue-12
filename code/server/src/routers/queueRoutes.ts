@@ -3,6 +3,7 @@ import ErrorHandler from "../helper"
 import {body, oneOf, param, query} from "express-validator"
 import QueueController from "../controllers/queueController";
 import {Queue} from "../components/queue";
+import { Ticket } from "../components/ticket";
 
 /**
  * Represents a class that defines the routes for handling proposals.
@@ -124,7 +125,7 @@ class QueueRoutes {
                 })
             }
         )
-
+        
         /**
          * Edits a queue's information.
          */
@@ -174,6 +175,56 @@ class QueueRoutes {
                 })
             }
         )
+
+        /**
+         * Route to call the next ticket for a specific counter.
+         * 
+         * @route POST /:counterId
+         * @param {number} counterId - The ID of the counter from which to call the next ticket.
+         * @returns {Ticket} 200 - The next Ticket object for the counter.
+         * @throws {Error} 500 - If there is an issue calling the next ticket.
+         * 
+         * @middleware param("counterId").isInt() - Middleware to validate that counterId is an integer.
+         * @middleware this.errorHandler.validateRequest - Middleware to validate the request and handle errors.
+        */
+        this.router.post(
+            "/:counterId",
+            param("counterId").isInt(),
+            this.errorHandler.validateRequest,
+            (req: any, res: any, next: any) => {
+                try {
+                    this.controller.callNextTicket(req.params.counterId).then(
+                        (ticket: Ticket) => res.status(200).json(ticket)
+                    )
+                } catch (err) {
+                    next(err);
+                }
+            }
+        )
+        
+        /**
+         * Route to reset the queue for all service types.
+         * 
+         * @route POST /reset
+         * @returns {void} 200 - Successfully resets the queue.
+         * @throws {Error} 500 - If there is an issue resetting the queue.
+         * 
+         * This route does not require any parameters and will call the `resetQueue` method 
+         * from the controller to clear all queue lengths and reset the date.
+        */
+        this.router.post(
+            "/reset",
+            (req: any, res: any, next: any) => {
+                try {
+                    this.controller.resetQueues().then(
+                        () => res.status(200).send()
+                    )
+                } catch (err) {
+                    next(err);
+                }
+            }
+        )
+
     }
 }
 

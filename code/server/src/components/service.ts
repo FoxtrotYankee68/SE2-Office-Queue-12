@@ -1,5 +1,5 @@
 class Service{
-    id: string;
+    id: number;
     name: string;
     serviceTime: number;
   
@@ -9,7 +9,7 @@ class Service{
      * @param name - The name of the service.
      * @param serviceTime - The amount of time that the service takes to complete.
      */
-    constructor(id: string, name: string = "", serviceTime: number = 0) {
+    constructor(id: number, name: string = "", serviceTime: number = 0) {
         /* The id of the service */
 
         this.id = id;

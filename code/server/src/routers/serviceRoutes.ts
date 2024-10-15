@@ -55,7 +55,7 @@ class ServiceRoutes {
         */
         this.router.get(
             "/:id",
-            param("id").isString(),
+            param("id").isNumeric(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
                 try {
@@ -123,7 +123,7 @@ class ServiceRoutes {
             }
         );
 
-               /**
+        /**
          * Route for estimate waiting time a specific service.  
         */
         this.router.get(
