@@ -155,7 +155,7 @@ describe("queueController/queueDAO Integration tests", () => {
 
             expect(response).toEqual(queue_input);
 
-            await expect(controller.deleteQueue(id,date)).toBeUndefined();
+            await expect(controller.deleteQueue(id,date)).resolves.toBeUndefined();
 
             response = await controller.getQueue(id, new Date());
 
@@ -260,7 +260,7 @@ describe("queueController/queueDAO Integration tests", () => {
 
             await expect(dao.removeTicketFromQueue(queue1.serviceId)).resolves.toBeUndefined();
 
-            await expect(controller.callNextTicket(1)).toStrictEqual(nextTicket);
+            await expect(controller.callNextTicket(1)).resolves.toStrictEqual(nextTicket);
 
         });
     
@@ -273,7 +273,7 @@ describe("queueController/queueDAO Integration tests", () => {
     
             expect (dao.getQueuesForCounter(1)).toStrictEqual([]);
             expect (controller.findLongestQueue([])).resolves.toBeUndefined();
-            await expect(controller.callNextTicket(1)).toBeNull();
+            await expect(controller.callNextTicket(1)).resolves.toBeNull();
             
         });
     
