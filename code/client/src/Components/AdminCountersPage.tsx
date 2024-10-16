@@ -32,14 +32,15 @@ function AdminCountersPage( {services }: AdminCountersPageProbs) {
         }
 
         try{
+            API.resetQueues()
+                .catch(err => console.log(err))
+
             for (const counter of counters) {
                 await API.findServiceByName(counter.name)
                     .then(async (service: Service) => {
                         await API.addCounterService(counter.id, service.id);
                     })
             }
-
-            await API.resetQueues()
         } catch (err) {
             console.log(err);
         }

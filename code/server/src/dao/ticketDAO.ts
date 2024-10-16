@@ -29,7 +29,7 @@ class TicketDAO {
      */
     getTicketsByService(serviceId: number): Promise<Ticket[]> {
         return new Promise<Ticket[]>((resolve, reject) => {
-            const sql = "SELECT * FROM ticket WHERE serviceId = ? AND is_served = 0";
+            const sql = "SELECT * FROM ticket WHERE serviceId = ? AND served = 0";
             db.all(sql, [serviceId], (err, rows: Ticket[]) => {
                 if(err) return reject(err);
 

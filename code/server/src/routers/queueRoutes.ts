@@ -147,7 +147,7 @@ class QueueRoutes {
          * @middleware this.errorHandler.validateRequest - Middleware to validate the request and handle errors.
         */
         this.router.patch(
-            "/:counterId",
+            "/next/:counterId",
             param("counterId").isInt(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
@@ -179,6 +179,7 @@ class QueueRoutes {
                         () => res.status(200).send()
                     )
                 } catch (err) {
+                    console.log(err)
                     next(err);
                 }
             }

@@ -401,8 +401,23 @@ async function deleteAllQueues() {
     }
 }
 
+
+/**
+ * Makes a POST request to call the next ticket for a specific counter.
+ *
+ * @param {number} counterId - The ID of the counter for which to call the next ticket.
+ * @returns {Promise<Ticket>} - A Promise that resolves with the next Ticket object if the request is successful.
+ *
+ * @throws {Error} - Throws an error if the response is not successful. The error can be custom from the server
+ * (either from `error` or `message` fields in the JSON response), or a generic error if none is provided.
+ *
+ * This function performs the following steps:
+ * 1. Sends a POST request to the endpoint `/queues/:counterId` to request the next ticket.
+ * 2. If the response is successful (HTTP 200), it parses the JSON and creates a new `Ticket` object.
+ * 3. If the response is not successful, it throws an error with the specific message or a default error.
+*/
 async function callNextTicket(counterId: number): Promise<Ticket> {
-    const response = await fetch(`${baseURL}queues/${counterId}`, {
+    const response = await fetch(`${baseURL}queues/next/${counterId}`, {
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json',
@@ -421,6 +436,19 @@ async function callNextTicket(counterId: number): Promise<Ticket> {
     }
 }
 
+/**
+ * Sends a POST request to reset all queues.
+ *
+ * @returns {Promise<void>} - A Promise that resolves with no value if the reset is successful.
+ *
+ * @throws {Error} - Throws an error if the response is not successful. The error can be custom from the server
+ * (either from `error` or `message` fields in the JSON response), or a generic error if none is provided.
+ *
+ * This function performs the following steps:
+ * 1. Sends a POST request to the endpoint `/queues/reset` to reset all queues.
+ * 2. If the response is successful (HTTP 200), the function returns without any value.
+ * 3. If the response is not successful, it throws an error with the specific message or a default error.
+*/
 async function resetQueues() {
     const response = await fetch(`${baseURL}queues/reset`, {
         method: "PATCH",
