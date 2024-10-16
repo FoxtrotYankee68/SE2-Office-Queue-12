@@ -1,134 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1729018827809" clover="3.2.0">
-  <project timestamp="1729018827809" name="All files">
-    <metrics statements="525" coveredstatements="155" conditionals="78" coveredconditionals="5" methods="177" coveredmethods="30" elements="780" coveredelements="190" complexity="0" loc="525" ncloc="525" packages="7" files="18" classes="18"/>
-    <package name="server">
-      <metrics statements="14" coveredstatements="12" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="index.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\index.ts">
-        <metrics statements="14" coveredstatements="12" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="server.src">
-      <metrics statements="30" coveredstatements="29" conditionals="7" coveredconditionals="1" methods="5" coveredmethods="4"/>
-      <file name="helper.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\helper.ts">
-        <metrics statements="11" coveredstatements="10" conditionals="7" coveredconditionals="1" methods="4" coveredmethods="3"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="17" count="14" type="stmt"/>
-        <line num="18" count="14" type="cond" truecount="1" falsecount="0"/>
-        <line num="19" count="12" type="stmt"/>
-        <line num="20" count="12" type="stmt"/>
-        <line num="21" count="27" type="stmt"/>
-        <line num="23" count="12" type="stmt"/>
-        <line num="25" count="2" type="stmt"/>
-        <line num="33" count="1" type="stmt"/>
-        <line num="34" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="42" count="1" type="stmt"/>
-      </file>
-      <file name="routes.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\routes.ts">
-        <metrics statements="19" coveredstatements="19" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="7" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="16" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="server.src.components">
-      <metrics statements="16" coveredstatements="13" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="3"/>
-      <file name="counter.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\components\counter.ts">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="14" count="1" type="stmt"/>
-      </file>
+<coverage generated="1729073417810" clover="3.2.0">
+  <project timestamp="1729073417810" name="All files">
+    <metrics statements="275" coveredstatements="98" conditionals="60" coveredconditionals="7" methods="84" coveredmethods="36" elements="419" coveredelements="141" complexity="0" loc="275" ncloc="275" packages="4" files="9" classes="9"/>
+    <package name="components">
+      <metrics statements="9" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="queue.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\components\queue.ts">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-      </file>
-      <file name="service.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\components\service.ts">
-        <metrics statements="4" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
+        <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
       </file>
       <file name="ticket.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\components\ticket.ts">
-        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
+        <metrics statements="5" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="server.src.controllers">
-      <metrics statements="69" coveredstatements="12" conditionals="15" coveredconditionals="0" methods="25" coveredmethods="4"/>
-      <file name="counterController.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\controllers\counterController.ts">
-        <metrics statements="11" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="3"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="29" count="1" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-      </file>
+    <package name="controllers">
+      <metrics statements="49" coveredstatements="14" conditionals="15" coveredconditionals="2" methods="9" coveredmethods="5"/>
       <file name="queueController.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\controllers\queueController.ts">
-        <metrics statements="49" coveredstatements="4" conditionals="15" coveredconditionals="0" methods="9" coveredmethods="0"/>
+        <metrics statements="49" coveredstatements="14" conditionals="15" coveredconditionals="2" methods="9" coveredmethods="5"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="24" count="5" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="51" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="52" count="0" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="51" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="52" count="1" type="stmt"/>
         <line num="56" count="0" type="stmt"/>
         <line num="59" count="0" type="stmt"/>
         <line num="62" count="0" type="stmt"/>
         <line num="65" count="0" type="stmt"/>
-        <line num="77" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="77" count="1" type="cond" truecount="1" falsecount="0"/>
         <line num="79" count="0" type="stmt"/>
         <line num="80" count="0" type="stmt"/>
         <line num="83" count="0" type="stmt"/>
@@ -160,127 +74,37 @@
         <line num="149" count="0" type="stmt"/>
         <line num="154" count="1" type="stmt"/>
       </file>
-      <file name="serviceController.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\controllers\serviceController.ts">
-        <metrics statements="9" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="64" count="0" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
-      </file>
     </package>
-    <package name="server.src.dao">
-      <metrics statements="255" coveredstatements="28" conditionals="48" coveredconditionals="2" methods="83" coveredmethods="6"/>
-      <file name="counterDAO.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\dao\counterDAO.ts">
-        <metrics statements="75" coveredstatements="17" conditionals="18" coveredconditionals="2" methods="27" coveredmethods="6"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="24" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="27" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="50" count="1" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
-        <line num="52" count="1" type="stmt"/>
-        <line num="53" count="1" type="cond" truecount="0" falsecount="1"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="56" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="57" count="1" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
-        <line num="65" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="68" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="71" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="72" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="85" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="86" count="0" type="stmt"/>
-        <line num="89" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="90" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="99" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
-        <line num="103" count="0" type="stmt"/>
-        <line num="105" count="0" type="stmt"/>
-        <line num="106" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="107" count="0" type="stmt"/>
-        <line num="109" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="110" count="0" type="stmt"/>
-        <line num="112" count="0" type="stmt"/>
-        <line num="120" count="0" type="stmt"/>
-        <line num="121" count="0" type="stmt"/>
-        <line num="123" count="0" type="stmt"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="126" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="127" count="0" type="stmt"/>
-        <line num="129" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="130" count="0" type="stmt"/>
-        <line num="132" count="0" type="stmt"/>
-        <line num="141" count="0" type="stmt"/>
-        <line num="142" count="0" type="stmt"/>
-        <line num="144" count="0" type="stmt"/>
-        <line num="148" count="0" type="stmt"/>
-        <line num="149" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="150" count="0" type="stmt"/>
-        <line num="153" count="0" type="stmt"/>
-        <line num="155" count="0" type="stmt"/>
-        <line num="162" count="1" type="stmt"/>
-      </file>
+    <package name="dao">
+      <metrics statements="180" coveredstatements="45" conditionals="30" coveredconditionals="3" methods="56" coveredmethods="14"/>
       <file name="queueDAO.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\dao\queueDAO.ts">
-        <metrics statements="72" coveredstatements="5" conditionals="12" coveredconditionals="0" methods="25" coveredmethods="0"/>
+        <metrics statements="72" coveredstatements="32" conditionals="12" coveredconditionals="2" methods="25" coveredmethods="11"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="28" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="16" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="18" count="6" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="cond" truecount="0" falsecount="1"/>
         <line num="29" count="0" type="stmt"/>
-        <line num="31" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="32" count="0" type="stmt"/>
+        <line num="31" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="32" count="1" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="43" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="44" count="0" type="stmt"/>
+        <line num="40" count="5" type="stmt"/>
+        <line num="41" count="5" type="stmt"/>
+        <line num="42" count="5" type="stmt"/>
+        <line num="43" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="44" count="5" type="stmt"/>
         <line num="46" count="0" type="stmt"/>
         <line num="52" count="0" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
@@ -300,14 +124,14 @@
         <line num="77" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="78" count="0" type="stmt"/>
         <line num="81" count="0" type="stmt"/>
-        <line num="91" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="93" count="0" type="stmt"/>
-        <line num="97" count="0" type="stmt"/>
-        <line num="98" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="97" count="1" type="stmt"/>
+        <line num="98" count="1" type="cond" truecount="0" falsecount="1"/>
         <line num="99" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
         <line num="115" count="0" type="stmt"/>
         <line num="116" count="0" type="stmt"/>
         <line num="117" count="0" type="stmt"/>
@@ -329,16 +153,16 @@
         <line num="153" count="1" type="stmt"/>
       </file>
       <file name="serviceDAO.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\dao\serviceDAO.ts">
-        <metrics statements="83" coveredstatements="2" conditionals="15" coveredconditionals="0" methods="23" coveredmethods="0"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
+        <metrics statements="83" coveredstatements="9" conditionals="15" coveredconditionals="1" methods="23" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="15" count="5" type="stmt"/>
+        <line num="16" count="5" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="18" count="5" type="cond" truecount="1" falsecount="1"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
+        <line num="21" count="5" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
@@ -412,7 +236,7 @@
         <line num="201" count="0" type="stmt"/>
         <line num="202" count="0" type="stmt"/>
         <line num="203" count="0" type="stmt"/>
-        <line num="213" count="2" type="stmt"/>
+        <line num="213" count="1" type="stmt"/>
       </file>
       <file name="ticketDAO.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\dao\ticketDAO.ts">
         <metrics statements="25" coveredstatements="4" conditionals="3" coveredconditionals="0" methods="8" coveredmethods="0"/>
@@ -443,163 +267,53 @@
         <line num="66" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="server.src.db">
-      <metrics statements="7" coveredstatements="7" conditionals="5" coveredconditionals="2" methods="1" coveredmethods="1"/>
+    <package name="db">
+      <metrics statements="37" coveredstatements="37" conditionals="15" coveredconditionals="2" methods="17" coveredmethods="17"/>
+      <file name="cleanup.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\db\cleanup.ts">
+        <metrics statements="17" coveredstatements="17" conditionals="6" coveredconditionals="0" methods="9" coveredmethods="9"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="7" type="stmt"/>
+        <line num="13" count="7" type="stmt"/>
+        <line num="14" count="7" type="stmt"/>
+        <line num="15" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="17" count="7" type="stmt"/>
+        <line num="18" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="20" count="7" type="stmt"/>
+        <line num="21" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="23" count="7" type="stmt"/>
+        <line num="24" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="26" count="7" type="stmt"/>
+        <line num="27" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="29" count="7" type="stmt"/>
+        <line num="30" count="7" type="cond" truecount="0" falsecount="1"/>
+        <line num="31" count="7" type="stmt"/>
+      </file>
       <file name="db.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\db\db.ts">
         <metrics statements="7" coveredstatements="7" conditionals="5" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="9" count="2" type="stmt"/>
-        <line num="16" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="19" count="2" type="cond" truecount="1" falsecount="1"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="23" count="2" type="cond" truecount="0" falsecount="1"/>
-        <line num="24" count="2" type="stmt"/>
-        <line num="27" count="2" type="stmt"/>
-      </file>
-    </package>
-    <package name="server.src.routers">
-      <metrics statements="134" coveredstatements="54" conditionals="0" coveredconditionals="0" methods="58" coveredmethods="12"/>
-      <file name="counterRoutes.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\routers\counterRoutes.ts">
-        <metrics statements="48" coveredstatements="22" conditionals="0" coveredconditionals="0" methods="27" coveredmethods="7"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="19" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="31" count="3" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="62" count="1" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="79" count="1" type="stmt"/>
-        <line num="81" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
-        <line num="84" count="0" type="stmt"/>
-        <line num="85" count="0" type="stmt"/>
-        <line num="94" count="1" type="stmt"/>
-        <line num="98" count="0" type="stmt"/>
-        <line num="99" count="0" type="stmt"/>
-        <line num="100" count="0" type="stmt"/>
-        <line num="108" count="1" type="stmt"/>
-        <line num="112" count="1" type="stmt"/>
-        <line num="113" count="1" type="stmt"/>
-        <line num="115" count="0" type="stmt"/>
-        <line num="116" count="0" type="stmt"/>
-        <line num="125" count="1" type="stmt"/>
-        <line num="130" count="0" type="stmt"/>
-        <line num="131" count="0" type="stmt"/>
-        <line num="133" count="0" type="stmt"/>
-        <line num="134" count="0" type="stmt"/>
-        <line num="143" count="1" type="stmt"/>
-        <line num="148" count="0" type="stmt"/>
-        <line num="149" count="0" type="stmt"/>
-        <line num="151" count="0" type="stmt"/>
-        <line num="152" count="0" type="stmt"/>
-        <line num="161" count="1" type="stmt"/>
-        <line num="165" count="0" type="stmt"/>
-        <line num="166" count="0" type="stmt"/>
-        <line num="168" count="0" type="stmt"/>
-        <line num="169" count="0" type="stmt"/>
-        <line num="175" count="1" type="stmt"/>
+        <line num="23" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
       </file>
-      <file name="queueRoutes.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\routers\queueRoutes.ts">
-        <metrics statements="45" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="17" coveredmethods="2"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
+      <file name="setup.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\db\setup.ts">
+        <metrics statements="13" coveredstatements="13" conditionals="4" coveredconditionals="0" methods="7" coveredmethods="7"/>
         <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
-        <line num="59" count="0" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="75" count="0" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="87" count="1" type="stmt"/>
-        <line num="93" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="95" count="0" type="stmt"/>
-        <line num="98" count="0" type="stmt"/>
-        <line num="106" count="1" type="stmt"/>
-        <line num="112" count="0" type="stmt"/>
-        <line num="113" count="0" type="stmt"/>
-        <line num="114" count="0" type="stmt"/>
-        <line num="117" count="0" type="stmt"/>
-        <line num="127" count="1" type="stmt"/>
-        <line num="132" count="0" type="stmt"/>
-        <line num="133" count="0" type="stmt"/>
-        <line num="134" count="0" type="stmt"/>
-        <line num="137" count="0" type="stmt"/>
-        <line num="153" count="1" type="stmt"/>
-        <line num="158" count="0" type="stmt"/>
-        <line num="159" count="0" type="stmt"/>
-        <line num="160" count="0" type="stmt"/>
-        <line num="163" count="0" type="stmt"/>
-        <line num="178" count="1" type="stmt"/>
-        <line num="181" count="0" type="stmt"/>
-        <line num="182" count="0" type="stmt"/>
-        <line num="183" count="0" type="stmt"/>
-        <line num="186" count="0" type="stmt"/>
-        <line num="194" count="1" type="stmt"/>
-      </file>
-      <file name="serviceRoutes.ts" path="C:\Users\stefa\OneDrive\Desktop\Polito\Software Engineering 2\SE2-Office-Queue-12\code\server\src\routers\serviceRoutes.ts">
-        <metrics statements="41" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="14" coveredmethods="3"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="38" count="1" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="56" count="1" type="stmt"/>
-        <line num="61" count="0" type="stmt"/>
-        <line num="62" count="0" type="stmt"/>
-        <line num="63" count="0" type="stmt"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="74" count="1" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="79" count="0" type="stmt"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="83" count="0" type="stmt"/>
-        <line num="91" count="1" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="97" count="0" type="stmt"/>
-        <line num="98" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
-        <line num="109" count="1" type="stmt"/>
-        <line num="116" count="0" type="stmt"/>
-        <line num="117" count="0" type="stmt"/>
-        <line num="118" count="0" type="stmt"/>
-        <line num="121" count="0" type="stmt"/>
-        <line num="129" count="1" type="stmt"/>
-        <line num="133" count="0" type="stmt"/>
-        <line num="134" count="0" type="stmt"/>
-        <line num="136" count="0" type="stmt"/>
-        <line num="137" count="0" type="stmt"/>
-        <line num="139" count="0" type="stmt"/>
-        <line num="146" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="14" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="23" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="34" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="44" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="45" count="1" type="stmt"/>
       </file>
     </package>
   </project>
