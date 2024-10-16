@@ -40,6 +40,7 @@ function AdminCountersPage( {services }: AdminCountersPageProbs) {
                         await API.addCounterService(counter.id, service.id);
                     })
             }
+            alert("Ok. Counters setup went well!");
             //after insert the counter_service reset the queues
             API.resetQueues()
                 .catch(err => console.log(err))
