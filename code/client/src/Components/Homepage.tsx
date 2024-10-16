@@ -51,6 +51,9 @@ function Homepage( {services, nextCustomerList }: HomepageProps ) {
         setSelectedService('');
         setWaitingTime(-1);
     }
+    const formatTicketNumber = (number: number) => {
+        return number.toString().padStart(5, '0');
+      };
 
     return (
         <>
@@ -83,11 +86,12 @@ function Homepage( {services, nextCustomerList }: HomepageProps ) {
                     <Container>
                         <Row className="justify-content-md-center">
                             <Col md={8} lg={6}>
-                                <Card className="shadow-sm" style={{backgroundColor: 'rgb(250, 250, 210, 0.8)', padding: '10px', height: '300px'}}>
+                                <Card className="shadow-sm" style={{backgroundColor: 'rgb(250, 250, 210, 0.8)', padding: '10px', height: '400px'}}>
                                     <Card.Body>
                                         {ticket.id > 0 ? (
                                             <div>
                                                 <Card.Title style={{ fontSize: '2rem', fontWeight: 'bold' }}>Your Ticket</Card.Title>
+                                                <Card.Text style={{ fontSize: '2rem', fontWeight: 'bold' }}>{formatTicketNumber(ticket.id)}</Card.Text>
                                                 <Card.Text>Requested service: {selectedService}</Card.Text>
                                                 <Card.Text>Your position in line: {ticket.queuePosition + 1}</Card.Text>
                                                 <Card.Text>Estimated waiting time: {waitingTime ? waitingTime : ''}</Card.Text>
