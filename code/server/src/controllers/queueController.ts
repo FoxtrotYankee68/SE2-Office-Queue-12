@@ -16,20 +16,28 @@ class QueueController {
         this.ticketDAO = new TicketDAO();
     }
 
-    async getQueue(serviceId: string, date: Date): Promise<Queue> {
+    async getQueue(serviceId: number, date: Date): Promise<Queue> {
         return this.dao.getQueue(serviceId, date);
     }
 
-    async addQueue(serviceId: string, date: Date): Promise<void> {
+    async getAllQueues(): Promise<Queue[]> {
+        return this.dao.getAllQueues();
+    }
+
+    async addQueue(serviceId: number, date: Date): Promise<void> {
         return this.dao.addQueue(serviceId, date);
     }
 
-    async deleteQueue(serviceId: string, date: Date): Promise<void> {
+    async addCustomerToQueue(serviceId: number, date: Date): Promise<Queue> {
+        return this.dao.addCustomerToQueue(serviceId, date);
+    }
+
+    async deleteQueue(serviceId: number, date: Date): Promise<void> {
         return this.dao.deleteQueue(serviceId, date);
     }
 
-    async addCustomerToQueue(serviceId: string, date: Date): Promise<Queue> {
-        return this.dao.addCustomerToQueue(serviceId, date);
+    async deleteAllQueues(): Promise<void> {
+        return this.dao.deleteAllQueues();
     }
 
     //---------- Task: Implement next customer logic --------//
@@ -56,7 +64,7 @@ class QueueController {
         const nextTicket = await this.selectNextTicket(longestQueue);
     
         // 4. Update the ticket information
-        await this.ticketDAO.issuedTicket(nextTicket.id, counterId);
+        await this.ticketDAO.markTicketIssued(nextTicket.id, counterId);
     
         // 5. Remove the ticket from the queue (decrementing its length)
         await this.dao.removeTicketFromQueue(longestQueue.serviceId);
@@ -101,7 +109,7 @@ class QueueController {
     
         for (const q of queues_temp) {
             for (const s of allServices) {
-                if (s.id == q.serviceId.toString()) {
+                if (s.id == q.serviceId) {
                     if (estimated_time === undefined || s.serviceTime < estimated_time) {
                         longestQueue = q;
                         estimated_time = s.serviceTime; // Use "<" for the lowest service time
@@ -126,12 +134,12 @@ class QueueController {
         const tickets = await this.ticketDAO.getTicketsByService(queue.serviceId);
     
         let nextTicket = tickets.pop();
-        let position_queue: number = nextTicket.position_queue;
+        let position_queue: number = nextTicket.queuePosition;
     
         for (const ticket of tickets) {
-            if (position_queue === undefined || ticket.position_queue < position_queue) {
+            if (position_queue === undefined || ticket.queuePosition < position_queue) {
                 nextTicket = ticket;
-                position_queue = ticket.position_queue;
+                position_queue = ticket.queuePosition;
             }
         }
     

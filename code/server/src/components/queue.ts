@@ -13,4 +13,4 @@ class Queue {
     }
 }
 
-export { Queue }
+export { Queue };

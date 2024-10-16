@@ -23,8 +23,12 @@ class ServiceController {
      * @param id - The id of the service to retrieve.
      * @returns A promise that resolves with the service if it exists.
     */
-    async getService(id: string): Promise<Service> {
+    async getService(id: number): Promise<Service> {
         return this.dao.getService(id);
+    }
+
+    async findServiceWithName(name: string): Promise<Service> {
+        return this.dao.getServiceByName(name);
     }
 
     /**

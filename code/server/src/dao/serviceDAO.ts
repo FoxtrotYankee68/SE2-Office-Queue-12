@@ -1,5 +1,7 @@
 import db from "../db/db";
 import {Service} from "../components/service";
+import {Queue} from "../components/queue";
+import Utilities from "../utilities";
 
 class ServiceDAO {
     /**
@@ -32,7 +34,7 @@ class ServiceDAO {
      * @param id - The id of the service.
      * @returns A promise that resolves with the service if it exists.
     */    
-    getService(id: string): Promise<Service> {
+    getService(id: number): Promise<Service> {
         const sql = "SELECT * FROM service WHERE id = ?";
         const params = [id];
 
@@ -57,6 +59,18 @@ class ServiceDAO {
                 resolve(service);
             });
         });
+    }
+
+    getServiceByName(name: string): Promise<Service> {
+        const sql = "SELECT * FROM service WHERE name = ?";
+        return new Promise((resolve, reject) => {
+            db.get(sql, [name], (err: Error | null, row: Service) => {
+                if (err) return reject(err);
+                if (!row) return reject(new Error(`No service with name ${name}`));
+
+                return resolve(row);
+            })
+        })
     }
 
     /**
@@ -132,81 +146,46 @@ class ServiceDAO {
     /**
      * Estimate waiting time for a specific service in the database.
      * @param id - The id of the service.
-     * @returns ??
+     * @returns The estimated waiting time for the specified service.
     */    
     estimateServiceWaitingTime(id: number): Promise<number> {
-        const sql = "SELECT serviceTime FROM service WHERE id = ?";
-        const params = [id];
+        return new Promise(async (resolve, reject) => {
+            const serviceTime = await new Promise<number>((resolve, reject) => {
+                const sql = "SELECT * FROM service WHERE id = ?";
+                db.get(sql, [id], (err: Error | null, row: Service) => {
+                    if (err) return reject(err);
 
-        return new Promise((resolve, reject) => {
-            db.get(sql, params, (err: Error | null, row: any) => {
-                if (err) {
-                    reject(new Error(`Error retrieving service: ${err.message}`));
-                    return;
-                }
-    
-                if (!row) {
-                    reject(new Error(`Service with this ID not found`));
-                    return;
-                }
-    
-                // Extract serviceTime from the row
-                const serviceTime = row.serviceTime;
-    
-                const queueSql = "SELECT length, date FROM queue WHERE serviceId = ?"; // 
-                db.get(queueSql, params, (err: Error | null, queueRow: any) => {
-                    if (err) {
-                        reject(new Error(`Error retrieving additional data: ${err.message}`));
-                        return;
-                    }
-                    if (!queueRow) {
-                        reject(new Error(`No additional data found for serviceTime ${serviceTime}`));
-                        return;
-                    }
+                    return resolve(row.serviceTime);
+                })
+            })
 
-                    const dateQueue = queueRow.date;
-                    const length = queueRow.length;
+            const queueLength = await new Promise<number>((resolve, reject) => {
+                const sql = "SELECT * FROM queue WHERE serviceId = ? AND date = ?";
+                db.get(sql, [id, Utilities.getFormattedDate()], (err: Error | null, row: Queue) => {
+                    if (err) return reject(err);
 
-                        // Now run the final query using the dateQueue and the serviceId
-                    const counterSql = `
-                        SELECT count(serviceId)
-                        FROM counter_service
-                        WHERE date = ? AND counterId IN (
-                            SELECT counterId 
-                            FROM counter_service
-                            WHERE serviceId = ? AND date = ?
-                        )
-                        GROUP BY counterId;
-                        `;
+                    return resolve(row.length);
+                })
+            })
 
-                    // Use dateQueue and id (serviceId) as parameters for the final query
-                    const counterParams = [dateQueue, id, dateQueue];
-            
-                    db.all(counterSql, counterParams, (err: Error | null, counterRows: any[]) => {
-                        if (err) {
-                            reject(new Error(`Error retrieving counter data: ${err.message}`));
-                            return;
-                        }                    
-                        if (!counterRows || counterRows.length === 0) {
-                            reject(new Error(`No counters found for serviceId ${id} on date ${dateQueue}`));
-                            return;
-                        }
-                        const counts = counterRows.map(row => row['count(serviceId)']);
+            const counterSql = "SELECT count(serviceId) FROM counter_service WHERE date = ? AND counterId IN (" +
+                "SELECT counterId FROM counter_service WHERE serviceId = ? AND date = ?" +
+            ") GROUP BY counterId ";
 
+            db.all(counterSql, [Utilities.getFormattedDate(), id, Utilities.getFormattedDate()], (err: Error | null, rows: any[]) => {
+                if (err) return reject(new Error(`Error retrieving counter data: ${err.message}`));
+                if (!rows || rows.length === 0) return reject(new Error(`No counters found for serviceId ${id} on date ${Utilities.getFormattedDate()}`));
 
-                        //formula
-                        // Step 1: Calculate sum of the reciprocals of each ki
-                        const sumReciprocals = counts.reduce((acc, val) => acc + (1 / val), 0);
-                        // Step 2: Calculate the final value of Tr
-                        const Tr = serviceTime * (0.5 + length / sumReciprocals);
-                        console.log(Tr);
-                        resolve(Tr);  // This is waiting time
-                    });
-        
-                });
+                const counts = rows.map(row => row['count(serviceId)']);
 
-            });
-        });
+                //formula
+                // Step 1: Calculate sum of the reciprocals of each ki
+                const sumReciprocals = counts.reduce((acc, val) => acc + (1 / val), 0);
+                // Step 2: Calculate the final value of estimatedTime
+                const estimatedTime = serviceTime * (0.5 + queueLength / sumReciprocals);
+                resolve(estimatedTime);
+            })
+        })
     }
 }
 

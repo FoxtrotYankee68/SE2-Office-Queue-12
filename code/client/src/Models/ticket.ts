@@ -1,15 +1,22 @@
+/**
+ * Represents a queue for a service
+ */
 class Ticket {
     id: number;
-    position_queue: number;
-    date_issued: string;
-    is_served: number;
+    serviceId: number;
+    counterId: number;
+    queuePosition: number;
+    issueDate: Date;
+    served: boolean;
 
-    constructor(id: number, pos_queue: number, date_issued: string, is_served: number){
+    constructor(id: number = 0, serviceId: number = 0, counterId: number = 0, queuePosition: number = 0, issueDate: Date = new Date(), served: boolean = false) {
         this.id = id;
-        this.position_queue = pos_queue;
-        this.date_issued = date_issued;
-        this.is_served = is_served;
+        this.serviceId = serviceId;
+        this.counterId = counterId;
+        this.issueDate = issueDate;
+        this.queuePosition = queuePosition;
+        this.served = served;
     }
 }
 
-export {Ticket};
+export { Ticket }

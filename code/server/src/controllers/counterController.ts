@@ -13,7 +13,7 @@ class CounterController {
         this.dao = new CounterDAO;
     }
 
-    async getCounter(id: string): Promise<Counter> {
+    async getCounter(id: number): Promise<Counter> {
         return this.dao.getCounter(id);
     }
 

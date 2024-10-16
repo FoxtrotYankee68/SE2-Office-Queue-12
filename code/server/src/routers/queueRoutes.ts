@@ -1,6 +1,6 @@
 import express, { Router } from "express"
 import ErrorHandler from "../helper"
-import {body, oneOf, param, query} from "express-validator"
+import {body, param} from "express-validator"
 import QueueController from "../controllers/queueController";
 import {Queue} from "../components/queue";
 import { Ticket } from "../components/ticket";
@@ -33,11 +33,11 @@ class QueueRoutes {
 
     /**
      * Initializes the routes for the product router.
-     * 
+     *
      * @remarks
      * This method sets up the HTTP routes for handling product-related operations such as registering products, registering arrivals, selling products, retrieving products, and deleting products.
      * It can (and should!) apply authentication, authorization, and validation middlewares to protect the routes.
-     * 
+     *
      */
     initRoutes() {
 
@@ -47,8 +47,8 @@ class QueueRoutes {
          */
         this.router.get(
             "/:serviceId/:date",
-            param("serviceId").isString().notEmpty(),
-            param("date").isString().notEmpty(),
+            param("serviceId").notEmpty().isNumeric(),
+            param("date").notEmpty().isString(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
                 try {
@@ -66,8 +66,8 @@ class QueueRoutes {
          */
         this.router.post(
             "/",
-            body("serviceId").isString().notEmpty(),
-            body("date").isString().notEmpty(),
+            body("serviceId").notEmpty().isNumeric(),
+            body("date").notEmpty().isString(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
                 try {
@@ -81,13 +81,12 @@ class QueueRoutes {
         )
         
         /**
-         * Adds a customer to a queue (given the serviceId and date).
-         * @returns The modified Queue item, to show its information to the requesting customer.
+         * Edits a queue's information.
          */
         this.router.patch(
-            "/:serviceId/:date",
-            param("serviceId").isString().notEmpty(),
-            param("date").isString().notEmpty(),
+            ":serviceId/:date",
+            param("serviceId").notEmpty().isNumeric(),
+            param("date").notEmpty().isString(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
                 try {
@@ -105,8 +104,8 @@ class QueueRoutes {
          */
         this.router.delete(
             "/:serviceId/:date",
-            param("serviceId").isString().notEmpty(),
-            param("date").isString().notEmpty(),
+            param("serviceId").notEmpty().isNumeric(),
+            param("date").notEmpty().isString(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
                 try {
@@ -120,18 +119,15 @@ class QueueRoutes {
         )
 
         /**
-         * The only route actually needed.
-         * Adds a customer to the current day's queue (given the serviceId).
-         * @returns The modified Queue item, to show its information to the requesting customer.
+         * Removes all queues from the database.
          */
-        this.router.patch(
-            "/:serviceId",
-            param("serviceId").isString().notEmpty(),
+        this.router.delete(
+            "/",
             this.errorHandler.validateRequest,
-            (req: any, res: any, next: any) => {
+            (_: any, res: any, next: any) => {
                 try {
-                    this.controller.addCustomerToQueue(req.params.serviceId, new Date(Date.now())).then(
-                        (queue: Queue) => res.status(200).json(queue)
+                    this.controller.deleteAllQueues().then(
+                        () => res.status(200)
                     )
                 } catch (err) {
                     next(err);
@@ -150,7 +146,7 @@ class QueueRoutes {
          * @middleware param("counterId").isInt() - Middleware to validate that counterId is an integer.
          * @middleware this.errorHandler.validateRequest - Middleware to validate the request and handle errors.
         */
-        this.router.post(
+        this.router.patch(
             "/:counterId",
             param("counterId").isInt(),
             this.errorHandler.validateRequest,
@@ -175,9 +171,9 @@ class QueueRoutes {
          * This route does not require any parameters and will call the `resetQueue` method 
          * from the controller to clear all queue lengths and reset the date.
         */
-        this.router.post(
+        this.router.patch(
             "/reset",
-            (req: any, res: any, next: any) => {
+            (_: any, res: any, next: any) => {
                 try {
                     this.controller.resetQueues().then(
                         () => res.status(200).send()

@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 import db from "../db/db";
 

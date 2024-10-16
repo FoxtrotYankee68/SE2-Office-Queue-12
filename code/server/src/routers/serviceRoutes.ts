@@ -1,6 +1,6 @@
 import express, { Router } from "express"
 import ErrorHandler from "../helper"
-import {body, oneOf, param, query} from "express-validator"
+import {body, param} from "express-validator"
 import ServiceController from "../controllers/serviceController";
 import {Service} from "../components/service";
 
@@ -55,11 +55,29 @@ class ServiceRoutes {
         */
         this.router.get(
             "/:id",
-            param("id").isString(),
+            param("id").isNumeric(),
             this.errorHandler.validateRequest,
             (req: any, res: any, next: any) => {
                 try {
                     this.controller.getService(req.params.id).then((service: Service) => {
+                        res.status(200).json(service);
+                    });
+                } catch (err) {
+                    next(err);
+                }
+            }
+        );
+
+        /**
+         * Route for retrieving a specific service by its name.
+         */
+        this.router.get(
+            "/name/:name",
+            param("name").isString(),
+            this.errorHandler.validateRequest,
+            (req: any, res: any, next: any) => {
+                try {
+                    this.controller.findServiceWithName(req.params.name).then((service: Service) => {
                         res.status(200).json(service);
                     });
                 } catch (err) {
