@@ -38,6 +38,7 @@ function EmployeePage({ counters, addNextCustomerToCallList }: EmployeePageProps
       API.callNextTicket(selectedCounterId)
           .then((ticket: Ticket) => {
               addNextCustomerToCallList(ticket);
+              console.log(ticket.counterId)
               setNextCustomer(ticket.id);
               setIsClicked(true);
           })

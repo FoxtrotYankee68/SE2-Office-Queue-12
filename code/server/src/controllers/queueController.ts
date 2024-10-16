@@ -65,12 +65,14 @@ class QueueController {
     
         // 4. Update the ticket information
         await this.ticketDAO.markTicketIssued(nextTicket.id, counterId);
+
+        const nt = await this.ticketDAO.getTicket(nextTicket.id);
     
         // 5. Remove the ticket from the queue (decrementing its length)
         await this.dao.removeTicketFromQueue(longestQueue.serviceId);
     
         // 6. Return the selected ticket
-        return nextTicket;
+        return nt;
     }
     
     /**

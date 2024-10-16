@@ -148,7 +148,7 @@ function Homepage( {services, nextCustomerList }: HomepageProps ) {
                                             <tbody style={{backgroundColor: '#FF7F50'}}>
                                             {nextCustomerList.map((t, index) => (
                                                 <tr>
-                                                    <td style={{backgroundColor: '#FF7F50'}}>{t.id}</td>
+                                                    <td style={{backgroundColor: '#FF7F50'}}>{formatTicketNumber(t.id)}</td>
                                                     <td style={{backgroundColor: '#FF7F50'}}>{t.counterId}</td>
                                                 </tr>
                                             ))}
