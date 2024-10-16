@@ -35,11 +35,11 @@ function EmployeePage({ counters, addNextCustomerToCallList }: EmployeePageProps
     const handleNextCustomer = async (event: React.FormEvent) => {
       event.preventDefault();
 
-      setIsClicked(true);
-
       API.callNextTicket(selectedCounterId)
           .then((ticket: Ticket) => {
               addNextCustomerToCallList(ticket);
+              setNextCustomer(ticket.id);
+              setIsClicked(true);
           })
           .catch(err => console.log(err));
     }
