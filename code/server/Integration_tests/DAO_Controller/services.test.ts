@@ -17,6 +17,7 @@ describe('serviceController/serviceDAO Integration tests', () => {
     const testTime = 10;
 
     beforeAll(async () => {
+       await cleanup();
        await setup();
 
         // Initialize DAO and controller

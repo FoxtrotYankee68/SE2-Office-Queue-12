@@ -417,7 +417,7 @@ async function deleteAllQueues() {
  * 3. If the response is not successful, it throws an error with the specific message or a default error.
 */
 async function callNextTicket(counterId: number): Promise<Ticket> {
-    const response = await fetch(`${baseURL}queues/next/${counterId}`, {
+    const response = await fetch(`${baseURL}queues/${counterId}`, {
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json',

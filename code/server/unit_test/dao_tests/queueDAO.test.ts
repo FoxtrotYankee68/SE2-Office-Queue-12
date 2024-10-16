@@ -39,7 +39,7 @@ describe("Queue DAO", () => {
                 return {} as Database;
             });
 
-            const queue = await queueDAO.getQueue("2", new Date()); //data non importa
+            const queue = await queueDAO.getQueue(2, new Date()); //data non importa
 
             expect(queue).toEqual({serviceId: 2, date: formatDate(new Date()), length: 3});
         });
@@ -54,7 +54,7 @@ describe("Queue DAO", () => {
                 return {} as Database;
             });
 
-            await expect(queueDAO.getQueue("3", new Date())).rejects.toEqual(error);
+            await expect(queueDAO.getQueue(3, new Date())).rejects.toEqual(error);
         });
 
         test("It should reject with error during db.get", async () => {
@@ -70,7 +70,7 @@ describe("Queue DAO", () => {
                 return {} as Database;
             });
 
-            await expect(queueDAO.getQueue("2", new Date())).rejects.toThrow(error);
+            await expect(queueDAO.getQueue(2, new Date())).rejects.toThrow(error);
 
         });
 
@@ -86,7 +86,7 @@ describe("Queue DAO", () => {
                 return {} as Database;
             });
 
-            await expect(queueDAO.addQueue("3", new Date())).resolves.toBeUndefined();
+            await expect(queueDAO.addQueue(3, new Date())).resolves.toBeUndefined();
         });
 
         test("It should reject with error in db", async () => {
@@ -98,7 +98,7 @@ describe("Queue DAO", () => {
                 return {} as Database;
             });
 
-            await expect(queueDAO.addQueue("3", new Date())).rejects.toThrow(error);
+            await expect(queueDAO.addQueue(3, new Date())).rejects.toThrow(error);
         });
 
     });
@@ -123,7 +123,7 @@ describe("Queue DAO", () => {
                 return {} as Database;
             });
 
-            await expect(queueDAO.addCustomerToQueue("2", new Date())).resolves.toEqual({serviceId: "2", date: "24/12/2024", length: 3});
+            await expect(queueDAO.addCustomerToQueue(2, new Date())).resolves.toEqual({serviceId: "2", date: "24/12/2024", length: 3});
         });
 
         test("It should reject with an error in db.run", async () => {
@@ -142,7 +142,7 @@ describe("Queue DAO", () => {
             });
             */
            
-            await expect(queueDAO.addCustomerToQueue("2", new Date())).rejects.toThrow(error);
+            await expect(queueDAO.addCustomerToQueue(2, new Date())).rejects.toThrow(error);
         });
 
         test("It should reject with an error in db.get", async () => {
@@ -159,7 +159,7 @@ describe("Queue DAO", () => {
                 return {} as Database;
             });
            
-            await expect(queueDAO.addCustomerToQueue("2", new Date())).rejects.toThrow(error);
+            await expect(queueDAO.addCustomerToQueue(2, new Date())).rejects.toThrow(error);
         });
 
         test("It should reject with row == undefined", async () => {
@@ -177,7 +177,7 @@ describe("Queue DAO", () => {
                 return {} as Database;
             });
            
-            await expect(queueDAO.addCustomerToQueue("2", new Date())).rejects.toEqual(error);
+            await expect(queueDAO.addCustomerToQueue(2, new Date())).rejects.toEqual(error);
         
             
          });
@@ -193,7 +193,7 @@ describe("Queue DAO", () => {
                 return {} as Database;
             });
 
-            await expect(queueDAO.deleteQueue("3", new Date())).resolves.toBeUndefined();
+            await expect(queueDAO.deleteQueue(3, new Date())).resolves.toBeUndefined();
         });
 
         test("It should reject with error in db.run",async () => {
@@ -205,7 +205,7 @@ describe("Queue DAO", () => {
                 return {} as Database;
             });
 
-            await expect(queueDAO.deleteQueue("3", new Date())).rejects.toThrow(error);
+            await expect(queueDAO.deleteQueue(3, new Date())).rejects.toThrow(error);
         
         });
     });

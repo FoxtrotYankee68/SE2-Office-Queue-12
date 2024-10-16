@@ -247,8 +247,9 @@ describe('serviceDAO', () => {
             callback(null, counterRows);
             return {} as Database;
         });
-    
+
         const result = await dao.estimateServiceWaitingTime(2);
+
     
         expect(result).toBeCloseTo(90.71, 2);
     });
@@ -260,8 +261,9 @@ describe('serviceDAO', () => {
             callback(null, null);
             return {} as Database;
         });
-    
+
         await expect(dao.estimateServiceWaitingTime(2)).rejects.toThrow("Service with this ID not found");
+
     });    
 
     test("It should reject because there isn't a queue with the specified id", async () => {
@@ -300,6 +302,7 @@ describe('serviceDAO', () => {
         });
 
         await expect(dao.estimateServiceWaitingTime(2)).rejects.toThrow("No counters found for serviceId 2 on date 2023-01-01");
+
     });
 
     test("It should reject with an error during db.get", async () => {
