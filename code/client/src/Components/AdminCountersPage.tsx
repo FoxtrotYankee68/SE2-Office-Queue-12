@@ -26,22 +26,25 @@ function AdminCountersPage( {services }: AdminCountersPageProbs) {
     };
 
     const handleSubmit = async () => {
-        if (counters.includes('Select an option')) {
+        // Verifica se c'è almeno un elemento con name "Select an option" o name vuoto
+        const invalidNameExists = counters.some(counter => counter.id === -1 || counter.name === "");
+        if (invalidNameExists) {
             alert("Please select a service for all counters before submitting.");
             return;
         }
-
+        console.log("prova");
         try{
-            API.resetQueues()
-                .catch(err => console.log(err))
-
             for (const counter of counters) {
                 await API.findServiceByName(counter.name)
                     .then(async (service: Service) => {
                         await API.addCounterService(counter.id, service.id);
                     })
             }
+            //after insert the counter_service reset the queues
+            API.resetQueues()
+                .catch(err => console.log(err))
         } catch (err) {
+            alert("The config counters is already done.");
             console.log(err);
         }
     };
