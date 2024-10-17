@@ -73,9 +73,9 @@ sections:
 **What caused your errors in estimation (if any)?**
 
 Here are the main causes that led to errors in our estimations:
-  1. **Underestimating the time required for testing**: I didn’t allocate enough time for comprehensive testing, including regression and integration tests, which ended up taking more time than expected
+  1. **Underestimating the time required for testing**: We didn’t allocate enough time for comprehensive testing, including regression and integration tests, which ended up taking more time than expected
 
-  2. **Not accounting for potential bugs or unforeseen risks**: I didn’t plan for a buffer to handle unexpected bugs or technical issues that arose during development, which delayed task completion
+  2. **Not accounting for potential bugs or unforeseen risks**: We didn’t plan for a buffer to handle unexpected bugs or technical issues that arose during development, which delayed task completion
   
   3. **Underestimating the time needed for code reviews by team members**
 
@@ -111,6 +111,10 @@ In the previous retrospective, we identified several improvement goals, and unfo
 
 **Improvement goals for the next sprint and how to achieve them (technical tasks, team coordination, etc.)**
 
-  > Propose one or two
+Looking ahead to the next sprint we should improve our team coordination and try to orginize our work better. 
+To achieve this goal we need to implement and testing the user stories in priority order, after a user story is done we shouldn't modify it
+to avoid possible errors in later project implementations.
 
 **One thing you are proud of as a Team!!**
+
+As a team everyone help each other when someone has a problem or some difficulties.
