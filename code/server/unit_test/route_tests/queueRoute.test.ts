@@ -239,7 +239,7 @@ describe('QueueRoutes', () => {
 
 
     describe('POST /:counterId', () => {
-        const ticket_output = new Ticket(1, 1, "2024-10-15", 1);
+        const ticket_output = new Ticket(1, 1, 1, 3, new Date(), true);
 
         test("It should call the next ticket and return 200", async () => {
             jest.spyOn(controller, "callNextTicket").mockResolvedValueOnce(ticket_output);
